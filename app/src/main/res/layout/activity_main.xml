@@ -2,26 +2,58 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    tools:openDrawer="start"
-    >
+    tools:openDrawer="start">
 
     <include
-        layout="@layout/app_bar_man"
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
     </include>
+
     <LinearLayout
+        android:id="@+id/layout_left_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f46118"
+        android:background="#ffffff"
         android:clickable="true"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#f46118"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ava"
+                android:id="@+id/imv_avatar"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_padding_top"
+                android:text="Nhat Dealin Do"
+                android:textSize="@dimen/md_content_textsize"
+                android:textStyle="bold"
+                android:id="@+id/tv_fullname"/>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
+
 </android.support.v4.widget.DrawerLayout>
