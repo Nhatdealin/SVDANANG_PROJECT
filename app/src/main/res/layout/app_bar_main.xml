@@ -13,10 +13,10 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
+            <include layout="@layout/app_bar_header"/>
 
         </FrameLayout>
-        <include layout="@layout/app_bar_header"/>
+
 
     </android.support.design.widget.AppBarLayout>
 <include layout="@layout/contain_main"/>

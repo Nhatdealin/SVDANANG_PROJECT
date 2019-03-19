@@ -7,6 +7,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -15,7 +16,8 @@
             android:id="@+id/imv_nav_left"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/icon_nav_left"/>
     </FrameLayout>
 
