@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="home_item_width">160dp</dimen>
+    <dimen name="home_item_height">160dp</dimen>
+    <dimen name="margin_home_item">20dp</dimen>
+    <dimen name="transperent_home_item">110dp</dimen>
+
+</resources>
