@@ -1,11 +1,12 @@
 package com.diendan.svdanang;
 
 public class Homeitem {
-    private int identity1,identity2,identity3,identity4;
+    private int idtopic,identity1,identity2,identity3,identity4;
     private String data1,data2,data3,data4;
     private String title;
 
-    public Homeitem(String til,int id1,int id2,int id3,int id4, String text1, String text2, String text3, String text4) {
+    public Homeitem(int idtp, String til,int id1,int id2,int id3,int id4, String text1, String text2, String text3, String text4) {
+        this.idtopic = idtp;
         this.title=til;
         this.identity1=id1;
         this.identity2=id2;
@@ -19,6 +20,14 @@ public class Homeitem {
 
     public String getTitle() {
         return title;
+    }
+
+    public int getIdtopic() {
+        return idtopic;
+    }
+
+    public void setIdtopic(int idtopic) {
+        this.idtopic = idtopic;
     }
 
     public void setTitle(String title) {

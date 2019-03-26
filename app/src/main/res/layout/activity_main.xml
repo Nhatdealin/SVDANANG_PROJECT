@@ -14,9 +14,7 @@
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
     </include>
-
     <LinearLayout
         android:id="@+id/layout_left_menu"
         android:layout_width="match_parent"
@@ -29,17 +27,53 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="#f46118"
+            android:background="#FF7F24"
             android:gravity="center"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ava"
-                android:id="@+id/imv_avatar"/>
+
+
+                <ImageView
+                    android:id="@+id/imv_ic_back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/md_nav_back"
+                    />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_weight="1"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imv_avatar"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ava" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:layout_marginRight="10dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="left"
+                    android:src="@drawable/md_nav_back"
+                    android:visibility="invisible"
+
+
+                    />
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"

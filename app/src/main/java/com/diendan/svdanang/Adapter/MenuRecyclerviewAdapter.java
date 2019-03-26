@@ -1,10 +1,8 @@
 package com.diendan.svdanang.Adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,11 +11,9 @@ import android.widget.TextView;
 import com.diendan.svdanang.Menuitem;
 import com.diendan.svdanang.R;
 
-import java.security.PublicKey;
-import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.MyViewHolder> {
+public class MenuRecyclerviewAdapter extends RecyclerView.Adapter<MenuRecyclerviewAdapter.MyViewHolder> {
     private List<Menuitem> mDataset;
     private Context mContext;
 
@@ -37,7 +33,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         }
     }
 
-    public RecyclerviewAdapter(Context context, List<Menuitem> myDataset) {
+    public MenuRecyclerviewAdapter(Context context, List<Menuitem> myDataset) {
         this.mDataset = myDataset;
         this.mContext = context;
     }

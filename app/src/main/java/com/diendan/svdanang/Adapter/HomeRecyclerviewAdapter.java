@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.diendan.svdanang.Fragment.HomeFragment;
 import com.diendan.svdanang.Homeitem;
-import com.diendan.svdanang.Menuitem;
 import com.diendan.svdanang.R;
 
 import java.util.List;
@@ -19,11 +17,16 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
     private List<Homeitem> mDataset;
     private Context mContext;
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle, tvContent1, tvContent2, tvContent3, tvContent4;
+    public IOnItemClickedListener mIOnItemClickedListener;
+    public void setOnItemClickListener(IOnItemClickedListener listener) {
+        mIOnItemClickedListener = listener;
+    }
+    public  class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView tvTitle, tvContent1, tvContent2, tvContent3, tvContent4,tvSeemore;
         ImageView imvImage1, imvImage2, imvImage3, imvImage4;
         private View homeGroup;
         private View viewDividerTop;
+
 
         public MyViewHolder(View view) {
             super(view);
@@ -39,6 +42,16 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
             imvImage4 = (ImageView) view.findViewById(R.id.imv_home_item4);
             homeGroup = view.findViewById(R.id.home_group);
             viewDividerTop = view.findViewById(R.id.view_divider_top_home);
+            tvSeemore = view.findViewById(R.id.tv_see_more);
+
+            tvSeemore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mIOnItemClickedListener != null) {
+                        mIOnItemClickedListener.onItemClickComment(mDataset.get(getLayoutPosition()).getIdtopic());
+                    }
+                }
+            });
         }
     }
 
@@ -72,4 +85,9 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
     }
 
 
+    public interface IOnItemClickedListener {
+        void onItemClick(int id);
+        void onItemClickComment(int id);
+        void userSelectedAValue(String value);
+    }
 }

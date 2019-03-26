@@ -1,13 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:src="@drawable/cover1"/>
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:theme="@style/CardView1">
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="6dp"
+        android:background="#ffffff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:theme="@style/CardView1">
+
+            <ImageView
+                android:id="@+id/imv_content_see_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:src="@drawable/cover1" />
+
+            <TextView
+                android:id="@+id/tv_title_see_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:paddingLeft="5dp"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_summary_see_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:paddingLeft="5dp"
+                android:paddingTop="4dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:theme="@style/CardView1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0.04"
+                    android:text="Chủ đề: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_topic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.48"
+                    android:text="Môi trường" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:backgroundTint="@color/primecolor1"
+                    android:shadowColor="@color/cardview_dark_background"
+                    android:text="Xem chi tiết"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 
 </LinearLayout>

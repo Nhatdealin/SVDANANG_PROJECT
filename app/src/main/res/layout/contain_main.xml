@@ -9,6 +9,7 @@
     tools:showIn="@layout/app_bar_main">
 
     <FrameLayout
+        android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
@@ -19,25 +20,26 @@
          android:gravity="center"
          android:orientation="horizontal"
          android:paddingBottom="3dp"
-         android:paddingTop="7dp">
+         android:paddingTop="7dp"
+         android:outlineSpotShadowColor="@color/cardview_dark_background">
          <ImageView
              android:layout_width="35dp"
-             android:layout_height="30dp"
+             android:layout_height="35dp"
              android:layout_weight="1"
              android:src="@drawable/bg_ic_home"/>
          <ImageView
              android:layout_width="35dp"
-             android:layout_height="30dp"
+             android:layout_height="35dp"
              android:layout_weight="1"
              android:src="@drawable/bg_ic_find"/>
          <ImageView
              android:layout_width="35dp"
-             android:layout_height="30dp"
+             android:layout_height="35dp"
              android:layout_weight="1"
              android:src="@drawable/bg_ic_event"/>
          <ImageView
              android:layout_width="35dp"
-             android:layout_height="30dp"
+             android:layout_height="35dp"
              android:layout_weight="1"
              android:src="@drawable/bg_ic_project"/>
 

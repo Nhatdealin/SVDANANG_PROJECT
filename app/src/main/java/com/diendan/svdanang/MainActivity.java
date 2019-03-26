@@ -1,7 +1,8 @@
 package com.diendan.svdanang;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,17 +13,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.diendan.svdanang.Adapter.RecyclerviewAdapter;
+import com.diendan.svdanang.Adapter.MenuRecyclerviewAdapter;
+import com.diendan.svdanang.Fragment.HomeFragment;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, View.OnClickListener {
     private RecyclerView mRecyclerView;
-    private RecyclerviewAdapter mAdapter;
+    private MenuRecyclerviewAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private DrawerLayout mDrawerLayout;
     private TextView tvUssername;
-    private ImageView imgAvatar, mImvBack;
+    private ImageView imgAvatar, mImvBack,mImvNav;
     private View mLayoutSlide, mCurrentTab;
     private Fragment mCurrentFragment, mMenuBefore;
 
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         menuitemList.add(new Menuitem(R.drawable.icon_member_management, "Quản lý thành viên"));
         menuitemList.add(new Menuitem(R.drawable.icon_personal_infomation, "Thông tin cá nhân"));
         menuitemList.add(new Menuitem(R.drawable.icon_user_management, "Quản lý tài khoản"));
-        mAdapter = new RecyclerviewAdapter(this, menuitemList);
+        mAdapter = new MenuRecyclerviewAdapter(this, menuitemList);
         mRecyclerView.setAdapter(mAdapter);
         initComponent();
         addListener();
@@ -48,12 +50,17 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     protected void initComponent() {
         imgAvatar = findViewById(R.id.imv_avatar);
         tvUssername = findViewById(R.id.tv_fullname);
-        mImvBack = findViewById(R.id.imv_nav_left);
+        mImvNav = findViewById(R.id.imv_nav_left);
+        mImvBack = findViewById(R.id.imv_ic_back);
         mImvBack.setVisibility(View.VISIBLE);
         mLayoutSlide = findViewById(R.id.layout_left_menu);
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mDrawerLayout.addDrawerListener(this);
-
+        mCurrentFragment = HomeFragment.newInstance();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.add(R.id.main_frame, mCurrentFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     @Override
@@ -68,11 +75,15 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
 
     protected void addListener() {
             mImvBack.setOnClickListener(this);
+            mImvNav.setOnClickListener(this);
     }
 
     public void onClick(View view) {
             switch (view.getId()){
                 case R.id.imv_nav_left:
+                    onBackPressed();
+                    break;
+                case R.id.imv_ic_back:
                     onBackPressed();
                     break;
             }

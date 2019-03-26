@@ -4,20 +4,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bg_main"
     >
-    <TextView
-        android:id="@+id/tv_title_see_more"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TITLE"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_margin="20dp"
-        />
+    <LinearLayout
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/primecolor2"
+        android:outlineAmbientShadowColor="@color/cardview_dark_background">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/md_nav_back" />
+
+        <TextView
+            android:id="@+id/tv_title_see_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TITLE"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            />
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_see_more_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#A6ffffff">
+
     </android.support.v7.widget.RecyclerView>
+
 
 </LinearLayout>

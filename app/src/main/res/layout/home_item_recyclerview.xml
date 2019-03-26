@@ -32,6 +32,7 @@
             android:layout_width="0dp" />
 
         <TextView
+            android:id="@+id/tv_see_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_home_item"
