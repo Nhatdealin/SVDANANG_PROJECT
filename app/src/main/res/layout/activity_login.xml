@@ -21,8 +21,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="-170dp"
+            android:layout_marginTop="-220dp"
             android:src="@drawable/logo"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="-150dp"
+            android:src="@drawable/text_svdanang"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,7 +54,7 @@
                 app:met_floatingLabelTextColor="#0BB2CA"
                 app:met_primaryColor="#0BB2CA"
                 app:met_textColorHint="#e1e1e1"
-                app:met_underlineColor="#FF8C00" />
+                app:met_underlineColor="@color/primecolor1" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edt_password"
@@ -68,7 +74,7 @@
                 app:met_floatingLabelTextColor="#0BB2CA"
                 app:met_primaryColor="#0BB2CA"
                 app:met_textColorHint="#e1e1e1"
-                app:met_underlineColor="#FF8C00" />
+                app:met_underlineColor="@color/primecolor1" />
 
 
             <Button

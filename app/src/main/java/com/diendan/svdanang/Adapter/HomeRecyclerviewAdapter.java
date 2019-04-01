@@ -48,7 +48,7 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
                 @Override
                 public void onClick(View view) {
                     if (mIOnItemClickedListener != null) {
-                        mIOnItemClickedListener.onItemClickComment(mDataset.get(getLayoutPosition()).getIdtopic());
+                        mIOnItemClickedListener.onItemClickComment(1);
                     }
                 }
             });

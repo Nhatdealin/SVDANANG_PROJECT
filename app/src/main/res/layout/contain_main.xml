@@ -13,35 +13,42 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-     <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:background="#F9F9F9"
-         android:gravity="center"
-         android:orientation="horizontal"
-         android:paddingBottom="3dp"
-         android:paddingTop="7dp"
-         android:outlineSpotShadowColor="@color/cardview_dark_background">
-         <ImageView
-             android:layout_width="35dp"
-             android:layout_height="35dp"
-             android:layout_weight="1"
-             android:src="@drawable/bg_ic_home"/>
-         <ImageView
-             android:layout_width="35dp"
-             android:layout_height="35dp"
-             android:layout_weight="1"
-             android:src="@drawable/bg_ic_find"/>
-         <ImageView
-             android:layout_width="35dp"
-             android:layout_height="35dp"
-             android:layout_weight="1"
-             android:src="@drawable/bg_ic_event"/>
-         <ImageView
-             android:layout_width="35dp"
-             android:layout_height="35dp"
-             android:layout_weight="1"
-             android:src="@drawable/bg_ic_project"/>
 
-     </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F9F9F9"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="3dp"
+            android:paddingTop="7dp"
+            android:outlineSpotShadowColor="@color/cardview_dark_background">
+            <ImageView
+                android:id="@+id/imv_ic_home"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:src="@drawable/bg_ic_home"/>
+            <ImageView
+                android:id="@+id/imv_ic_find"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:src="@drawable/bg_ic_find"/>
+            <ImageView
+                android:id="@+id/imv_ic_event"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:src="@drawable/bg_ic_event"/>
+            <ImageView
+                android:id="@+id/imv_ic_project"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:src="@drawable/bg_ic_project"/>
+
+        </LinearLayout>
+
+
 </LinearLayout>

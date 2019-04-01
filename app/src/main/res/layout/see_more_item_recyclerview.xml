@@ -48,7 +48,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:theme="@style/CardView1">
+                android:theme="@style/CardView1"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -56,20 +57,24 @@
                     android:layout_marginLeft="5dp"
                     android:layout_weight="0.04"
                     android:text="Chủ đề: "
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    />
 
                 <TextView
                     android:id="@+id/tv_topic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.48"
-                    android:text="Môi trường" />
+                    android:text="Môi trường"
+                    android:layout_gravity="center_vertical"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:backgroundTint="@color/primecolor1"
+                    android:layout_margin="10dp"
+                    android:backgroundTint="@color/primecolor2"
                     android:shadowColor="@color/cardview_dark_background"
                     android:text="Xem chi tiết"
                     android:textColor="#ffffff" />

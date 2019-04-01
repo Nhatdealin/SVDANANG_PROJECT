@@ -5,18 +5,20 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/home_group"
-    android:background="#A6ffffff"
+    android:background="#1Dffffff"
     >
     <View
         android:id="@+id/view_divider_top_home"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:visibility="visible" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        >
         <TextView
             android:id="@+id/tv_home_title"
             android:layout_width="wrap_content"
@@ -38,6 +40,7 @@
             android:layout_marginRight="@dimen/margin_home_item"
             android:text="Xem tất cả"
             android:textSize="15dp"
+            android:textStyle="bold"
             />
 
     </LinearLayout>

@@ -47,7 +47,7 @@ public class MenuRecyclerviewAdapter extends RecyclerView.Adapter<MenuRecyclervi
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Menuitem menu = mDataset.get(position);
         holder.tvName.setText(menu.getData());
-        holder.imvImage.setImageResource(menu.getIdentity());
+        holder.imvImage.setImageResource(menu.getIdImage());
     }
 
     @Override
