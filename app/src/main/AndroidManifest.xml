@@ -26,6 +26,7 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".SeeMoreActivity"/>
+        <activity android:name=".SignUpActivity"/>
     </application>
 
 </manifest>
