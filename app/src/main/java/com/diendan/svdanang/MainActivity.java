@@ -19,6 +19,8 @@ import com.diendan.svdanang.Adapter.MenuRecyclerviewAdapter;
 import com.diendan.svdanang.Fragment.EventFragment;
 import com.diendan.svdanang.Fragment.HomeFragment;
 import com.diendan.svdanang.Fragment.ProjectFragment;
+import com.diendan.svdanang.utils.Constants;
+import com.diendan.svdanang.utils.SharedPreferenceHelper;
 
 import java.util.ArrayList;
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         mAdapter = new MenuRecyclerviewAdapter(this, menuitemList);
         mRecyclerView.setAdapter(mAdapter);
         initComponent();
+        loadProfile();
         addListener();
     }
 
@@ -78,7 +81,9 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     }
 
     protected void loadProfile() {
-
+        if(SharedPreferenceHelper.getInstance(this).get(Constants.PREF_PERSON_NAME) != null){
+            tvUssername.setText(SharedPreferenceHelper.getInstance(this).get(Constants.PREF_PERSON_NAME));
+        }
     }
 
     protected void addListener() {

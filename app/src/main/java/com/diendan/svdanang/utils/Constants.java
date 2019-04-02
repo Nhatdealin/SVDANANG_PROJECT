@@ -27,6 +27,7 @@ public class Constants {
     public static String PREF_USER_ID = "PREF_USER_ID";
     public static String PREF_EMPLOYEES_ID = "PREF_EMPLOYEES_ID";
     public static String PREF_ROLE = "PREF_ROLE";
+    public static final String PREF_PERSON_NAME = "PREF_PERSON_NAME";
     public static String PREF_GENERAL_DATA = "PREF_GENERAL_DATA";
     public static final String PREF_USERNAME = "username";
     public static final String PREF_PASSWORD_NAME = "password";

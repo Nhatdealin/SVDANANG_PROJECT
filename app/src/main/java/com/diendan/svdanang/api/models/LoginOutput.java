@@ -15,7 +15,7 @@ public class LoginOutput extends BaseOutput {
     @SerializedName("accessToken")
     public String accessToken;
     @SerializedName("tokenType")
-    public String tokenType;
+    public String tokenType = "";
     @SerializedName("firstName")
     public String firstName;
     @SerializedName("lastName")
