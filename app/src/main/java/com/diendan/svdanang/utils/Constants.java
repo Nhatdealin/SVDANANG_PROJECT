@@ -5,6 +5,11 @@ import android.widget.LinearLayout;
 public class Constants {
 
     LinearLayout bg;
+    public static final int MENU_ITEM_PROFILE = 110;
+    public static final int MENU_ITEM_MANAGE_USER = 111;
+    public static final int MENU_ITEM_MANAGE_MEMBER = 112;
+    public static final int MENU_ITEM_MANAGE_MEETING = 113;
+    public static final int MENU_ITEM_LOGOUT = 114;
 
     public static int WITDH = 220;
     public static String ROLE_ADMIN = "Admin";

@@ -3,25 +3,28 @@ package com.diendan.svdanang.models;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by Admin on 4/13/2017.
  */
 
-public class User implements Serializable {
+public class CreatedBy implements Serializable {
+    @SerializedName("id")
+    private Integer id;
     @SerializedName("firstName")
     private String firstName;
     @SerializedName("lastName")
     private String lastName;
     @SerializedName("avatar")
     private String avatar;
-    @SerializedName("userName")
-    private String userName;
-    @SerializedName("email")
-    private String email;
-    @SerializedName("grantedActions")
-    private ArrayList<String> grantedActions;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -47,27 +50,5 @@ public class User implements Serializable {
         this.avatar = avatar;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public ArrayList<String> getGrantedActions() {
-        return grantedActions;
-    }
-
-    public void setGrantedActions(ArrayList<String> grantedActions) {
-        this.grantedActions = grantedActions;
-    }
 }
+

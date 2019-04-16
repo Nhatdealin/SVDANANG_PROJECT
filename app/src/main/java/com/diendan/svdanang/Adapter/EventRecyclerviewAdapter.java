@@ -11,12 +11,13 @@ import android.widget.TextView;
 import com.diendan.svdanang.Eventitem;
 import com.diendan.svdanang.R;
 import com.diendan.svdanang.Seemoreitem;
+import com.diendan.svdanang.models.ContentEvent;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class EventRecyclerviewAdapter extends  RecyclerView.Adapter<EventRecyclerviewAdapter.MyViewHolder>  {
-    private List<Eventitem> mDataset;
+    private List<ContentEvent> mDataset;
     private Context mContext;
 
     public IOnItemClickedListener mIOnItemClickedListener;
@@ -40,7 +41,7 @@ public class EventRecyclerviewAdapter extends  RecyclerView.Adapter<EventRecycle
 
         }
     }
-    public EventRecyclerviewAdapter(Context context, List<Eventitem> myDataset) {
+    public EventRecyclerviewAdapter(Context context, List<ContentEvent> myDataset) {
         this.mDataset = myDataset;
         this.mContext = context;
     }
@@ -52,16 +53,14 @@ public class EventRecyclerviewAdapter extends  RecyclerView.Adapter<EventRecycle
 
     @Override
     public void onBindViewHolder(EventRecyclerviewAdapter.MyViewHolder holder, int position) {
-        Eventitem eventitem = mDataset.get(position);
-        Picasso.with(mContext).load(eventitem.getIdImage()).fit().into(holder.imvImage);
-        holder.imvImage.setImageResource(eventitem.getIdImage());
-        holder.tvTopic.setText(eventitem.getTopic());
-        holder.tvTitle.setText(eventitem.getTitle());
-        holder.tvSummary.setText(eventitem.getSummary());
+        ContentEvent eventitem = mDataset.get(position);
+        Picasso.with(mContext).load(eventitem.getImage()).fit().into(holder.imvImage);
+        holder.tvTopic.setText(eventitem.getTopicId().toString());
+        holder.tvTitle.setText(eventitem.getName());
+        holder.tvSummary.setText(eventitem.getDescription());
         holder.tvLocation.setText(eventitem.getLocation());
         holder.tvFee.setText(String.valueOf(eventitem.getFee()));
     }
-
 
 
     @Override

@@ -28,8 +28,8 @@ public abstract class BaseTask<Output> extends AsyncTask<Void,Exception, Output>
     public BaseTask(Context context, @Nullable ApiListener<Output> listener) {
         mListener = listener;
         mApi = new TaskApi(context);
-        if(SharedPreferenceHelper.getInstance(context).get(Constants.PREF_SESSION_ID) != null && SharedPreferenceHelper.getInstance(context).get(Constants.PREF_SESSION_ID).length() > 0) {
-            mApi.setCredentials(SharedPreferenceHelper.getInstance(context).get(Constants.PREF_SESSION_ID));
+        if(SharedPreferenceHelper.getInstance(context).get(Constants.EXTRAX_TOKEN_CODE) != null && SharedPreferenceHelper.getInstance(context).get(Constants.EXTRAX_TOKEN_CODE).length() > 0) {
+            mApi.setCredentials(SharedPreferenceHelper.getInstance(context).get(Constants.EXTRAX_TOKEN_CODE));
         }
     }
 

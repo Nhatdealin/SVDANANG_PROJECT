@@ -17,6 +17,9 @@ public class MenuRecyclerviewAdapter extends RecyclerView.Adapter<MenuRecyclervi
     private List<Menuitem> mDataset;
     private Context mContext;
 
+    public IOnItemClickedListener mIOnItemClickedListener;
+
+
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvName;
         ImageView imvImage;
@@ -26,7 +29,6 @@ public class MenuRecyclerviewAdapter extends RecyclerView.Adapter<MenuRecyclervi
         public MyViewHolder(View view) {
             super(view);
             tvName = (TextView) view.findViewById(R.id.tv_item);
-            tvName.setSelected(true);
             imvImage = (ImageView) view.findViewById(R.id.imv_item);
             menuGroup = view.findViewById(R.id.menu_group);
             viewDividerTop = view.findViewById(R.id.view_divider_top);
@@ -37,6 +39,9 @@ public class MenuRecyclerviewAdapter extends RecyclerView.Adapter<MenuRecyclervi
         this.mDataset = myDataset;
         this.mContext = context;
     }
+    public void setOnItemClickListener(IOnItemClickedListener listener) {
+        mIOnItemClickedListener = listener;
+    }
 
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MyViewHolder(LayoutInflater.from(parent.getContext())
@@ -44,16 +49,28 @@ public class MenuRecyclerviewAdapter extends RecyclerView.Adapter<MenuRecyclervi
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         Menuitem menu = mDataset.get(position);
         holder.tvName.setText(menu.getData());
         holder.imvImage.setImageResource(menu.getIdImage());
+        holder.menuGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mIOnItemClickedListener != null) {
+                    mIOnItemClickedListener.onItemClickComment(mDataset.get(position).getType());
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return mDataset.size();
     }
-
+    public interface IOnItemClickedListener {
+        void onItemClick(int id);
+        void onItemClickComment(int id);
+        void userSelectedAValue(String value);
+    }
 
 }

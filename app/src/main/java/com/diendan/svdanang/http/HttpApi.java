@@ -63,6 +63,19 @@ public interface HttpApi {
      * @return The response string
      * @throws IOException
      */
+
+    Object doHttpPut(@NonNull String requestUrl, String jsonObject)
+            throws ApiException, JSONException, IOException, ApiException;
+
+    /**
+     * Execute http request with post method and body is json object (raw)
+     *
+     * @param requestUrl
+     * @param jsonObject
+     * @return The response string
+     * @throws IOException
+     * @throws ApiException
+     */
     Object doHttpGet(@NonNull String requestUrl, @Nullable Map<String, String> params)
             throws ApiException, JSONException, IOException;
 

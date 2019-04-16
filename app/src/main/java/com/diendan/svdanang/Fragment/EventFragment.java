@@ -1,11 +1,14 @@
 package com.diendan.svdanang.Fragment;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
 import android.support.v7.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +18,22 @@ import com.diendan.svdanang.Adapter.EventRecyclerviewAdapter;
 import com.diendan.svdanang.Eventitem;
 
 import com.diendan.svdanang.R;
+import com.diendan.svdanang.api.ApiListener;
+import com.diendan.svdanang.api.models.EventsOutput;
+import com.diendan.svdanang.models.ContentEvent;
+import com.diendan.svdanang.tasks.BaseTask;
+import com.diendan.svdanang.tasks.GetEventsTask;
+import com.diendan.svdanang.tasks.GetProjectsTask;
 
 
 import java.util.ArrayList;
 
-public class EventFragment extends Fragment implements View.OnClickListener {
+public class EventFragment extends Fragment implements View.OnClickListener, ApiListener<EventsOutput> {
     RecyclerView mEventRecyclerView;
     private EventRecyclerviewAdapter mAdapter;
-
-    ArrayList<Eventitem> eventitemlist;
+    int mStart = 0;
+    protected ProgressDialog mProgressDialog;
+    ArrayList<ContentEvent> eventitemlist;
     LinearLayoutManager mLayoutManager;
 
     public static EventFragment newInstance() {
@@ -38,14 +48,14 @@ public class EventFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.event_fragment, container, false);
         mEventRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_event_fragment);
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        // set nằm ngang là
-
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage(getString(R.string.txt_waiting));
         mEventRecyclerView.setLayoutManager(mLayoutManager);
         eventitemlist = new ArrayList<>();
-        eventitemlist.add(new Eventitem(1, R.drawable.cover1, "Hành Trình SV 2019", "Sự kiện là sân chơi cho các ..................", 100000, "Thành phố Đà Nẵng", "Hành tình"));
-        eventitemlist.add(new Eventitem(2, R.drawable.cover2, "Hành Trình SV 2019", "Sự kiện là sân chơi cho các ..................", 50000, "Thành phố Đà Nẵng", "Hành tình"));
         mAdapter = new EventRecyclerviewAdapter(getActivity(), eventitemlist);
         mEventRecyclerView.setAdapter(mAdapter);
+        loadData();
         addListener();
         return rootView;
     }
@@ -68,7 +78,11 @@ public class EventFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
+    private void loadData() {
+        showLoading(true);
+        new GetEventsTask(getActivity(), mStart,5, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
+    }
 
     @Override
     public void onClick(View view) {
@@ -79,4 +93,39 @@ public class EventFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    @Override
+    public void onConnectionOpen(BaseTask task) {
+
+    }
+
+    @Override
+    public void onConnectionSuccess(BaseTask task, EventsOutput data) {
+        if(task instanceof GetEventsTask)
+        {
+            showLoading(false);
+            EventsOutput output = data;
+            if(output.success)
+            {
+                eventitemlist.addAll(output.getData().getContent());
+                mAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    @Override
+    public void onConnectionError(BaseTask task, Exception exception) {
+        Log.i("aaaaaaaaaa",exception.getMessage());
+    }
+    public void showLoading(boolean isShow) {
+        try {
+            if (isShow) {
+                mProgressDialog.show();
+            } else {
+                if (mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                }
+            }
+        } catch (IllegalArgumentException ex) {
+        }
+    }
 }

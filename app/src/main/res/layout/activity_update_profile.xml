@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/bg_main">
+
+    <LinearLayout
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/primecolor2"
+        android:outlineAmbientShadowColor="@color/cardview_dark_background">
+
+        <ImageView
+            android:id="@+id/imv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/md_nav_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chỉnh sửa thông tin cá nhân"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            />
+    </LinearLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:background="#A6ffffff">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imv_avatar"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ava"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_home_item"
+                        android:layout_marginBottom="@dimen/md_listitem_vertical_margin_choice"
+                        android:text="Nhat Dealin Do"
+                        android:textSize="@dimen/md_title_textsize"
+                        android:textStyle="bold"
+                        android:id="@+id/tv_infor_username"
+                        android:gravity="center"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/md_listitem_vertical_margin_choice"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/icon_profile"
+                            android:layout_height="@dimen/icon_profile"
+                            android:src="@drawable/ic_email_profile"
+                            android:layout_gravity="center_vertical"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="dominhnhat2311@gmail.com"
+                            android:textSize="@dimen/md_content_textsize"
+                            android:id="@+id/tv_update_email"
+                            android:layout_gravity="left|center_vertical"
+                            app:met_floatingLabel="normal"
+                            app:met_floatingLabelTextColor="#F8F8FF"
+                            app:met_primaryColor="#FF8C00"
+                            app:met_textColorHint="#EEEEEE"
+                            app:met_underlineColor="#E1E1E1"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/md_listitem_vertical_margin_choice"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/icon_profile"
+                            android:layout_height="@dimen/icon_profile"
+                            android:src="@drawable/ic_facebook_profile"
+                            android:layout_gravity="center_vertical"/>
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edt_update_fblink"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="facebook.com/nhat.dealin"
+                            android:textSize="@dimen/md_content_textsize"
+                            android:layout_gravity="left|center_vertical"
+                            app:met_floatingLabel="normal"
+                            app:met_floatingLabelTextColor="#F8F8FF"
+                            app:met_primaryColor="#FF8C00"
+                            app:met_textColorHint="#EEEEEE"
+                            app:met_underlineColor="#E1E1E1"
+                            />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/margin_profile"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/line_divide" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Họ và tên đệm"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_update_firstname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Đỗ Minh Nhật"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textSize="@dimen/md_content_textsize"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelTextColor="#F8F8FF"
+                    app:met_primaryColor="#FF8C00"
+                    app:met_textColorHint="#EEEEEE"
+                    app:met_underlineColor="#E1E1E1"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tên"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_update_lastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Đỗ Minh Nhật"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textSize="@dimen/md_content_textsize"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelTextColor="#F8F8FF"
+                    app:met_primaryColor="#FF8C00"
+                    app:met_textColorHint="#EEEEEE"
+                    app:met_underlineColor="#E1E1E1"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Giới tính"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <RadioGroup
+                    android:id="@+id/rbg_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_update_male_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nam"
+                        android:layout_margin="@dimen/margin_profile"
+                        android:textSize="@dimen/md_content_textsize"
+                        />
+                    <RadioButton
+                        android:id="@+id/rb_update_female_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nữ"
+                        android:layout_margin="@dimen/margin_profile"
+                        android:textSize="@dimen/md_content_textsize"
+                        />
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Địa chỉ"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_update_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="10 Hà Văn Tính"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tỉnh Thành"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_update_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Đà Nẵng"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Số điện thoại"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_update_phonenumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="01266800577"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textSize="@dimen/md_content_textsize"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày sinh"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edt_update_birthdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="23/11/1997"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textSize="@dimen/md_content_textsize"
+
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <Button
+                        android:layout_margin="@dimen/margin_home_item"
+                        android:id="@+id/btn_update_submit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lưu"
+                        android:backgroundTint="@color/primecolor2"
+                        android:shadowColor="@color/cardview_dark_background"
+                        android:textColor="#ffffff"/>
+                    <Button
+                        android:id="@+id/btn_update_cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hủy"
+                        android:backgroundTint="@color/primecolor2"
+                        android:shadowColor="@color/cardview_dark_background"
+                        android:layout_margin="@dimen/margin_home_item"
+                        android:textColor="#ffffff"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</LinearLayout>

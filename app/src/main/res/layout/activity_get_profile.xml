@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_main">
+
+    <LinearLayout
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/primecolor2"
+        android:outlineAmbientShadowColor="@color/cardview_dark_background">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/md_nav_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thông tin cá nhân"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            />
+    </LinearLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:background="#A6ffffff">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imv_avatar"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ava"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_home_item"
+                        android:layout_marginBottom="@dimen/md_listitem_vertical_margin_choice"
+                        android:text="Nhat Dealin Do"
+                        android:textSize="@dimen/md_title_textsize"
+                        android:textStyle="bold"
+                        android:id="@+id/tv_infor_username"
+                        android:gravity="center"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/md_listitem_vertical_margin_choice"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/icon_profile"
+                            android:layout_height="@dimen/icon_profile"
+                            android:src="@drawable/ic_email_profile"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="dominhnhat2311@gmail.com"
+                            android:textSize="@dimen/md_content_textsize"
+                            android:id="@+id/tv_infor_email"
+                            android:layout_gravity="left|center_vertical"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/md_listitem_vertical_margin_choice"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/icon_profile"
+                            android:layout_height="@dimen/icon_profile"
+                            android:src="@drawable/ic_facebook_profile"/>
+                        <TextView
+                            android:id="@+id/tv_infor_fblink"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="facebook.com/nhat.dealin"
+                            android:textSize="@dimen/md_content_textsize"
+                            android:layout_gravity="left|center_vertical"
+                            />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="THÔNG TIN CÁ NHÂN"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:layout_margin="5dp"
+                        android:textColor="@color/cardview_shadow_start_color"/>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+                    <Button
+                        android:id="@+id/btn_edit_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:text="Chỉnh sửa"
+                        android:backgroundTint="@color/primecolor2"
+                        android:textColor="#ffffff"
+                        android:shadowColor="@color/cardview_dark_background"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/line_divide" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tên tài khoản"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <TextView
+                    android:id="@+id/tv_infor_fullname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Đỗ Minh Nhật"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textSize="@dimen/md_content_textsize"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Giới tính"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <TextView
+                    android:id="@+id/tv_infor_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nam"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Địa chỉ"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <TextView
+                    android:id="@+id/tv_infor_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="10 Hà Văn Tính"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tỉnh Thành"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <TextView
+                    android:id="@+id/tv_infor_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Đà Nẵng"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bộ phận - ban làm việc"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <TextView
+                    android:id="@+id/tv_infor_department"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ban sự kiện"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textSize="@dimen/md_content_textsize"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Số điện thoại"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_infor_phonenumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="01266800577"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textSize="@dimen/md_content_textsize"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày sinh"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/md_content_textsize"
+                    />
+                <TextView
+                    android:id="@+id/tv_infor_birthdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="23/11/1997"
+                    android:layout_margin="@dimen/margin_profile"
+                    android:textSize="@dimen/md_content_textsize"
+
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</LinearLayout>

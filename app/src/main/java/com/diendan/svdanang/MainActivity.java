@@ -2,6 +2,10 @@ package com.diendan.svdanang;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -10,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.Transition;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,12 +22,17 @@ import com.diendan.svdanang.Adapter.MenuRecyclerviewAdapter;
 import com.diendan.svdanang.Fragment.EventFragment;
 import com.diendan.svdanang.Fragment.HomeFragment;
 import com.diendan.svdanang.Fragment.ProjectFragment;
+import com.diendan.svdanang.api.ApiListener;
+import com.diendan.svdanang.api.models.ProfileOutput;
+import com.diendan.svdanang.models.DataProfile;
+import com.diendan.svdanang.tasks.BaseTask;
+import com.diendan.svdanang.tasks.GetProfileTask;
 import com.diendan.svdanang.utils.Constants;
 import com.diendan.svdanang.utils.SharedPreferenceHelper;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements ApiListener<ProfileOutput>,DrawerLayout.DrawerListener, View.OnClickListener {
     private RecyclerView mRecyclerView;
     private MenuRecyclerviewAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -33,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     private ImageView imgAvatar, mImvBack, mImvNav;
     private View mLayoutSlide, mCurrentTab, mEventTab, mFindTab, mProjectTab;
     private Fragment mCurrentFragment, mMenuBefore;
+    protected ProgressDialog mProgressDialog;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -41,12 +50,15 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_menu);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         ArrayList<Menuitem> menuitemList = new ArrayList<>();
-        menuitemList.add(new Menuitem(1, R.drawable.icon_meeting_management, "Quản lý lịch họp"));
-        menuitemList.add(new Menuitem(2, R.drawable.icon_member_management, "Quản lý thành viên"));
-        menuitemList.add(new Menuitem(3, R.drawable.icon_personal_infomation, "Thông tin cá nhân"));
-        menuitemList.add(new Menuitem(4, R.drawable.icon_user_management, "Quản lý tài khoản"));
+        menuitemList.add(new Menuitem(Constants.MENU_ITEM_MANAGE_MEETING, 1, R.drawable.icon_meeting_management, "Quản lý lịch họp"));
+        menuitemList.add(new Menuitem(Constants.MENU_ITEM_MANAGE_MEMBER, 2, R.drawable.icon_member_management, "Quản lý thành viên"));
+        menuitemList.add(new Menuitem(Constants.MENU_ITEM_PROFILE, 3, R.drawable.icon_personal_infomation, "Thông tin cá nhân"));
+        menuitemList.add(new Menuitem(Constants.MENU_ITEM_MANAGE_USER, 4, R.drawable.icon_user_management, "Quản lý tài khoản"));
         mAdapter = new MenuRecyclerviewAdapter(this, menuitemList);
         mRecyclerView.setAdapter(mAdapter);
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage(getString(R.string.txt_waiting));
         initComponent();
         loadProfile();
         addListener();
@@ -81,7 +93,8 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     }
 
     protected void loadProfile() {
-        if(SharedPreferenceHelper.getInstance(this).get(Constants.PREF_PERSON_NAME) != null){
+
+        if (SharedPreferenceHelper.getInstance(this).get(Constants.PREF_PERSON_NAME) != null) {
             tvUssername.setText(SharedPreferenceHelper.getInstance(this).get(Constants.PREF_PERSON_NAME));
         }
     }
@@ -93,6 +106,32 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         mFindTab.setOnClickListener(this);
         mProjectTab.setOnClickListener(this);
         mEventTab.setOnClickListener(this);
+        mAdapter.setOnItemClickListener(new MenuRecyclerviewAdapter.IOnItemClickedListener () {
+            @Override
+            public void onItemClick(int id) {
+
+            }
+
+            @Override
+            public void onItemClickComment(int id) {
+                switch (id) {
+                    case 110:
+                        showLoading(true);
+                        GetProfile();
+                        break;
+                }
+            }
+
+
+            @Override
+            public void userSelectedAValue(String value) {
+
+            }
+        });
+    }
+
+    private void GetProfile() {
+        new GetProfileTask(this,this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
     }
 
@@ -187,6 +226,56 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
 
     @Override
     public void onDrawerStateChanged(int newState) {
+
+    }
+
+    public void showLoading(boolean isShow) {
+        try {
+            if (isShow) {
+                mProgressDialog.show();
+            } else {
+                if (mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                }
+            }
+        } catch (IllegalArgumentException ex) {
+        }
+    }
+
+    @Override
+    public void onConnectionOpen(BaseTask task) {
+
+    }
+
+    @Override
+    public void onConnectionSuccess(BaseTask task, ProfileOutput data) {
+
+        if(task instanceof GetProfileTask){
+
+            ProfileOutput output = data;
+            DataProfile getData = data.getData();
+            if(output.success){
+                Intent i = new Intent(MainActivity.this, GetProfileActivity.class);
+                i.putExtra("firstname",getData.getFirstName());
+                i.putExtra("lastname",getData.getLastName());
+                i.putExtra("address",getData.getAddress());
+                i.putExtra("birthdate",getData.getBirthDate());
+                i.putExtra("city",getData.getCity());
+                i.putExtra("department",getData.getDepartment());
+                i.putExtra("email",getData.getEmail());
+                i.putExtra("fblink",getData.getFacebookLink());
+                i.putExtra("gender",getData.getGender());
+                i.putExtra("phone",getData.getPhoneNumber());
+                i.putExtra("username",getData.getUserName());
+                showLoading(false);
+                startActivity(i);
+            }
+
+        }
+    }
+
+    @Override
+    public void onConnectionError(BaseTask task, Exception exception) {
 
     }
 }

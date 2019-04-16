@@ -1,9 +1,11 @@
 package com.diendan.svdanang;
 
 public class Menuitem {
-    private int identity,idImage;
+
+    private int identity,idImage,type;
     private String data;
-    public Menuitem(int id,int idimg, String text) {
+    public Menuitem(int tp, int id,int idimg, String text) {
+        this.type = tp;
         this.identity=id;
         this.data = text;
         this.idImage = idimg;
@@ -27,6 +29,14 @@ public class Menuitem {
 
     public String getData() {
         return data;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public void setData(String data) {

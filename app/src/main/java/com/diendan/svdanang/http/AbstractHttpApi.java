@@ -59,6 +59,25 @@ public abstract class AbstractHttpApi implements HttpApi {
         String response = executeHttpRequest(connection);
         return response;
     }
+    protected String executeHttpPut(@NonNull String requestUrl, @Nullable Map<String, String> headers,
+                                     String jsonObject)
+            throws JSONException, ApiException, IOException {
+        HttpURLConnection connection = prepareConnection(requestUrl);
+        connection.setRequestMethod("PUT");
+        connection.setDoOutput(true);
+        connection.setDoInput(true);
+        connection.setRequestProperty("Content-Type", "application/json; charset=" + CHARSET);
+        connection.setRequestProperty("Content-Length", "" + Integer.toString(jsonObject.getBytes().length));
+        if (headers != null) addHeaderFields(connection, headers);
+        if (jsonObject != null) {
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(connection.getOutputStream(), CHARSET), true);
+            writer.append(jsonObject);
+            writer.flush();
+            writer.close();
+        }
+            String response = executeHttpRequest(connection);
+        return response;
+    }
 
     protected String executeHttpPost(@NonNull String requestUrl, @Nullable Map<String, String> headers,
                                      JSONObject jsonObject)
@@ -217,7 +236,7 @@ public abstract class AbstractHttpApi implements HttpApi {
 //        if (status == HttpURLConnection.HTTP_OK) {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    status == HttpURLConnection.HTTP_OK ? connection.getInputStream() : connection.getErrorStream()));
+                    status == HttpURLConnection.HTTP_OK || status == HttpURLConnection.HTTP_CREATED ? connection.getInputStream() : connection.getErrorStream()));
             String line = null;
             while ((line = reader.readLine()) != null) {
                 response.append(line);

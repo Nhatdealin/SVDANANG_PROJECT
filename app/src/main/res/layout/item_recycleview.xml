@@ -21,8 +21,8 @@
 
         <ImageView
             android:id="@+id/imv_item"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:src="@drawable/icon_member_management" />
@@ -34,7 +34,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="30dp"
             android:text="AAAAAA"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
     </LinearLayout>
 
 </LinearLayout>

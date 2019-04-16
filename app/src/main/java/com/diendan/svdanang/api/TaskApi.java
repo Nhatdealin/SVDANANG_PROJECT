@@ -2,17 +2,21 @@ package com.diendan.svdanang.api;
 
 import android.content.Context;
 
+import com.diendan.svdanang.api.models.EventsOutput;
 import com.diendan.svdanang.api.models.LoginOutput;
+import com.diendan.svdanang.api.models.ProfileOutput;
+import com.diendan.svdanang.api.models.ProjectsOutput;
+import com.diendan.svdanang.api.models.SignupOutput;
+import com.diendan.svdanang.api.objects.SignupInput;
+import com.diendan.svdanang.api.objects.UpdateProfileInput;
+import com.diendan.svdanang.utils.Constants;
+import com.diendan.svdanang.utils.SharedPreferenceHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.logging.Logger;
 
 import com.diendan.svdanang.api.exception.ApiException;
@@ -27,7 +31,12 @@ public class TaskApi {
     // URL
     public static final String TASK_WS = "https://api-svdanang.herokuapp.com/api/";//DEV api
     public static final String LOGIN_API = "auth/signin";
-    public static final String PROFILE_API = "user/me";
+    public static final String SIGNUP_API = "auth/signup";
+    public static final String PROFILE_API = "users/me";
+    public static final String PROJECT_API = "projects?filter&sortBy&sortOrder&page=%s&pageSize=%s";
+    public static final String EVENT_API = "events?filter&sortBy&sortOrder&page=%s&pageSize=%s";
+    public static final String EMAIL_AVAILABILITY = "users/checkEmailAvailability?email=%s";
+    public static final String USERNAME_AVAILABILITY = "users/checkUsernameAvailability";
     public static final String GET_NOTE = "crm/notes/%s";
     public static final String GET_LIST_NOTE = "crm/notes/filter/%s/%s?searchTerm=%s";
     public static final String GET_LIST_WORK = "crm/works/filter/%s/%s?searchTerm=%s";
@@ -121,6 +130,37 @@ public class TaskApi {
     public LoginOutput loginUsername(LoginInput loginInput) throws ApiException, JSONException, IOException {
         JSONObject data = mHttpApi.doHttpPost(getFullUrl(LOGIN_API), new Gson().toJson(loginInput));
         LoginOutput output = mGson.fromJson(data.toString(), LoginOutput.class);
+
+        return output;
+    }
+    public SignupOutput signUpAccount(SignupInput signupInput) throws ApiException, JSONException, IOException {
+        JSONObject data = (JSONObject) mHttpApi.doHttpPost(getFullUrl(SIGNUP_API), new Gson().toJson(signupInput));
+        SignupOutput output = (SignupOutput) mGson.fromJson(data.toString(), SignupOutput.class);
+        return output;
+    }
+
+    public ProfileOutput getProfile() throws ApiException, JSONException, IOException {
+        mHttpApi.setCredentials(SharedPreferenceHelper.getInstance(this.mContext).get(Constants.EXTRAX_TOKEN_CODE));
+        JSONObject data = mHttpApi.doHttpGetWithHeader(String.format(getFullUrl(PROFILE_API)));
+        ProfileOutput output = mGson.fromJson(data.toString(), ProfileOutput .class);
+        return output;
+    }
+    public ProfileOutput updateProfile(UpdateProfileInput updateProfileInput) throws ApiException, JSONException, IOException {
+        mHttpApi.setCredentials(SharedPreferenceHelper.getInstance(this.mContext).get(Constants.EXTRAX_TOKEN_CODE));
+        JSONObject data = (JSONObject) mHttpApi.doHttpPut(getFullUrl(PROFILE_API), new Gson().toJson(updateProfileInput));
+        ProfileOutput output = (ProfileOutput) mGson.fromJson(data.toString(), ProfileOutput .class);
+        return output;
+    }
+    public ProjectsOutput getProjects(int page,int pagesize) throws ApiException, JSONException, IOException {
+        mHttpApi.setCredentials(SharedPreferenceHelper.getInstance(this.mContext).get(Constants.EXTRAX_TOKEN_CODE));
+        JSONObject data = (JSONObject) mHttpApi.doHttpGetWithHeader(String.format(getFullUrl(PROJECT_API),page +"",5+""));
+        ProjectsOutput output = (ProjectsOutput) mGson.fromJson(data.toString(), ProjectsOutput .class);
+        return output;
+    }
+    public EventsOutput getEvents(int page, int pagesize) throws ApiException, JSONException, IOException {
+        mHttpApi.setCredentials(SharedPreferenceHelper.getInstance(this.mContext).get(Constants.EXTRAX_TOKEN_CODE));
+        JSONObject data = (JSONObject) mHttpApi.doHttpGetWithHeader(String.format(getFullUrl(EVENT_API),page +"",5+""));
+        EventsOutput output = (EventsOutput) mGson.fromJson(data.toString(), EventsOutput .class);
         return output;
     }
 }

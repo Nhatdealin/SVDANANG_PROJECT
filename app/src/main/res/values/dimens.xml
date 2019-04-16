@@ -5,5 +5,7 @@
     <dimen name="margin_home_item">20dp</dimen>
     <dimen name="transperent_home_item">110dp</dimen>
     <dimen name="progress_bar_raise_width">300dp</dimen>
+    <dimen name="margin_profile">10dp</dimen>
+    <dimen name="icon_profile">32dp</dimen>
     <integer name="progress_bar_raise_width_ndp">250</integer>
 </resources>

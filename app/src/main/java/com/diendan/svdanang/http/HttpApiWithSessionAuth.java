@@ -53,7 +53,7 @@ public class HttpApiWithSessionAuth extends AbstractHttpApi {
         map.put("Content-Type", "application/json");
         map.put("Accept", "application/json");
         if (hasCredentials()) {
-            map.put("Authorization", mToken);
+            map.put("Authorization","Bearer "+ mToken);
             return map;
         } else {
             return null;
@@ -140,6 +140,33 @@ public class HttpApiWithSessionAuth extends AbstractHttpApi {
 //        }
 
     }
+    @Override
+    public JSONObject doHttpPut(@NonNull String requestUrl, String jsonObject)
+            throws ApiException, JSONException, IOException {
+//        try {
+        JSONObject jsonResult = new JSONObject(executeHttpPut(requestUrl, createHeaderWithAuthorization(), jsonObject));
+        try {
+            if(jsonResult.getInt("ErrorCode") == Constants.FAILURE_SESSION_EXPIRED){
+                if(getNewSession()) {
+                    return new JSONObject(executeHttpPost(requestUrl, createHeaderWithAuthorization(), jsonObject));
+                } else {
+                    return jsonResult;
+                }
+            }
+        } catch (JSONException ex){
+
+        }
+        return jsonResult;
+//        } catch (ApiException e) {
+//            if (e.getErrorCode() == Constants.FAILURE_SESSION_EXPIRED) {
+//                getNewSession();
+//                return new JSONObject(executeHttpPost(requestUrl, createHeaderWithAuthorization(), jsonObject));
+//            } else
+//            throw e;
+//        }
+    }
+
+
 
     @Override
     public JSONObject doHttpGet(@NonNull String requestUrl, Map<String, String> params)
@@ -320,8 +347,8 @@ public class HttpApiWithSessionAuth extends AbstractHttpApi {
         if(output.success) {
 //            mPrefHelper.set(Constants.PREF_SESSION_ID, output.result.tokenType + " " + output.result.accessToken);
 //            mToken = output.result.tokenType + " " + output.result.accessToken;
-            mPrefHelper.set(Constants.PREF_SESSION_ID, output.tokenType + " " + output.accessToken);
-            mToken = output.tokenType + " " + output.accessToken;
+            mPrefHelper.set(Constants.PREF_SESSION_ID, output.getData().getTokenType() + " " + output.getData().getAccessToken());
+            mToken = output.getData().getTokenType() + " " + output.getData().getAccessToken();
         } else {
             return false;
         }

@@ -26,7 +26,7 @@
             <ImageView
                 android:id="@+id/imv_content_project"
                 android:layout_width="match_parent"
-                android:layout_height="390dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/cover1" />
 
@@ -37,7 +37,7 @@
                 android:layout_marginTop="5dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:orientation="vertical">
@@ -49,7 +49,7 @@
 
                         <View
                             android:id="@+id/view_space"
-                            android:layout_width="250dp"
+                            android:layout_width="220dp"
                             android:layout_height="match_parent"></View>
 
                         <LinearLayout
@@ -109,14 +109,15 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_goal"
-                            android:layout_marginLeft="2dp"/>
+                            android:layout_marginLeft="10dp"/>
 
                         <TextView
                             android:id="@+id/tv_goal"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:gravity="center"
                             android:text="10000000"
                             android:textStyle="bold"
                             android:background="@color/primecolor2"/>
