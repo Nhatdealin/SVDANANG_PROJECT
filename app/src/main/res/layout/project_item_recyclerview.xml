@@ -46,41 +46,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-
-                        <View
-                            android:id="@+id/view_space"
-                            android:layout_width="220dp"
-                            android:layout_height="match_parent"></View>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <FrameLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_thumb" />
-
-                                <TextView
-                                    android:id="@+id/tv_raised"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical|center_horizontal"
-                                    android:layout_marginBottom="5dp"
-                                    android:text="100.000.000"
-                                    android:textStyle="bold" />
-                            </FrameLayout>
-                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -89,7 +61,7 @@
                             android:layout_marginLeft="40dp">
 
                             <LinearLayout
-                                android:layout_width="220dp"
+                                android:layout_width="310dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/progress_bar_bg"></LinearLayout>
 
@@ -104,25 +76,64 @@
 
                         </FrameLayout>
 
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_raised"
+                            android:layout_marginLeft="@dimen/margin_home_item"/>
+                        <TextView
+                            android:id="@+id/tv_raised"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="100.000.000"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tv_currency1_project"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="5dp"
+                            android:gravity="center"
+                            android:text="VND" />
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
                         <ImageView
 
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:src="@drawable/ic_goal"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginLeft="10dp"
+                            />
 
                         <TextView
                             android:id="@+id/tv_goal"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:gravity="center"
                             android:text="10000000"
-                            android:textStyle="bold"
-                            android:background="@color/primecolor2"/>
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tv_currency2_project"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="5dp"
+                            android:layout_marginRight="@dimen/margin_home_item"
+                            android:gravity="center"
+                            android:text="VND" />
                     </LinearLayout>
-
                 </LinearLayout>
             </LinearLayout>
             <ImageView
@@ -130,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/line_divide" />
@@ -141,9 +152,9 @@
                 android:layout_gravity="bottom"
                 android:gravity="bottom"
                 android:paddingLeft="10dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="5dp"
                 android:text="AAAAAAA"
-                android:textSize="20dp"
+                android:textSize="@dimen/md_title_textsize"
                 android:textStyle="bold" />
 
             <TextView
@@ -156,22 +167,90 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_marginLeft="10dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="5dp"
-                    android:src="@drawable/icon_topic" />
+                    android:layout_marginBottom="@dimen/cardview_default_radius">
 
-                <TextView
-                    android:id="@+id/tv_topic_project"
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="@dimen/icon_event_size"
+                        android:layout_height="@dimen/icon_event_size"
+                        android:src="@drawable/ic_starttime"
+                        android:layout_marginRight="5dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_starttime_project"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:text="2-/10/2019" />
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="@dimen/icon_event_size"
+                        android:layout_height="@dimen/icon_event_size"
+                        android:src="@drawable/ic_endtime"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_endtime_project"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:text="2-/10/2019" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="5dp"
-                    android:text="Môi trường" />
+                    >
 
+                    <ImageView
+                        android:layout_width="@dimen/icon_event_size"
+                        android:layout_height="@dimen/icon_event_size"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/ic_project_payroll" />
+
+                    <TextView
+                        android:id="@+id/tv_donator_project"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:text="10" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:text="Người ủng hộ" />
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_event_size"
+                        android:layout_height="@dimen/icon_event_size"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/icon_topic" />
+
+                    <TextView
+                        android:id="@+id/tv_topic_project"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:text="Môi trường" />
+
+
+                </LinearLayout>
             </LinearLayout>
 
             <ImageView

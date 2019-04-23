@@ -23,38 +23,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
                 <ImageView
                     android:id="@+id/imv_content_event"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/cover1" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/gradient"
-                    android:paddingLeft="5dp"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_title_event"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_gravity="bottom"
-                    android:gravity="bottom"
-                    android:paddingLeft="5dp"
-                    android:paddingBottom="10dp"
-                    android:text="AAAAAAA"
-                    android:textColor="#ffffff"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-            </FrameLayout>
+            <TextView
+                android:id="@+id/tv_title_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="bottom"
+                android:paddingLeft="5dp"
+                android:paddingBottom="10dp"
+                android:text="AAAAAAA"
+                android:textColor="#8B7D7B"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_summary_event"
@@ -63,6 +48,15 @@
                 android:paddingLeft="5dp"
                 android:paddingTop="4dp"
                 />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/line_divide" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -79,12 +73,13 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/cardview_default_radius">
 
                         <ImageView
                             android:layout_gravity="center_vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/icon_event_size"
+                            android:layout_height="@dimen/icon_event_size"
                             android:src="@drawable/icon_location"
                             android:layout_marginRight="5dp"/>
 
@@ -98,12 +93,13 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/cardview_default_radius">
 
                         <ImageView
                             android:layout_gravity="center_vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/icon_event_size"
+                            android:layout_height="@dimen/icon_event_size"
                             android:src="@drawable/icon_fee"
                             android:layout_marginRight="5dp"/>
 
@@ -112,17 +108,59 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="5dp"
-                            android:text="500.000 VND" />
+                            android:text="500.000" />
+                        <TextView
+                            android:id="@+id/tv_currency_event"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="VND" />
+
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/cardview_default_radius">
+
+                        <ImageView
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="@dimen/icon_event_size"
+                            android:layout_height="@dimen/icon_event_size"
+                            android:src="@drawable/ic_starttime"
+                            android:layout_marginRight="5dp"/>
+
+                        <TextView
+                            android:id="@+id/tv_starttime_event"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="2/10/2019" />
+
+                        <ImageView
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="@dimen/icon_event_size"
+                            android:layout_height="@dimen/icon_event_size"
+                            android:src="@drawable/ic_endtime"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="10dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_endtime_event"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="2/10/2019" />
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <ImageView
                             android:layout_gravity="center_vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/icon_event_size"
+                            android:layout_height="@dimen/icon_event_size"
                             android:src="@drawable/icon_topic"
                             android:layout_marginRight="5dp"/>
 
@@ -140,17 +178,35 @@
                     android:layout_width="0dp"
                     android:layout_height="10dp"
                     android:layout_weight="1" />
-                <Button
-                    android:id="@+id/btn_register_event"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/primecolor2"
-                    android:shadowColor="@color/cardview_dark_background"
-                    android:text="Đăng kí"
-                    android:textColor="#ffffff" />
+                    android:orientation="vertical">
+                    <Button
+                        android:id="@+id/btn_register_event"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/primecolor2"
+                        android:shadowColor="@color/cardview_dark_background"
+                        android:text="Đăng kí"
+                        android:textColor="#ffffff" />
+                    <Button
+                        android:id="@+id/btn_information_event"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/primecolor2"
+                        android:shadowColor="@color/cardview_dark_background"
+                        android:text="Xem chi tiết"
+                        android:textColor="#ffffff" />
+
+                </LinearLayout>
+
 
 
             </LinearLayout>

@@ -290,7 +290,7 @@
                     android:text="23/11/1997"
                     android:layout_margin="@dimen/margin_profile"
                     android:textSize="@dimen/md_content_textsize"
-
+                    android:focusable="false"
                     />
                 <LinearLayout
                     android:layout_width="match_parent"

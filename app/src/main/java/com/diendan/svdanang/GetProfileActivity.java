@@ -16,6 +16,9 @@ import com.diendan.svdanang.models.DataProfile;
 import com.diendan.svdanang.tasks.BaseTask;
 import com.diendan.svdanang.tasks.GetProfileTask;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 public class GetProfileActivity extends AppCompatActivity implements ApiListener<ProfileOutput>, View.OnClickListener {
     private Button btn_edit_infor;
     private TextView tvIfnorFullname, tvInforEmail, tvInforUsername, tvInforGender, tvInforAddress, tvInforCity, tvInforDepartment, tvInforPhone, tvInforBirthDate, tvInforFbLink;
@@ -60,7 +63,7 @@ public class GetProfileActivity extends AppCompatActivity implements ApiListener
 
         tvIfnorFullname.setText(firstname+" "+lastname);
         tvInforAddress.setText(address);
-        tvInforBirthDate.setText(birthdate.toString());
+        tvInforBirthDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(birthdate)));
         tvInforCity.setText(city);
         tvInforDepartment.setText(department);
         tvInforEmail.setText(email);
@@ -77,18 +80,27 @@ public class GetProfileActivity extends AppCompatActivity implements ApiListener
 
     @Override
     public void onClick(View view) {
-        Intent i = new Intent(GetProfileActivity.this, UpdateProfileActivity.class);
-        i.putExtra("firstname",firstname);
-        i.putExtra("lastname",lastname);
-        i.putExtra("address",tvInforAddress.getText());
-        i.putExtra("birthdate",tvInforBirthDate.getText());
-        i.putExtra("city",tvInforCity.getText());
-        i.putExtra("email",tvInforEmail.getText());
-        i.putExtra("fblink",tvInforFbLink.getText());
-        i.putExtra("gender",gender);
-        i.putExtra("phone",tvInforPhone.getText());
-        i.putExtra("username",tvInforUsername.getText());
-        startActivity(i);
+        switch (view.getId()){
+            case R.id.btn_edit_profile:
+                Intent i = new Intent(GetProfileActivity.this, UpdateProfileActivity.class);
+                i.putExtra("firstname",firstname);
+                i.putExtra("lastname",lastname);
+                i.putExtra("address",tvInforAddress.getText());
+                i.putExtra("birthdate",tvInforBirthDate.getText());
+                i.putExtra("city",tvInforCity.getText());
+                i.putExtra("email",tvInforEmail.getText());
+                i.putExtra("fblink",tvInforFbLink.getText());
+                i.putExtra("gender",gender);
+                i.putExtra("phone",tvInforPhone.getText());
+                i.putExtra("username",tvInforUsername.getText());
+                startActivity(i);
+                break;
+            case  R.id.btn_back:
+                exit();
+                break;
+
+        }
+
 
     }
 
@@ -121,6 +133,11 @@ public class GetProfileActivity extends AppCompatActivity implements ApiListener
 
 }
 
+    private void exit() {
+        Intent i = new Intent(GetProfileActivity.this, MainActivity.class);
+        showLoading(false);
+        startActivity(i);
+    }
     private void showLoading(boolean isShow) {
         try {
             if (isShow) {

@@ -11,12 +11,15 @@ import android.widget.TextView;
 import com.diendan.svdanang.R;
 import com.diendan.svdanang.Seemoreitem;
 import com.diendan.svdanang.Viewpageitem;
+import com.diendan.svdanang.models.ContentBlogPost;
 import com.squareup.picasso.Picasso;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class SeemorePageRecyclerviewAdapter extends  RecyclerView.Adapter<SeemorePageRecyclerviewAdapter.MyViewHolder>  {
-    private List<Seemoreitem> mDataset;
+    private List<ContentBlogPost> mDataset;
     private Context mContext;
     Picasso picasso;
 
@@ -24,7 +27,7 @@ public class SeemorePageRecyclerviewAdapter extends  RecyclerView.Adapter<Seemor
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imvImage;
-        TextView tvTopic,tvTitle,tvSummary;
+        TextView tvTopic,tvTitle,tvSummary,tvCreatedAt;
         private View menuGroup;
         private View viewDividerTop;
 
@@ -35,11 +38,12 @@ public class SeemorePageRecyclerviewAdapter extends  RecyclerView.Adapter<Seemor
             tvTitle = (TextView) view.findViewById(R.id.tv_title_see_more);
             tvTopic = (TextView) view.findViewById(R.id.tv_topic);
             tvSummary = (TextView) view.findViewById(R.id.tv_summary_see_more);
+            tvCreatedAt = (TextView) view.findViewById(R.id.tv_createdat_blogpost);
 
         }
     }
 
-    public SeemorePageRecyclerviewAdapter(Context context, List<Seemoreitem> myDataset) {
+    public SeemorePageRecyclerviewAdapter(Context context, List<ContentBlogPost> myDataset) {
         this.mDataset = myDataset;
         this.mContext = context;
     }
@@ -51,12 +55,12 @@ public class SeemorePageRecyclerviewAdapter extends  RecyclerView.Adapter<Seemor
 
     @Override
     public void onBindViewHolder(SeemorePageRecyclerviewAdapter.MyViewHolder holder, int position) {
-        Seemoreitem seemoreitem = mDataset.get(position);
-        Picasso.with(mContext).load(seemoreitem.getIdentity()).fit().into(holder.imvImage);
-        holder.imvImage.setImageResource(seemoreitem.getIdentity());
-        holder.tvTopic.setText(seemoreitem.getTopic());
+        ContentBlogPost seemoreitem = mDataset.get(position);
+        Picasso.with(mContext).load(seemoreitem.getThumbnailImage()).fit().into(holder.imvImage);
+        holder.tvTopic.setText(seemoreitem.getBlogPostTopic().getName());
         holder.tvTitle.setText(seemoreitem.getTitle());
-        holder.tvSummary.setText(seemoreitem.getSummary());
+        holder.tvCreatedAt.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(seemoreitem.getCreatedDate())));
+        holder.tvSummary.setText(seemoreitem.getShortContent());
     }
 
 

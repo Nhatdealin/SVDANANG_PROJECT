@@ -32,10 +32,12 @@ public class EventFragment extends Fragment implements View.OnClickListener, Api
     RecyclerView mEventRecyclerView;
     private EventRecyclerviewAdapter mAdapter;
     int mStart = 0;
+    boolean isLoading;
     protected ProgressDialog mProgressDialog;
     ArrayList<ContentEvent> eventitemlist;
     LinearLayoutManager mLayoutManager;
-
+    private int pastVisiblesItems, visibleItemCount, totalItemCount;
+    private boolean mIsLoadMore;
     public static EventFragment newInstance() {
 
         EventFragment fragment = new EventFragment();
@@ -77,12 +79,37 @@ public class EventFragment extends Fragment implements View.OnClickListener, Api
 
             }
         });
-    }
+        mEventRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) //check for scroll down
+                {
+                    visibleItemCount = mLayoutManager.getChildCount();
+                    totalItemCount = mLayoutManager.getItemCount();
+                    pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        if (eventitemlist.size() > 0 && mIsLoadMore && !isLoading) {
+                            isLoading = true;
+                            mStart++;
+                            loadData();
+                        }
+                    }
+                }
+            }
+        });}
     private void loadData() {
         showLoading(true);
         new GetEventsTask(getActivity(), mStart,5, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -106,9 +133,13 @@ public class EventFragment extends Fragment implements View.OnClickListener, Api
             EventsOutput output = data;
             if(output.success)
             {
+                mIsLoadMore = !output.getData().getLast();
                 eventitemlist.addAll(output.getData().getContent());
                 mAdapter.notifyDataSetChanged();
+                isLoading = false;
+                showLoading(false);
             }
+
         }
     }
 

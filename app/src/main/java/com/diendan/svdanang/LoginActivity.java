@@ -1,6 +1,8 @@
 package com.diendan.svdanang;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,6 +37,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage(getString(R.string.txt_waiting));
+        if(SharedPreferenceHelper.getInstance(LoginActivity.this).get(Constants.EXTRAX_TOKEN_CODE) != null && SharedPreferenceHelper.getInstance(LoginActivity.this).get(Constants.EXTRAX_TOKEN_CODE).length() > 0)
+        {
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
         addListener();
     }
     protected void addListener() {
@@ -47,9 +54,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         switch (view.getId()) {
             case R.id.btn_login:
-                showLoading(true);
-                LoginInput login = new LoginInput(edt_user.getText().toString(), edt_password.getText().toString());
-                new LoginTask(this, login, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                if(edt_user.getText().toString().trim().equals("") || edt_password.getText().toString().trim().equals(""))
+                {
+                    notify("Không thành công","Chưa nhập tài khoản hoặc mật khẩu");
+                }
+                else
+                {
+                    showLoading(true);
+                    LoginInput login = new LoginInput(edt_user.getText().toString(), edt_password.getText().toString());
+                    new LoginTask(this, login, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                }
+
                 break;
             case R.id.tv_sign_up:
                 Intent intent1 = new Intent(LoginActivity.this,SignUpActivity.class);
@@ -69,14 +84,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(task instanceof LoginTask){
             showLoading(false);
             LoginOutput output = (LoginOutput) data;
-            if(output.getData().getTokenType() != ""){
-                SharedPreferenceHelper.getInstance(this).set(Constants.PREF_PERSON_NAME, String.valueOf(output.getData().getUser().getFirstName() + " " + output.getData().getUser().getLastName()));
-                SharedPreferenceHelper.getInstance(this).set(Constants.EXTRAX_EMAIL, output.getData().getUser().getEmail());
-                SharedPreferenceHelper.getInstance(this).set(Constants.EXTRAX_TOKEN_CODE, output.getData().getAccessToken());
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(intent);
+            if(output.success)
+            {
+                if(output.getData().getTokenType() != ""){
+                    SharedPreferenceHelper.getInstance(this).set(Constants.PREF_PERSON_NAME, String.valueOf(output.getData().getUser().getFirstName() + " " + output.getData().getUser().getLastName()));
+                    SharedPreferenceHelper.getInstance(this).set(Constants.EXTRAX_EMAIL, output.getData().getUser().getEmail());
+                    SharedPreferenceHelper.getInstance(this).set(Constants.EXTRAX_TOKEN_CODE, output.getData().getAccessToken());
+                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    startActivity(intent);
+                }
             }
-
+            else
+            {
+                showLoading(false);
+                notify("Không thành công",((LoginOutput) data).getMessage());
+            }
         }
 
     }
@@ -84,6 +106,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onConnectionError(BaseTask task, Exception exception) {
         Log.e(TAG,exception.getMessage());
+    }
+    private void notify(String result,String mess)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(result);
+        builder.setMessage(mess);
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
     public void showLoading(boolean isShow) {
         try {

@@ -1,6 +1,9 @@
 package com.diendan.svdanang;
 
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +14,7 @@ import android.support.v7.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.TextView;
 
 
 import com.diendan.svdanang.Adapter.SeemorePageRecyclerviewAdapter;
@@ -19,35 +22,53 @@ import com.diendan.svdanang.Adapter.ViewpageRecyclerviewAdapter;
 
 import com.diendan.svdanang.R;
 import com.diendan.svdanang.Seemoreitem;
+import com.diendan.svdanang.api.ApiListener;
+import com.diendan.svdanang.api.models.BlogPostsOutput;
+import com.diendan.svdanang.models.ContentBlogPost;
+import com.diendan.svdanang.tasks.BaseTask;
+import com.diendan.svdanang.tasks.GetBlogPostsByTopicTask;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class SeeMoreActivity extends AppCompatActivity implements View.OnClickListener {
+public class SeeMoreActivity extends AppCompatActivity implements View.OnClickListener, ApiListener<BlogPostsOutput> {
     RecyclerView mSeemoreRecyclerView;
     SeemorePageRecyclerviewAdapter mAdapter;
-    ViewpageRecyclerviewAdapter mViewPageAdapter;
-    ArrayList<Seemoreitem> seemorelist;
+    ArrayList<ContentBlogPost> seemorelist;
+    ProgressDialog mProgressDialog;
     LinearLayoutManager mLayoutManager;
+    Long idTopic;
+    String nameTopic;
+    TextView titleActivity;
+
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.see_more_fragment);
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage(getString(R.string.txt_waiting));
+        Intent intent = this.getIntent();
+        idTopic = intent.getLongExtra("idTopic",0);
+        nameTopic = intent.getStringExtra("nameTopic");
+        titleActivity = findViewById(R.id.tv_title_see_more);
+        titleActivity.setText(nameTopic);
         mSeemoreRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_see_more_fragment);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mSeemoreRecyclerView.setLayoutManager(mLayoutManager);
-
         seemorelist = new ArrayList<>();
-        seemorelist.add(new Seemoreitem(R.drawable.cover4,"Chương trình Hành trình SV 'Thập Niên 80' ","Hành Trình SV","Chương trình với các thử thách những năm thập niên 80, giúp cho người tham gia sống trong không khí của những hoài niệm và đầy sự mộc mạc"));
-        seemorelist.add(new Seemoreitem(R.drawable.cover3,"Chương trình tình nguyện 'Áo ấm mùa đông 3' ","HTình nguyện","Chương trình tình nguyện tại làng AHleo thuộc xã Đông Giang, Tỉnh Quảng Nam, với tinh thân tương thân tương ái,....."));
-        seemorelist.add(new Seemoreitem(R.drawable.cover4,"Chương trình Hành trình SV 'Thập Niên 80' ","Hành Trình SV","Chương trình với các thử thách những năm thập niên 80, giúp cho người tham gia sống trong không khí của những hoài niệm và đầy sự mộc mạc"));
-        seemorelist.add(new Seemoreitem(R.drawable.cover3,"Chương trình tình nguyện 'Áo ấm mùa đông 3' ","HTình nguyện","Chương trình tình nguyện tại làng AHleo thuộc xã Đông Giang, Tỉnh Quảng Nam, với tinh thân tương thân tương ái,....."));
         mAdapter = new SeemorePageRecyclerviewAdapter(this, seemorelist);
         mSeemoreRecyclerView.setAdapter(mAdapter);
-
+        loadData();
         addListener();
 
+    }
+
+    private void loadData() {
+        new GetBlogPostsByTopicTask(this,idTopic, 0,5, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     private void addListener() {
@@ -63,5 +84,41 @@ public class SeeMoreActivity extends AppCompatActivity implements View.OnClickLi
 
         }
 
+    }
+
+    @Override
+    public void onConnectionOpen(BaseTask task) {
+
+    }
+
+    @Override
+    public void onConnectionSuccess(BaseTask task, BlogPostsOutput data) {
+        if(task instanceof GetBlogPostsByTopicTask)
+        {
+            BlogPostsOutput output = data;
+            if(output.success)
+            {
+                seemorelist.addAll(output.getData().getContent());
+                mAdapter.notifyDataSetChanged();
+                showLoading(false);
+                }
+            }
+    }
+
+    @Override
+    public void onConnectionError(BaseTask task, Exception exception) {
+
+    }
+    public void showLoading(boolean isShow) {
+        try {
+            if (isShow) {
+                mProgressDialog.show();
+            } else {
+                if (mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                }
+            }
+        } catch (IllegalArgumentException ex) {
+        }
     }
 }

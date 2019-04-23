@@ -33,11 +33,13 @@ public class ContentProject implements Serializable {
     @SerializedName("raised")
     private BigDecimal raised;
     @SerializedName("numOfDonators")
-    private Integer numOfDonators;
+    private Long numOfDonators;
     @SerializedName("isExpired")
     private Boolean isExpired;
     @SerializedName("isFulfill")
     private Boolean isFulfill;
+    @SerializedName("currency")
+    private Currency currency;
 
     public Integer getId() {
         return id;
@@ -127,29 +129,36 @@ public class ContentProject implements Serializable {
         this.raised = raised;
     }
 
-    public Integer getNumOfDonators() {
+    public Long getNumOfDonators() {
         return numOfDonators;
     }
 
-    public void setNumOfDonators(Integer numOfDonators) {
+    public void setNumOfDonators(Long numOfDonators) {
         this.numOfDonators = numOfDonators;
     }
 
-    public Boolean getIsExpired() {
+    public Boolean getExpired() {
         return isExpired;
     }
 
-    public void setIsExpired(Boolean isExpired) {
-        this.isExpired = isExpired;
+    public void setExpired(Boolean expired) {
+        isExpired = expired;
     }
 
-    public Boolean getIsFulfill() {
+    public Boolean getFulfill() {
         return isFulfill;
     }
 
-    public void setIsFulfill(Boolean isFulfill) {
-        this.isFulfill = isFulfill;
+    public void setFulfill(Boolean fulfill) {
+        isFulfill = fulfill;
     }
 
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
 }
 

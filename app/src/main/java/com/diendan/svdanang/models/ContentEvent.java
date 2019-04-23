@@ -17,10 +17,12 @@ public class ContentEvent implements Serializable {
     private String name;
     @SerializedName("description")
     private String description;
-    @SerializedName("topicId")
-    private Integer topicId;
+    @SerializedName("shortDescription")
+    private String shortDescription;
+    @SerializedName("eventTopic")
+    private EventTopic eventTopic;
     @SerializedName("currency")
-    private Integer currency;
+    private Currency currency;
     @SerializedName("endTime")
     private Long endTime;
     @SerializedName("expectedQuantity")
@@ -31,14 +33,26 @@ public class ContentEvent implements Serializable {
     private String image;
     @SerializedName("location")
     private String location;
-    @SerializedName("registrationEndTime")
-    private Long registrationEndTime;
-    @SerializedName("registrationStartTime")
-    private Long registrationStartTime;
     @SerializedName("startTime")
     private Long startTime;
-    @SerializedName("listSchedule")
-    private List<ListSchedule> listSchedule = null;
+    @SerializedName("createdDate")
+    private Long createdDate;
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public Long getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Long createdDate) {
+        this.createdDate = createdDate;
+    }
 
     public Integer getId() {
         return id;
@@ -64,19 +78,19 @@ public class ContentEvent implements Serializable {
         this.description = description;
     }
 
-    public Integer getTopicId() {
-        return topicId;
+    public EventTopic getEventTopic() {
+        return eventTopic;
     }
 
-    public void setTopicId(Integer topicId) {
-        this.topicId = topicId;
+    public void setEventTopic(EventTopic eventTopic) {
+        this.eventTopic = eventTopic;
     }
 
-    public Integer getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 
-    public void setCurrency(Integer currency) {
+    public void setCurrency(Currency currency) {
         this.currency = currency;
     }
 
@@ -120,21 +134,6 @@ public class ContentEvent implements Serializable {
         this.location = location;
     }
 
-    public Long getRegistrationEndTime() {
-        return registrationEndTime;
-    }
-
-    public void setRegistrationEndTime(Long registrationEndTime) {
-        this.registrationEndTime = registrationEndTime;
-    }
-
-    public Long getRegistrationStartTime() {
-        return registrationStartTime;
-    }
-
-    public void setRegistrationStartTime(Long registrationStartTime) {
-        this.registrationStartTime = registrationStartTime;
-    }
 
     public Long getStartTime() {
         return startTime;
@@ -144,13 +143,6 @@ public class ContentEvent implements Serializable {
         this.startTime = startTime;
     }
 
-    public List<ListSchedule> getListSchedule() {
-        return listSchedule;
-    }
-
-    public void setListSchedule(List<ListSchedule> listSchedule) {
-        this.listSchedule = listSchedule;
-    }
 
 }
 

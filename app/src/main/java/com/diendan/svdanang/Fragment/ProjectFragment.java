@@ -4,12 +4,14 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.diendan.svdanang.Adapter.EventRecyclerviewAdapter;
 import com.diendan.svdanang.Adapter.ProjectRecyclerviewAdapter;
@@ -27,11 +29,11 @@ import java.util.ArrayList;
 public class ProjectFragment extends Fragment implements View.OnClickListener, ApiListener<ProjectsOutput> {
     RecyclerView mProjectRecyclerView;
     private ProjectRecyclerviewAdapter mAdapter;
-    private boolean isLoading;
     ArrayList<ContentProject> pjtitemlist;
     LinearLayoutManager mLayoutManager;
     protected ProgressDialog mProgressDialog;
     int mStart = 0;
+    boolean isLoading;
     private boolean mIsLoadMore;
     private int pastVisiblesItems, visibleItemCount, totalItemCount;
 
@@ -89,6 +91,7 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
             }
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (dy > 0) //check for scroll down
@@ -99,15 +102,14 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
 
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                         if (pjtitemlist.size() > 0 && mIsLoadMore && !isLoading) {
-//                            showLoading(true);
+                            isLoading = true;
                             mStart++;
                             loadData();
                         }
                     }
                 }
             }
-        });
-    }
+            });}
 
 
     @Override
@@ -131,9 +133,14 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
             ProjectsOutput output = data;
             if(output.success)
             {
-                pjtitemlist.addAll(output.getData().getContent());
+                mIsLoadMore = !output.getData().getLast();
+                for (ContentProject item : output.getData().getContent()) {
+                    pjtitemlist.add(item);
+                }
                 mAdapter.notifyDataSetChanged();
+                isLoading = false;
                 showLoading(false);
+
             }
         }
 

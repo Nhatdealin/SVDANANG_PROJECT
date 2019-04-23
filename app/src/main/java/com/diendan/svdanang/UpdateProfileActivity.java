@@ -1,5 +1,6 @@
 package com.diendan.svdanang;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -21,6 +23,12 @@ import com.diendan.svdanang.models.DataProfile;
 import com.diendan.svdanang.tasks.BaseTask;
 import com.diendan.svdanang.tasks.GetProfileTask;
 import com.diendan.svdanang.tasks.UpdateProfileTask;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class UpdateProfileActivity extends AppCompatActivity implements ApiListener<ProfileOutput>, View.OnClickListener {
     private Button btn_update_submit,btn_update_cancel;
@@ -86,9 +94,50 @@ public class UpdateProfileActivity extends AppCompatActivity implements ApiListe
         }
         edtUpdatePhone.setText(phone);
         tvUsername.setText(username);
+        final Calendar myCalendar = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+            private void updateLabel() {
+                String myFormat = "dd/MM/yyyy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                edtUpdateBirthDate.setText(sdf.format(myCalendar.getTime()));
+            }
+        };
+
+        edtUpdateBirthDate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date birth = null;
+                try {
+                    birth = sdf.parse(edtUpdateBirthDate.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                int year = birth.getYear() +1900;
+                int month =birth.getMonth() ;
+                int dayofmonth = birth.getDate();
+                DatePickerDialog dialog = new DatePickerDialog(UpdateProfileActivity.this,R.style.DialogTheme ,date,year,month,dayofmonth);
+
+                dialog.getDatePicker().setMinDate(15177000);
+                dialog.show();
+            }
+        });
         addListener();
     }
+
 
     protected void addListener() {
         btn_update_submit.setOnClickListener(this);
@@ -110,7 +159,15 @@ public class UpdateProfileActivity extends AppCompatActivity implements ApiListe
         switch (view.getId()){
             case R.id.btn_update_submit :
                 showLoading(true);
-                UpdateProfileInput update = new UpdateProfileInput(edtUpdateAddress.getText().toString()," ",new Long(Integer.parseInt(edtUpdateBirthDate.getText().toString())),edtUpdateCity.getText().toString(),edtUpdateFbLink.getText().toString(),edtUpdateFirstname.getText().toString(),gender,edtUpdateLastname.getText().toString(),edtUpdatePhone.getText().toString());
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = null;
+                try {
+                    date = sdf.parse(edtUpdateBirthDate.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Long millis = date.getTime();
+                UpdateProfileInput update = new UpdateProfileInput(edtUpdateAddress.getText().toString()," ",millis,edtUpdateCity.getText().toString(),edtUpdateFbLink.getText().toString(),edtUpdateFirstname.getText().toString(),gender,edtUpdateLastname.getText().toString(),edtUpdatePhone.getText().toString());
 //        UpdateProfileInput update = new UpdateProfileInput("08 Hà văn tính"," ", new Long(111),"Đà Nẵng","bkbknbkn.com","Trần Châu",true,"Lệ Trinh","0126680577");
                 new UpdateProfileTask(this,update,this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 break;
@@ -157,7 +214,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements ApiListe
                 i.putExtra("firstname",getData.getFirstName());
                 i.putExtra("lastname",getData.getLastName());
                 i.putExtra("address",getData.getAddress());
-                i.putExtra("birthdate",getData.getBirthDate().toString());
+                i.putExtra("birthdate", getData.getBirthDate() );
                 i.putExtra("city",getData.getCity());
                 i.putExtra("email",email);
                 i.putExtra("fblink",getData.getFacebookLink());

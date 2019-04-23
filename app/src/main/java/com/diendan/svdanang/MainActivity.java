@@ -53,7 +53,9 @@ public class MainActivity extends AppCompatActivity implements ApiListener<Profi
         menuitemList.add(new Menuitem(Constants.MENU_ITEM_MANAGE_MEETING, 1, R.drawable.icon_meeting_management, "Quản lý lịch họp"));
         menuitemList.add(new Menuitem(Constants.MENU_ITEM_MANAGE_MEMBER, 2, R.drawable.icon_member_management, "Quản lý thành viên"));
         menuitemList.add(new Menuitem(Constants.MENU_ITEM_PROFILE, 3, R.drawable.icon_personal_infomation, "Thông tin cá nhân"));
+        menuitemList.add(new Menuitem(Constants.MENU_ITEM_PASSWORD, 4, R.drawable.ic_password_profile, "Thay đổi mật khẩu"));
         menuitemList.add(new Menuitem(Constants.MENU_ITEM_MANAGE_USER, 4, R.drawable.icon_user_management, "Quản lý tài khoản"));
+        menuitemList.add(new Menuitem(Constants.MENU_ITEM_LOGOUT, 4, R.drawable.ic_logout, "Đăng xuất"));
         mAdapter = new MenuRecyclerviewAdapter(this, menuitemList);
         mRecyclerView.setAdapter(mAdapter);
         mProgressDialog = new ProgressDialog(this);
@@ -118,6 +120,17 @@ public class MainActivity extends AppCompatActivity implements ApiListener<Profi
                     case 110:
                         showLoading(true);
                         GetProfile();
+                        break;
+                    case 115:
+                        showLoading(true);
+                        Intent i = new Intent(MainActivity.this, ChangePasswordActivity.class);
+                        startActivity(i);
+                        break;
+                    case 114:
+                        showLoading(true);
+                        SharedPreferenceHelper.getInstance(MainActivity.this).clearSharePrefs();
+                        Intent i2 = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(i2);
                         break;
                 }
             }

@@ -14,6 +14,8 @@ import com.diendan.svdanang.Seemoreitem;
 import com.diendan.svdanang.models.ContentEvent;
 import com.squareup.picasso.Picasso;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class EventRecyclerviewAdapter extends  RecyclerView.Adapter<EventRecyclerviewAdapter.MyViewHolder>  {
@@ -27,7 +29,7 @@ public class EventRecyclerviewAdapter extends  RecyclerView.Adapter<EventRecycle
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imvImage;
-        TextView tvTopic,tvTitle,tvSummary,tvLocation,tvFee;
+        TextView tvTopic,tvTitle,tvSummary,tvLocation,tvFee,tvCurrency,tvStartTime,tvEndTime;
 
 
         public MyViewHolder(View view) {
@@ -38,6 +40,9 @@ public class EventRecyclerviewAdapter extends  RecyclerView.Adapter<EventRecycle
             tvSummary = (TextView) view.findViewById(R.id.tv_summary_event);
             tvFee = (TextView) view.findViewById(R.id.tv_fee_event);
             tvLocation = (TextView) view.findViewById(R.id.tv_location_event);
+            tvCurrency = (TextView) view.findViewById(R.id.tv_currency_event);
+            tvStartTime = (TextView) view.findViewById(R.id.tv_starttime_event);
+            tvEndTime = (TextView) view.findViewById(R.id.tv_endtime_event);
 
         }
     }
@@ -54,12 +59,16 @@ public class EventRecyclerviewAdapter extends  RecyclerView.Adapter<EventRecycle
     @Override
     public void onBindViewHolder(EventRecyclerviewAdapter.MyViewHolder holder, int position) {
         ContentEvent eventitem = mDataset.get(position);
-        Picasso.with(mContext).load(eventitem.getImage()).fit().into(holder.imvImage);
-        holder.tvTopic.setText(eventitem.getTopicId().toString());
+        Picasso.with(mContext).load(eventitem.getImage()).noPlaceholder().fit().into(holder.imvImage);
+        holder.tvTopic.setText(eventitem.getEventTopic().getName());
         holder.tvTitle.setText(eventitem.getName());
         holder.tvSummary.setText(eventitem.getDescription());
         holder.tvLocation.setText(eventitem.getLocation());
         holder.tvFee.setText(String.valueOf(eventitem.getFee()));
+        holder.tvCurrency.setText(eventitem.getCurrency().getName());
+        holder.tvStartTime.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(eventitem.getStartTime())));
+        holder.tvEndTime.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(eventitem.getEndTime())));
+
     }
 
 

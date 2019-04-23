@@ -10,8 +10,9 @@ public class Constants {
     public static final int MENU_ITEM_MANAGE_MEMBER = 112;
     public static final int MENU_ITEM_MANAGE_MEETING = 113;
     public static final int MENU_ITEM_LOGOUT = 114;
+    public static final int MENU_ITEM_PASSWORD = 115;
 
-    public static int WITDH = 220;
+    public static int WITDH = 310;
     public static String ROLE_ADMIN = "Admin";
     public static String PREF_CUSTOMER = "PREF_CUSTOMER";
     public static String PREF_USER_AVATAR = "PREF_USER_AVATAR";
@@ -37,7 +38,7 @@ public class Constants {
     public static final String PREF_USERNAME = "username";
     public static final String PREF_PASSWORD_NAME = "password";
     public static final String EXTRAX_EMAIL = "email";
-    public static final String EXTRAX_TOKEN_CODE = "token_code";
+    public static final String EXTRAX_TOKEN_CODE = null;
     public static final String EXTRAX_CONTACT_ID = "EXTRAX_CONTACT_ID";
     public static final String EXTRAX_COMPANY_ID = "EXTRAX_COMPANY_ID";
     public static final String EXTRAX_DETAIL_CONTACT = "EXTRAX_DETAIL_CONTACT";
