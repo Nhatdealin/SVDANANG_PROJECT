@@ -1,20 +1,20 @@
 package com.diendan.svdanang;
 
 public class DataHomeitem {
-    private int id;
+    private Long id;
     private String title,image;
 
-    public DataHomeitem(int id, String title, String image) {
+    public DataHomeitem(Long id, String title, String image) {
         this.id = id;
         this.title = title;
         this.image = image;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

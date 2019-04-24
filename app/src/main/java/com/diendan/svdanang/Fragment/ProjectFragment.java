@@ -32,6 +32,7 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
     ArrayList<ContentProject> pjtitemlist;
     LinearLayoutManager mLayoutManager;
     protected ProgressDialog mProgressDialog;
+    ProgressBar loadMore;
     int mStart = 0;
     boolean isLoading;
     private boolean mIsLoadMore;
@@ -55,6 +56,7 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage(getString(R.string.txt_waiting));
         mProjectRecyclerView.setLayoutManager(mLayoutManager);
+        loadMore = rootView.findViewById(R.id.pb_loadmore_project);
         pjtitemlist = new ArrayList<>();
         mAdapter = new ProjectRecyclerviewAdapter(getActivity(), pjtitemlist);
         mProjectRecyclerView.setAdapter(mAdapter);
@@ -64,7 +66,8 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
     }
 
     private void loadData() {
-        showLoading(true);
+//        showLoading(true);
+        ShowLoadMore();
         new GetProjectsTask(getActivity(), mStart,5, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
     }
@@ -98,7 +101,7 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
                 {
                     visibleItemCount = mLayoutManager.getChildCount();
                     totalItemCount = mLayoutManager.getItemCount();
-                    pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+                    pastVisiblesItems = mLayoutManager.findFirstCompletelyVisibleItemPosition();
 
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                         if (pjtitemlist.size() > 0 && mIsLoadMore && !isLoading) {
@@ -139,7 +142,8 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
                 }
                 mAdapter.notifyDataSetChanged();
                 isLoading = false;
-                showLoading(false);
+//                showLoading(false);
+                HideLoadMore();
 
             }
         }
@@ -160,5 +164,13 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
             }
         } catch (IllegalArgumentException ex) {
         }
+    }
+    public void ShowLoadMore()
+    {
+        loadMore.setVisibility(View.VISIBLE);
+    }
+    public void HideLoadMore()
+    {
+        loadMore.setVisibility(View.GONE);
     }
 }

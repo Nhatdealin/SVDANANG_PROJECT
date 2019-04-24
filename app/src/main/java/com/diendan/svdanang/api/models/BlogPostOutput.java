@@ -1,6 +1,6 @@
 package com.diendan.svdanang.api.models;
 
-import com.diendan.svdanang.models.DataBlogPostsTopic;
+import com.diendan.svdanang.models.ContentBlogPost;
 import com.google.gson.annotations.SerializedName;
 
 
@@ -8,11 +8,12 @@ import com.google.gson.annotations.SerializedName;
  * Created by Admin on 4/13/2017.
  */
 
-public class BlogPostTopicsOutput extends BaseOutput {
+public class BlogPostOutput extends BaseOutput {
 
     @SerializedName("message")
     private String message;
-    private DataBlogPostsTopic data;
+    @SerializedName("data")
+    private ContentBlogPost data;
 
     public Boolean getSuccess() {
         return success;
@@ -30,11 +31,11 @@ public class BlogPostTopicsOutput extends BaseOutput {
         this.message = message;
     }
 
-    public DataBlogPostsTopic getData() {
+    public ContentBlogPost getData() {
         return data;
     }
 
-    public void setData(DataBlogPostsTopic data) {
+    public void setData(ContentBlogPost data) {
         this.data = data;
     }
 

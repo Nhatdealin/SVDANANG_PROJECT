@@ -2,6 +2,7 @@ package com.diendan.svdanang.api;
 
 import android.content.Context;
 
+import com.diendan.svdanang.api.models.BlogPostOutput;
 import com.diendan.svdanang.api.models.BlogPostTopicsOutput;
 import com.diendan.svdanang.api.models.BlogPostsOutput;
 import com.diendan.svdanang.api.models.ChangePasswordOutput;
@@ -37,10 +38,11 @@ public class TaskApi {
     public static final String LOGIN_API = "auth/signin";
     public static final String SIGNUP_API = "auth/signup";
     public static final String PROFILE_API = "users/me";
-    public static final String PROJECT_API = "projects?filter&sortBy&sortOrder&page=%s&pageSize=%s";
+    public static final String PROJECT_API = "projects?sortBy=createdAt&sortOrder&page=%s&pageSize=%s";
     public static final String EVENT_API = "events?filter&sortBy&sortOrder&page=%s&pageSize=%s";
     public static final String BLOGPOST_TOPIC_API = "blog-topics?filter&sortBy&sortOrder&page=%s&pageSize=%s";
-    public static final String BLOGPOSTS_ID_API = "blog-posts/?topic_id=%s&sortBy&sortOrder&page=%s&pageSize=%s";
+    public static final String BLOGPOSTS_TOPIC_ID_API = "blog-posts/?topic_id=%s&sortBy&sortOrder&page=%s&pageSize=%s";
+    public static final String BLOGPOSTS_BY_ID_API = "blog-posts/%s";
     public static final String EMAIL_AVAILABILITY = "users/checkEmailAvailability?email=%s";
     public static final String USERNAME_AVAILABILITY = "users/checkUsernameAvailability";
     public static final String GET_NOTE = "crm/notes/%s";
@@ -175,7 +177,7 @@ public class TaskApi {
     }
     public BlogPostsOutput getBlogPostsByIdTopic(Long idtopic,int page, int pagesize) throws ApiException, JSONException, IOException {
         mHttpApi.setCredentials(SharedPreferenceHelper.getInstance(this.mContext).get(Constants.EXTRAX_TOKEN_CODE));
-        JSONObject data = (JSONObject) mHttpApi.doHttpGetWithHeader(String.format(getFullUrl(BLOGPOSTS_ID_API),idtopic+"",page +"",pagesize+""));
+        JSONObject data = (JSONObject) mHttpApi.doHttpGetWithHeader(String.format(getFullUrl(BLOGPOSTS_TOPIC_ID_API),idtopic+"",page +"",pagesize+""));
         BlogPostsOutput output = (BlogPostsOutput) mGson.fromJson(data.toString(), BlogPostsOutput .class);
         return output;
     }
@@ -183,6 +185,12 @@ public class TaskApi {
         mHttpApi.setCredentials(SharedPreferenceHelper.getInstance(this.mContext).get(Constants.EXTRAX_TOKEN_CODE));
         JSONObject data = (JSONObject) mHttpApi.doHttpGetWithHeader(String.format(getFullUrl(BLOGPOST_TOPIC_API),page +"",pagesize+""));
         BlogPostTopicsOutput output = (BlogPostTopicsOutput) mGson.fromJson(data.toString(), BlogPostTopicsOutput .class);
+        return output;
+    }
+    public BlogPostOutput getBlogPostById(Long id ) throws ApiException, JSONException, IOException {
+        mHttpApi.setCredentials(SharedPreferenceHelper.getInstance(this.mContext).get(Constants.EXTRAX_TOKEN_CODE));
+        JSONObject data = (JSONObject) mHttpApi.doHttpGetWithHeader(String.format(getFullUrl(BLOGPOSTS_BY_ID_API),id +""));
+        BlogPostOutput output = (BlogPostOutput) mGson.fromJson(data.toString(), BlogPostOutput .class);
         return output;
     }
 }

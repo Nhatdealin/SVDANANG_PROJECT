@@ -72,9 +72,29 @@ public class SeeMoreActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void addListener() {
-        //chỗ ni là m muốn onlick cái nào thì setOnClickListener(this) vào đây
+            //chỗ ni là m muốn onlick cái nào thì setOnClickListener(this) vào đây
+            mAdapter.setOnItemClickListener(new SeemorePageRecyclerviewAdapter.IOnItemClickedListener() {
+                @Override
+                public void onItemClick(int id) {
 
-    }
+                }
+
+                @Override
+                public void onItemClickComment(Long id) {
+                    Intent i = new Intent(SeeMoreActivity.this, ShowDetailBlogPostActivity.class);
+                    i.putExtra("id",id);
+                    startActivity(i);
+
+                }
+
+                @Override
+                public void userSelectedAValue(String value) {
+
+                }
+            });
+
+        }
+
 
 
     @Override

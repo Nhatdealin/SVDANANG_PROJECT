@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class DataBlogPost {
+public class DataBlogPosts {
     @SerializedName("content")
     private List<ContentBlogPost> content = null;
     @SerializedName("page")

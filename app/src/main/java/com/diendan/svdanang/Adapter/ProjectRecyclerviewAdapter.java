@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -41,6 +42,8 @@ public class ProjectRecyclerviewAdapter extends RecyclerView.Adapter<ProjectRecy
         ImageView imvImage;
         TextView tvTopic, tvTitle, tvSummary, tvRaised, tvGoal, tvCurrency1, tvCurrency2, tvStartTime, tvEndTime,tvDonator;
         LinearLayout mProgressBar;
+        Button btnDetail;
+
         View vSpace;
 
         public MyViewHolder(View view) {
@@ -56,6 +59,7 @@ public class ProjectRecyclerviewAdapter extends RecyclerView.Adapter<ProjectRecy
             tvStartTime = (TextView) view.findViewById(R.id.tv_starttime_project);
             tvEndTime = (TextView) view.findViewById(R.id.tv_endtime_project);
             tvDonator = (TextView) view.findViewById(R.id.tv_donator_project);
+            btnDetail = (Button) view.findViewById(R.id.btn_detail_project);
             mProgressBar = (LinearLayout) view.findViewById(R.id.progress_bar_cr);
         }
     }
@@ -72,9 +76,9 @@ public class ProjectRecyclerviewAdapter extends RecyclerView.Adapter<ProjectRecy
     }
 
     @Override
-    public void onBindViewHolder(ProjectRecyclerviewAdapter.MyViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ProjectRecyclerviewAdapter.MyViewHolder viewHolder, final int position) {
 
-        ContentProject item = mDataset.get(position);
+        final ContentProject item = mDataset.get(position);
         BigDecimal raised;
         if (item.getRaised() != null) raised = item.getRaised();
         else raised = new BigDecimal(0);
@@ -96,6 +100,14 @@ public class ProjectRecyclerviewAdapter extends RecyclerView.Adapter<ProjectRecy
         else divide = (raised.divide(item.getGoal(), 3,RoundingMode.CEILING).floatValue());
         progresBarLayoutParams.width = (int) (Constants.WITDH * divide * factor);
         viewHolder.mProgressBar.setLayoutParams(progresBarLayoutParams);
+        viewHolder.btnDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mIOnItemClickedListener != null) {
+                    mIOnItemClickedListener.onItemClickComment(item.getId());
+                }
+            }
+        });
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class ContentBlogPost {
 
     @SerializedName("id")
-    private Integer id;
+    private Long id;
     @SerializedName("title")
     private String title;
     @SerializedName("content")
@@ -25,11 +25,11 @@ public class ContentBlogPost {
     @SerializedName("status")
     private Integer status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

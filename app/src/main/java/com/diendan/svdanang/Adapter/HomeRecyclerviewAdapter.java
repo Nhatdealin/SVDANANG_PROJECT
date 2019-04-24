@@ -38,7 +38,7 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
         BlogPostTopic topic;
         TextView tvTitle, tvContent1, tvContent2, tvContent3, tvContent4, tvSeemore;
         ImageView imvImage1, imvImage2, imvImage3, imvImage4;
-        private View homeGroup;
+        private View blogPost1,blogPost2,blogPost3,blogPost4;
         private View viewDividerTop;
 
         public MyViewHolder(View view) {
@@ -53,7 +53,10 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
             imvImage2 = (ImageView) view.findViewById(R.id.imv_home_item2);
             imvImage3 = (ImageView) view.findViewById(R.id.imv_home_item3);
             imvImage4 = (ImageView) view.findViewById(R.id.imv_home_item4);
-            homeGroup = view.findViewById(R.id.home_group);
+            blogPost1 = view.findViewById(R.id.home_blog_post_1);
+            blogPost2 = view.findViewById(R.id.home_blog_post_2);
+            blogPost3 = view.findViewById(R.id.home_blog_post_3);
+            blogPost4 = view.findViewById(R.id.home_blog_post_4);
             viewDividerTop = view.findViewById(R.id.view_divider_top_home);
             tvSeemore = view.findViewById(R.id.tv_see_more);
 
@@ -80,7 +83,7 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Homeitem menu = mDataset.get(position);
+        final Homeitem menu = mDataset.get(position);
         holder.topic = menu.getTopic();
         holder.tvTitle.setText(menu.getTitle());
         holder.tvContent1.setText(menu.getData1().getTitle());
@@ -91,6 +94,39 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
         Picasso.with(mContext).load(menu.getData2().getImage()).error(R.drawable.img_default).fit().into(holder.imvImage2);
         Picasso.with(mContext).load(menu.getData3().getImage()).error(R.drawable.img_default).fit().into(holder.imvImage3);
         Picasso.with(mContext).load(menu.getData4().getImage()).error(R.drawable.img_default).fit().into(holder.imvImage4);
+
+        holder.blogPost1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mIOnItemClickedListener != null) {
+                    mIOnItemClickedListener.onItemClickComment(menu.getData1().getId());
+                }
+            }
+        });
+        holder.blogPost2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mIOnItemClickedListener != null) {
+                    mIOnItemClickedListener.onItemClickComment(menu.getData2().getId());
+                }
+            }
+        });holder.blogPost3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mIOnItemClickedListener != null) {
+                    mIOnItemClickedListener.onItemClickComment(menu.getData3().getId());
+                }
+            }
+        });
+        holder.blogPost4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mIOnItemClickedListener != null) {
+                    mIOnItemClickedListener.onItemClickComment(menu.getData4().getId());
+                }
+            }
+        });
+
 
     }
 
@@ -105,6 +141,7 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
         void onItemClick(int id);
 
         void onItemClickComment(BlogPostTopic topic);
+        void onItemClickComment(Long id);
 
         void userSelectedAValue(String value);
     }

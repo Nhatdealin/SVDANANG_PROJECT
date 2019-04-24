@@ -110,6 +110,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiL
             }
 
             @Override
+            public void onItemClickComment(Long id) {
+
+            }
+
+            @Override
             public void userSelectedAValue(String value) {
 
             }
