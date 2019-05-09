@@ -1,7 +1,10 @@
 package com.diendan.svdanang.Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +21,7 @@ import com.diendan.svdanang.Adapter.EventRecyclerviewAdapter;
 import com.diendan.svdanang.Eventitem;
 
 import com.diendan.svdanang.R;
+import com.diendan.svdanang.ShowDetailEventActivity;
 import com.diendan.svdanang.api.ApiListener;
 import com.diendan.svdanang.api.models.EventsOutput;
 import com.diendan.svdanang.models.ContentEvent;
@@ -71,7 +75,10 @@ public class EventFragment extends Fragment implements View.OnClickListener, Api
             }
 
             @Override
-            public void onItemClickComment(int id) {
+            public void onItemClickComment(Long id) {
+                Intent i = new Intent(getActivity(), ShowDetailEventActivity.class);
+                i.putExtra("id",id);
+                startActivity(i);
             }
 
             @Override
@@ -139,13 +146,16 @@ public class EventFragment extends Fragment implements View.OnClickListener, Api
                 isLoading = false;
                 showLoading(false);
             }
+            else
+            {
+                notify("Không thành công", output.getMessage());
+            }
 
         }
     }
 
     @Override
     public void onConnectionError(BaseTask task, Exception exception) {
-        Log.i("aaaaaaaaaa",exception.getMessage());
     }
     public void showLoading(boolean isShow) {
         try {
@@ -158,5 +168,19 @@ public class EventFragment extends Fragment implements View.OnClickListener, Api
             }
         } catch (IllegalArgumentException ex) {
         }
+    }
+    private void notify(String result,String mess)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setCancelable(true);
+        builder.setTitle(result);
+        builder.setMessage(mess);
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
 }

@@ -76,14 +76,18 @@ public class ProjectRecyclerviewAdapter extends RecyclerView.Adapter<ProjectRecy
     }
 
     @Override
-    public void onBindViewHolder(ProjectRecyclerviewAdapter.MyViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(ProjectRecyclerviewAdapter.MyViewHolder viewHolder, int position) {
 
         final ContentProject item = mDataset.get(position);
         BigDecimal raised;
-        if (item.getRaised() != null) raised = item.getRaised();
+        if (item.getRaised() != null) raised = (BigDecimal) item.getRaised().divide(new BigDecimal(1),2,RoundingMode.CEILING);
         else raised = new BigDecimal(0);
-        Picasso.with(mContext).load(item.getImage()).noPlaceholder().into(viewHolder.imvImage);
-        viewHolder.tvTopic.setText(item.getProjectTopic().getName());
+        Picasso.with(mContext).load(item.getImage()).fit().centerCrop().noPlaceholder().into(viewHolder.imvImage);
+        if(item.getProjectTopic().getName() != null)
+        {
+            viewHolder.tvTopic.setText(item.getProjectTopic().getName());
+        }
+
         viewHolder.tvTitle.setText(item.getName());
         viewHolder.tvSummary.setText(item.getShortDescription());
         viewHolder.tvRaised.setText(String.valueOf(raised));
@@ -118,7 +122,7 @@ public class ProjectRecyclerviewAdapter extends RecyclerView.Adapter<ProjectRecy
     public interface IOnItemClickedListener {
         void onItemClick(int id);
 
-        void onItemClickComment(int id);
+        void onItemClickComment(Long id);
 
         void userSelectedAValue(String value);
     }

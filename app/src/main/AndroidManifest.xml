@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.diendan.svdanang">
+    <uses-permission android:name="android.permission.INTERNET" />
     <meta-data
         android:name="com.google.android.gms.version"
         android:value="@integer/google_play_services_version" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="true">
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +34,12 @@
         <activity android:name=".GetProfileActivity"/>
         <activity android:name=".UpdateProfileActivity"/>
         <activity android:name=".ChangePasswordActivity"/>
+        <activity android:name=".ShowDetailBlogPostActivity"/>
+        <activity android:name=".ShowDetailProjectActivity"/>
+        <activity android:name=".ShowDetailEventActivity"/>
+        <activity android:name=".RedirectDonationActivity"/>
+
     </application>
+
 
 </manifest>

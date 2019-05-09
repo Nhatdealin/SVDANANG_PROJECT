@@ -1,7 +1,10 @@
 package com.diendan.svdanang.Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +21,7 @@ import com.diendan.svdanang.Adapter.ProjectRecyclerviewAdapter;
 import com.diendan.svdanang.Eventitem;
 import com.diendan.svdanang.Projectitem;
 import com.diendan.svdanang.R;
+import com.diendan.svdanang.ShowDetailProjectActivity;
 import com.diendan.svdanang.api.ApiListener;
 import com.diendan.svdanang.api.models.ProjectsOutput;
 import com.diendan.svdanang.models.ContentProject;
@@ -32,12 +36,12 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
     ArrayList<ContentProject> pjtitemlist;
     LinearLayoutManager mLayoutManager;
     protected ProgressDialog mProgressDialog;
-    ProgressBar loadMore;
+
     int mStart = 0;
     boolean isLoading;
     private boolean mIsLoadMore;
     private int pastVisiblesItems, visibleItemCount, totalItemCount;
-
+    private int visibleThreshold = 1;
     public static ProjectFragment newInstance() {
 
         ProjectFragment fragment = new ProjectFragment();
@@ -56,7 +60,6 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage(getString(R.string.txt_waiting));
         mProjectRecyclerView.setLayoutManager(mLayoutManager);
-        loadMore = rootView.findViewById(R.id.pb_loadmore_project);
         pjtitemlist = new ArrayList<>();
         mAdapter = new ProjectRecyclerviewAdapter(getActivity(), pjtitemlist);
         mProjectRecyclerView.setAdapter(mAdapter);
@@ -66,8 +69,8 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
     }
 
     private void loadData() {
-//        showLoading(true);
-        ShowLoadMore();
+        showLoading(true);
+//        ShowLoadMore();
         new GetProjectsTask(getActivity(), mStart,5, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
     }
@@ -81,7 +84,10 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
             }
 
             @Override
-            public void onItemClickComment(int id) {
+            public void onItemClickComment(Long id) {
+                Intent i = new Intent(getActivity(), ShowDetailProjectActivity.class);
+                i.putExtra("id",id);
+                startActivity(i);
             }
 
             @Override
@@ -101,7 +107,7 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
                 {
                     visibleItemCount = mLayoutManager.getChildCount();
                     totalItemCount = mLayoutManager.getItemCount();
-                    pastVisiblesItems = mLayoutManager.findFirstCompletelyVisibleItemPosition();
+                    pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
 
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                         if (pjtitemlist.size() > 0 && mIsLoadMore && !isLoading) {
@@ -113,7 +119,6 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
                 }
             }
             });}
-
 
     @Override
     public void onClick(View view) {
@@ -142,9 +147,11 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
                 }
                 mAdapter.notifyDataSetChanged();
                 isLoading = false;
-//                showLoading(false);
-                HideLoadMore();
-
+                showLoading(false);
+            }
+            else
+            {
+                notify("Không thành công", output.getMessage());
             }
         }
 
@@ -165,12 +172,18 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
         } catch (IllegalArgumentException ex) {
         }
     }
-    public void ShowLoadMore()
+    private void notify(String result,String mess)
     {
-        loadMore.setVisibility(View.VISIBLE);
-    }
-    public void HideLoadMore()
-    {
-        loadMore.setVisibility(View.GONE);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setCancelable(true);
+        builder.setTitle(result);
+        builder.setMessage(mess);
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
 }

@@ -90,10 +90,10 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
         holder.tvContent2.setText(menu.getData2().getTitle());
         holder.tvContent3.setText(menu.getData3().getTitle());
         holder.tvContent4.setText(menu.getData4().getTitle());
-        Picasso.with(mContext).load(menu.getData1().getImage()).error(R.drawable.img_default).fit().into(holder.imvImage1);
-        Picasso.with(mContext).load(menu.getData2().getImage()).error(R.drawable.img_default).fit().into(holder.imvImage2);
-        Picasso.with(mContext).load(menu.getData3().getImage()).error(R.drawable.img_default).fit().into(holder.imvImage3);
-        Picasso.with(mContext).load(menu.getData4().getImage()).error(R.drawable.img_default).fit().into(holder.imvImage4);
+        Picasso.with(mContext).load(menu.getData1().getImage()).placeholder(R.drawable.img_default_cover).error(R.drawable.img_default_cover).fit().centerCrop().into(holder.imvImage1);
+        Picasso.with(mContext).load(menu.getData2().getImage()).placeholder(R.drawable.img_default_cover).error(R.drawable.img_default_cover).fit().centerCrop().into(holder.imvImage2);
+        Picasso.with(mContext).load(menu.getData3().getImage()).placeholder(R.drawable.img_default_cover).error(R.drawable.img_default_cover).fit().centerCrop().into(holder.imvImage3);
+        Picasso.with(mContext).load(menu.getData4().getImage()).placeholder(R.drawable.img_default_cover).error(R.drawable.img_default_cover).fit().centerCrop().into(holder.imvImage4);
 
         holder.blogPost1.setOnClickListener(new View.OnClickListener() {
             @Override

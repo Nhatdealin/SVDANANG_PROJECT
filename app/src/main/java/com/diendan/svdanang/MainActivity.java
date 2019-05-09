@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.diendan.svdanang.Adapter.MenuRecyclerviewAdapter;
 import com.diendan.svdanang.Fragment.EventFragment;
 import com.diendan.svdanang.Fragment.HomeFragment;
+import com.diendan.svdanang.Fragment.NewsFragment;
 import com.diendan.svdanang.Fragment.ProjectFragment;
 import com.diendan.svdanang.api.ApiListener;
 import com.diendan.svdanang.api.models.ProfileOutput;
@@ -31,6 +32,7 @@ import com.diendan.svdanang.utils.Constants;
 import com.diendan.svdanang.utils.SharedPreferenceHelper;
 
 import java.util.ArrayList;
+import java.util.prefs.PreferenceChangeEvent;
 
 public class MainActivity extends AppCompatActivity implements ApiListener<ProfileOutput>,DrawerLayout.DrawerListener, View.OnClickListener {
     private RecyclerView mRecyclerView;
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements ApiListener<Profi
         tvUssername = findViewById(R.id.tv_fullname);
         mCurrentTab = findViewById(R.id.imv_ic_home);
         mEventTab = findViewById(R.id.imv_ic_event);
-        mFindTab = findViewById(R.id.imv_ic_find);
+        mFindTab = findViewById(R.id.imv_ic_news);
         mProjectTab = findViewById(R.id.imv_ic_project);
         mImvNav = findViewById(R.id.imv_nav_left);
         mImvBack = findViewById(R.id.imv_ic_back);
@@ -117,16 +119,18 @@ public class MainActivity extends AppCompatActivity implements ApiListener<Profi
             @Override
             public void onItemClickComment(int id) {
                 switch (id) {
-                    case 110:
+                    case Constants.MENU_ITEM_PROFILE:
                         showLoading(true);
                         GetProfile();
                         break;
-                    case 115:
+                    case Constants.MENU_ITEM_PASSWORD:
                         showLoading(true);
                         Intent i = new Intent(MainActivity.this, ChangePasswordActivity.class);
+                        i.putExtra("email", SharedPreferenceHelper.getInstance(MainActivity.this).get(Constants.EXTRAX_EMAIL));
+                        i.putExtra("username", SharedPreferenceHelper.getInstance(MainActivity.this).get(Constants.PREF_PERSON_NAME));
                         startActivity(i);
                         break;
-                    case 114:
+                    case Constants.MENU_ITEM_LOGOUT:
                         showLoading(true);
                         SharedPreferenceHelper.getInstance(MainActivity.this).clearSharePrefs();
                         Intent i2 = new Intent(MainActivity.this, LoginActivity.class);
@@ -168,8 +172,11 @@ public class MainActivity extends AppCompatActivity implements ApiListener<Profi
                 mCurrentTab.setSelected(true);
                 setNewPage(new HomeFragment());
                 break;
-            case R.id.imv_ic_find:
-
+            case R.id.imv_ic_news:
+                mCurrentTab.setSelected(false);
+                mCurrentTab = view;
+                mCurrentTab.setSelected(true);
+                setNewPage(new NewsFragment());
                 break;
             case R.id.imv_ic_project:
                 mCurrentTab.setSelected(false);

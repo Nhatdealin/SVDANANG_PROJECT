@@ -16,8 +16,8 @@ public class ContentBlogPost {
     private String thumbnailImage;
     @SerializedName("blogPostTopic")
     private BlogPostTopic blogPostTopic;
-    @SerializedName("createdDate")
-    private Long createdDate;
+    @SerializedName("createdAt")
+    private Long createdAt;
     @SerializedName("createdBy")
     private CreatedBy createdBy;
     @SerializedName("updatedBy")
@@ -73,12 +73,12 @@ public class ContentBlogPost {
         this.blogPostTopic = blogPostTopic;
     }
 
-    public Long getCreatedDate() {
-        return createdDate;
+    public Long getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatedDate(Long createdDate) {
-        this.createdDate = createdDate;
+    public void setCreatedAt(Long createdDate) {
+        this.createdAt = createdDate;
     }
 
     public CreatedBy getCreatedBy() {

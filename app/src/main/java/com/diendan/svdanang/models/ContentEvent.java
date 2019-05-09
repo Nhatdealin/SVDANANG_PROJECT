@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ContentEvent implements Serializable {
     @SerializedName("id")
-    private Integer id;
+    private Long id;
     @SerializedName("name")
     private String name;
     @SerializedName("description")
@@ -26,39 +26,27 @@ public class ContentEvent implements Serializable {
     @SerializedName("endTime")
     private Long endTime;
     @SerializedName("expectedQuantity")
-    private Integer expectedQuantity;
+    private Long expectedQuantity;
     @SerializedName("fee")
-    private Integer fee;
+    private Long fee;
     @SerializedName("image")
     private String image;
     @SerializedName("location")
     private String location;
     @SerializedName("startTime")
     private Long startTime;
-    @SerializedName("createdDate")
-    private Long createdDate;
+    @SerializedName("createdBy")
+    private CreatedBy createdBy;
+    @SerializedName("createdAt")
+    private Long createdAt;
+    @SerializedName("schedules")
+    private List<EventSchedule> schedules = null;
 
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
-    public Long getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Long createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -76,6 +64,14 @@ public class ContentEvent implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
     }
 
     public EventTopic getEventTopic() {
@@ -102,19 +98,19 @@ public class ContentEvent implements Serializable {
         this.endTime = endTime;
     }
 
-    public Integer getExpectedQuantity() {
+    public Long getExpectedQuantity() {
         return expectedQuantity;
     }
 
-    public void setExpectedQuantity(Integer expectedQuantity) {
+    public void setExpectedQuantity(Long expectedQuantity) {
         this.expectedQuantity = expectedQuantity;
     }
 
-    public Integer getFee() {
+    public Long getFee() {
         return fee;
     }
 
-    public void setFee(Integer fee) {
+    public void setFee(Long fee) {
         this.fee = fee;
     }
 
@@ -134,6 +130,13 @@ public class ContentEvent implements Serializable {
         this.location = location;
     }
 
+    public CreatedBy getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(CreatedBy createdBy) {
+        this.createdBy = createdBy;
+    }
 
     public Long getStartTime() {
         return startTime;
@@ -143,6 +146,20 @@ public class ContentEvent implements Serializable {
         this.startTime = startTime;
     }
 
+    public Long getCreatedAt() {
+        return createdAt;
+    }
 
+    public void setCreatedAt(Long createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public List<EventSchedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<EventSchedule> schedules) {
+        this.schedules = schedules;
+    }
 }
 

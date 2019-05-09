@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/primecolor2"
+        android:outlineAmbientShadowColor="@color/cardview_dark_background"
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        <ImageView
+            android:id="@+id/imv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/md_nav_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingLeft="10dp"
+            android:text="Thông tin dự án"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#A6FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imv_detail_event_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/img_default_cover" />
+
+            <TextView
+                android:id="@+id/tv_detail_event_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_home_item"
+                android:gravity="center"
+                android:text="Tiêu đề"
+                android:textColor="@color/titlecolor"
+                android:textSize="@dimen/md_title_textsize"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_home_item"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_event_size"
+                    android:layout_height="@dimen/icon_event_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/ic_starttime" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày bắt đầu:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_starttime_detail_event"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_home_item"
+                android:layout_marginTop="@dimen/default_padding_top"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_event_size"
+                    android:layout_height="@dimen/icon_event_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/ic_endtime" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày kết thúc:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_endtime_detail_event"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_home_item"
+                android:layout_marginTop="@dimen/default_padding_top">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_event_size"
+                    android:layout_height="@dimen/icon_event_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/icon_created_by" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đăng bởi:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_detail_event_created_by"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_home_item"
+                android:layout_marginTop="@dimen/default_padding_top"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_event_size"
+                    android:layout_height="@dimen/icon_event_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/icon_created_at" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đăng ngày:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_createdat_detail_event"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_home_item"
+                android:layout_marginTop="@dimen/default_padding_top">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_event_size"
+                    android:layout_height="@dimen/icon_event_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/icon_quantity" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số lượng:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_detail_event_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_home_item"
+                android:layout_marginTop="@dimen/default_padding_top">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_event_size"
+                    android:layout_height="@dimen/icon_event_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/icon_fee" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phí tham gia:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_detail_event_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp" />
+
+                <TextView
+                    android:id="@+id/tv_detail_event_currency1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_home_item"
+                android:layout_marginTop="@dimen/default_padding_top">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_event_size"
+                    android:layout_height="@dimen/icon_event_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/icon_topic" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chủ đề:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_detail_event_topic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_home_item"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+                <com.baoyachi.stepview.VerticalStepView
+                    android:id="@+id/step_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+
+            <WebView
+                android:id="@+id/webview_content_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/margin_home_item"
+                android:layout_marginBottom="@dimen/margin_home_item"
+                android:backgroundTint="@color/transperent"
+                >
+
+            </WebView>
+
+            <Button
+                android:id="@+id/btn_apply_detail_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/primecolor2"
+                android:gravity="center"
+                android:text="Đăng ký"
+                android:textColor="#ffffff" />
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/form_register_volunteer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#A6ffffff"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_home_item"
+                                android:gravity="center"
+                                android:text="Đăng kí sự kiện"
+                                android:textColor="@color/titlecolor"
+                                android:textSize="@dimen/md_title_textsize"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginBottom="@dimen/md_listitem_vertical_margin_choice"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="@dimen/icon_profile"
+                                    android:layout_height="@dimen/icon_profile"
+                                    android:layout_gravity="center_vertical"
+                                    android:src="@drawable/ic_email_profile" />
+
+                                <com.rengwuxian.materialedittext.MaterialEditText
+                                    android:id="@+id/edt_volunteer_email"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left|center_vertical"
+                                    android:hint="Nhập địa chỉ email"
+                                    android:textSize="@dimen/md_content_textsize"
+                                    app:met_floatingLabel="normal"
+                                    app:met_floatingLabelTextColor="#F8F8FF"
+                                    app:met_primaryColor="#FF8C00"
+                                    app:met_textColorHint="#EEEEEE"
+                                    app:met_underlineColor="#E1E1E1" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginBottom="@dimen/md_listitem_vertical_margin_choice"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="@dimen/icon_profile"
+                                    android:layout_height="@dimen/icon_profile"
+                                    android:layout_gravity="center_vertical"
+                                    android:src="@drawable/ic_facebook_profile" />
+
+                                <com.rengwuxian.materialedittext.MaterialEditText
+                                    android:id="@+id/edt_volunteer_fblink"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left|center_vertical"
+                                    android:textSize="@dimen/md_content_textsize"
+                                    app:met_floatingLabel="normal"
+                                    app:met_floatingLabelTextColor="#F8F8FF"
+                                    app:met_primaryColor="#FF8C00"
+                                    app:met_textColorHint="#EEEEEE"
+                                    app:met_underlineColor="#E1E1E1" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_profile"
+                            android:orientation="horizontal" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/line_divide" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:text="Họ và tên"
+                            android:textSize="@dimen/md_content_textsize"
+                            android:textStyle="bold" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edt_volunteer_fullname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:textSize="@dimen/md_content_textsize"
+                            app:met_floatingLabel="normal"
+                            app:met_floatingLabelTextColor="#F8F8FF"
+                            app:met_primaryColor="#FF8C00"
+                            app:met_textColorHint="#EEEEEE"
+                            app:met_underlineColor="#E1E1E1"
+
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:text="Ngày sinh"
+                            android:textSize="@dimen/md_content_textsize"
+                            android:textStyle="bold" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edt_volunteer_birthdate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:focusable="false"
+                            android:textSize="@dimen/md_content_textsize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:text="Giới tính"
+                            android:textSize="@dimen/md_content_textsize"
+                            android:textStyle="bold" />
+
+                        <RadioGroup
+                            android:id="@+id/rbg_volunteer_gender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_volunteer_male_gender"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_profile"
+                                android:text="Nam"
+                                android:textSize="@dimen/md_content_textsize" />
+
+                            <RadioButton
+                                android:id="@+id/rb_volunteer_female_gender"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_profile"
+                                android:text="Nữ"
+                                android:textSize="@dimen/md_content_textsize" />
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:text="Địa chỉ"
+                            android:textSize="@dimen/md_content_textsize"
+                            android:textStyle="bold" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edt_volunteer_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:hint="Nhập vào địa chỉ"
+                            android:textSize="@dimen/md_content_textsize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:text="Tỉnh Thành"
+                            android:textSize="@dimen/md_content_textsize"
+                            android:textStyle="bold" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edt_volunteer_city"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:textSize="@dimen/md_content_textsize" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:text="Số điện thoại"
+                            android:textSize="@dimen/md_content_textsize"
+                            android:textStyle="bold" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edt_volunteer_phonenumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:textSize="@dimen/md_content_textsize"
+
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:text="Nơi làm việc"
+                            android:textSize="@dimen/md_content_textsize"
+                            android:textStyle="bold" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edt_volunteer_department"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:hint="Nhập vào nơi làm việc"
+                            android:textSize="@dimen/md_content_textsize"
+
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:text="Kỹ năng"
+                            android:textSize="@dimen/md_content_textsize"
+                            android:textStyle="bold" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edt_volunteer_skill"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:hint="Nhập vào 3 Kỹ năng"
+                            android:textSize="@dimen/md_content_textsize"
+
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:text="Ghi chú"
+                            android:textSize="@dimen/md_content_textsize"
+                            android:textStyle="bold" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/edt_volunteer_note"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_profile"
+                            android:hint="Ghi chú"
+                            android:textSize="@dimen/md_content_textsize"
+
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/btn_volunteer_submit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_home_item"
+                                android:backgroundTint="@color/submitbutton"
+                                android:shadowColor="@color/cardview_dark_background"
+                                android:text="Lưu"
+                                android:textColor="#ffffff" />
+
+                            <Button
+                                android:id="@+id/btn_volunteer_cancel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_home_item"
+                                android:backgroundTint="@color/cancelbutton"
+                                android:shadowColor="@color/cardview_dark_background"
+                                android:text="Hủy"
+                                android:textColor="#ffffff" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

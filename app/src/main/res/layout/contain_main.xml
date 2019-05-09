@@ -30,11 +30,11 @@
                 android:layout_weight="1"
                 android:src="@drawable/bg_ic_home"/>
             <ImageView
-                android:id="@+id/imv_ic_find"
+                android:id="@+id/imv_ic_news"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
-                android:src="@drawable/bg_ic_find"/>
+                android:src="@drawable/bg_ic_news"/>
             <ImageView
                 android:id="@+id/imv_ic_event"
                 android:layout_width="35dp"

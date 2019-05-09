@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diendan.svdanang.Adapter.SeemorePageRecyclerviewAdapter;
@@ -20,17 +21,18 @@ import com.diendan.svdanang.models.ContentBlogPost;
 import com.diendan.svdanang.tasks.BaseTask;
 import com.diendan.svdanang.tasks.GetBlogPostsByIdTask;
 import com.diendan.svdanang.tasks.GetBlogPostsByTopicTask;
+import com.squareup.picasso.Picasso;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ShowDetailBlogPostActivity extends AppCompatActivity implements View.OnClickListener, ApiListener<BlogPostOutput> {
-    ArrayList<ContentBlogPost> seemorelist;
     ProgressDialog mProgressDialog;
     Long id;
     TextView tvTitleBlogPost,tvCreatedBy,tvTopic,tvCreatedDate;
     WebView wvContent;
+    ImageView imvImage;
 
 
 
@@ -46,6 +48,7 @@ public class ShowDetailBlogPostActivity extends AppCompatActivity implements Vie
         tvTitleBlogPost = findViewById(R.id.tv_detail_blogpost_title);
         tvCreatedBy = findViewById(R.id.tv_detail_blogpost_created_by);
         tvTopic = findViewById(R.id.tv_detail_blogpost_topic);
+        imvImage = findViewById(R.id.imv_detail_blogpost_image);
         tvCreatedDate = findViewById(R.id.tv_createdat_detail_blogposst);
         wvContent = (WebView) findViewById(R.id.webview_content_blogpost);
         loadData();
@@ -54,6 +57,7 @@ public class ShowDetailBlogPostActivity extends AppCompatActivity implements Vie
     }
 
     private void loadData() {
+        showLoading(true);
         new GetBlogPostsByIdTask(this,id, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
@@ -81,7 +85,7 @@ public class ShowDetailBlogPostActivity extends AppCompatActivity implements Vie
 
     @Override
     public void onConnectionSuccess(BaseTask task, BlogPostOutput data) {
-        if(task instanceof GetBlogPostsByTopicTask)
+        if(task instanceof GetBlogPostsByIdTask)
         {
             BlogPostOutput output = data;
             if(output.success)
@@ -93,10 +97,11 @@ public class ShowDetailBlogPostActivity extends AppCompatActivity implements Vie
     }
 
     private void setValue(BlogPostOutput output) {
+        Picasso.with(this).load(output.getData().getThumbnailImage()).fit().centerCrop().noPlaceholder().into(imvImage);
         tvTitleBlogPost.setText(output.getData().getTitle());
         tvCreatedBy.setText(output.getData().getCreatedBy().getFirstName() +" "+output.getData().getCreatedBy().getLastName());
         tvTopic.setText(output.getData().getBlogPostTopic().getName());
-        tvCreatedDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(output.getData().getCreatedDate())));
+        tvCreatedDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(output.getData().getCreatedAt())));
         wvContent.loadData(output.getData().getContent(), "text/html", "UTF-8");
     }
 

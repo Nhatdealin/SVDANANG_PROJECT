@@ -1,27 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:scrollbars="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_view_home"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:id="@+id/scroll_view_home"
+    android:scrollbars="vertical"
 
     >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview_viewpage_home_fragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                >
-            </android.support.v7.widget.RecyclerView>
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_viewpage_home_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"></android.support.v7.widget.RecyclerView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_home_item"
+            android:src="@drawable/text_svdanang" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Diễn đàn Sinh viên Đà Nẵng được thành lập vào ngày 18/04/2004, nay trực thuộc Đoàn trường đại học Bách Khoa Đà Nẵng." />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="280dp"
+            android:src="@drawable/svsv" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Trải qua gần 14 năm hoạt động, Diễn đàn đã trở thành một nơi kết nối, học tập của các bạn sinh viên thuộc nhiều trường đại học trên địa bàn Đà Nẵng. CLB hoạt động với mục đích tạo môi trường giúp các bạn sinh viên trau dồi những kỹ năng mềm cần thiết, cũng là sân chơi để qua đó các bạn có một hành trang vững chắc và những người đồng hành đáng tin cậy sau khi rời khỏi giảng đường đại học và ứng dụng vào cuộc sống sau này của các bạn."/>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_home_fragment"
             android:layout_width="match_parent"

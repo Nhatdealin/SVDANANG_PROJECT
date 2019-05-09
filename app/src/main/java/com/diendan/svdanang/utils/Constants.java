@@ -12,7 +12,7 @@ public class Constants {
     public static final int MENU_ITEM_LOGOUT = 114;
     public static final int MENU_ITEM_PASSWORD = 115;
 
-    public static int WITDH = 310;
+    public static int WITDH = 340;
     public static String ROLE_ADMIN = "Admin";
     public static String PREF_CUSTOMER = "PREF_CUSTOMER";
     public static String PREF_USER_AVATAR = "PREF_USER_AVATAR";

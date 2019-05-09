@@ -3,31 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:outlineSpotShadowColor="@color/transperent"
         app:cardCornerRadius="6dp"
-        app:cardElevation="6dp"
-        >
+        app:cardElevation="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imv_content_event"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/cover1" />
+            <ImageView
+                android:id="@+id/imv_content_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_default_cover" />
+
             <TextView
                 android:id="@+id/tv_title_event"
                 android:layout_width="match_parent"
@@ -37,7 +36,7 @@
                 android:paddingLeft="5dp"
                 android:paddingBottom="10dp"
                 android:text="AAAAAAA"
-                android:textColor="#8B7D7B"
+                android:textColor="@color/titlecolor"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -46,8 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
-                android:paddingTop="4dp"
-                />
+                android:paddingTop="4dp" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,12 +56,37 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/line_divide" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_event_size"
+                    android:layout_height="@dimen/icon_event_size"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/icon_location" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Địa chỉ:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_location_event"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp" />
+
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -71,134 +95,134 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/cardview_default_radius">
+                        android:layout_marginBottom="@dimen/circular_progress_border">
 
                         <ImageView
-                            android:layout_gravity="center_vertical"
                             android:layout_width="@dimen/icon_event_size"
                             android:layout_height="@dimen/icon_event_size"
-                            android:src="@drawable/icon_location"
-                            android:layout_marginRight="5dp"/>
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/icon_fee" />
 
                         <TextView
-                            android:id="@+id/tv_location_event"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="5dp"
-                            android:text="Thành phố Đà Nẵng" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/cardview_default_radius">
-
-                        <ImageView
-                            android:layout_gravity="center_vertical"
-                            android:layout_width="@dimen/icon_event_size"
-                            android:layout_height="@dimen/icon_event_size"
-                            android:src="@drawable/icon_fee"
-                            android:layout_marginRight="5dp"/>
+                            android:text="Phí:"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_fee_event"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="5dp"
-                            android:text="500.000" />
+                            android:paddingLeft="5dp" />
+
                         <TextView
                             android:id="@+id/tv_currency_event"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="5dp"
-                            android:text="VND" />
+                            android:paddingLeft="5dp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/cardview_default_radius">
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/circular_progress_border">
 
                         <ImageView
-                            android:layout_gravity="center_vertical"
                             android:layout_width="@dimen/icon_event_size"
                             android:layout_height="@dimen/icon_event_size"
-                            android:src="@drawable/ic_starttime"
-                            android:layout_marginRight="5dp"/>
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/ic_starttime" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bắt đầu:"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_starttime_event"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="5dp"
-                            android:text="2/10/2019" />
+                            android:layout_gravity="center_vertical"
+                            android:paddingLeft="5dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/circular_progress_border">
 
                         <ImageView
-                            android:layout_gravity="center_vertical"
                             android:layout_width="@dimen/icon_event_size"
                             android:layout_height="@dimen/icon_event_size"
-                            android:src="@drawable/ic_endtime"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginRight="5dp"
-                            android:layout_marginLeft="10dp"
-                            />
+                            android:src="@drawable/ic_endtime" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kết thúc:"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_endtime_event"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="5dp"
-                            android:text="2/10/2019" />
+                            android:layout_gravity="center_vertical"
+                            android:paddingLeft="5dp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/circular_progress_border">
 
                         <ImageView
-                            android:layout_gravity="center_vertical"
                             android:layout_width="@dimen/icon_event_size"
                             android:layout_height="@dimen/icon_event_size"
-                            android:src="@drawable/icon_topic"
-                            android:layout_marginRight="5dp"/>
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/icon_topic" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chủ đề:"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_topic_event"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="5dp"
-                            android:text="Môi trường" />
+                            android:paddingLeft="5dp" />
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="10dp"
-                    android:layout_weight="1" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
                     android:orientation="vertical">
-                    <Button
-                        android:id="@+id/btn_register_event"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/primecolor2"
-                        android:shadowColor="@color/cardview_dark_background"
-                        android:text="Đăng kí"
-                        android:textColor="#ffffff" />
+
                     <Button
                         android:id="@+id/btn_information_event"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_weight="1"
                         android:backgroundTint="@color/primecolor2"
                         android:shadowColor="@color/cardview_dark_background"
@@ -206,7 +230,6 @@
                         android:textColor="#ffffff" />
 
                 </LinearLayout>
-
 
 
             </LinearLayout>

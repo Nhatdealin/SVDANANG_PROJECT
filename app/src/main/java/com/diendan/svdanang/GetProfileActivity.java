@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.diendan.svdanang.api.ApiListener;
@@ -25,6 +26,7 @@ public class GetProfileActivity extends AppCompatActivity implements ApiListener
     protected ProgressDialog mProgressDialog;
     private String firstname,lastname;
     private  boolean gender;
+    private ImageView md_nav_back;
     public static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -45,7 +47,7 @@ public class GetProfileActivity extends AppCompatActivity implements ApiListener
         setContentView(R.layout.activity_get_profile);
 
 
-
+        md_nav_back = findViewById(R.id.btn_back);
         btn_edit_infor = findViewById(R.id.btn_edit_profile);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
@@ -76,6 +78,7 @@ public class GetProfileActivity extends AppCompatActivity implements ApiListener
 
     protected void addListener() {
         btn_edit_infor.setOnClickListener(this);
+        md_nav_back.setOnClickListener(this);
     }
 
     @Override

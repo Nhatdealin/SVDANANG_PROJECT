@@ -6,5 +6,8 @@
     <color name="transperent">#00D81B60</color>
     <color name="primecolor1">#f46118</color>
     <color name="primecolor2">#FF7F50</color>
+    <color name="titlecolor">#8B7D7B</color>
+    <color name="submitbutton">#EE0000</color>
+    <color name="cancelbutton">#436EEE</color>
 
 </resources>

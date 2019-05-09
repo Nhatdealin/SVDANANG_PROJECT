@@ -1,15 +1,20 @@
 package com.diendan.svdanang.Fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +50,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiL
     LinearLayoutManager mLayoutManager;
     LinearLayoutManager mLayoutManagerPageView;
     ProgressDialog mProgressDialog;
+    final int duration = 2000;
+    final int pixelsToMove = 30;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Runnable SCROLLING_RUNNABLE = new Runnable() {
+
+        @Override
+        public void run() {
+            mViewpageRecyclerView.getLayoutManager().scrollToPosition((mLayoutManagerPageView.findLastVisibleItemPosition() + 1));
+//            mViewpageRecyclerView.scrollTo(pixelsToMove, 0);
+            mHandler.postDelayed(this, duration);
+        }
+    };
 
 
     public static HomeFragment newInstance() {
@@ -79,8 +96,29 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiL
         pageviewitemlist.add(new Viewpageitem(R.drawable.cover4));
         mViewPageAdapter = new ViewpageRecyclerviewAdapter(getActivity(), pageviewitemlist);
         mViewpageRecyclerView.setAdapter(mViewPageAdapter);
+
         SnapHelper helper = new LinearSnapHelper();
         helper.attachToRecyclerView(mViewpageRecyclerView);
+        mViewpageRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastItem = mLayoutManagerPageView.findLastCompletelyVisibleItemPosition();
+                if(lastItem == mLayoutManagerPageView.getItemCount()-1){
+                    mHandler.removeCallbacks(SCROLLING_RUNNABLE);
+                    Handler postHandler = new Handler();
+                    postHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mViewpageRecyclerView.setAdapter(null);
+                            mViewpageRecyclerView.setAdapter(mViewPageAdapter);
+                            mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
+                        }
+                    }, 2000);
+                }
+            }
+        });
+        mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
         loadDataTopic();
         addListener();
         return rootView;
@@ -88,7 +126,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiL
 
     private void loadDataTopic() {
         showLoading(true);
-        new GetBlogPostsTopicsTask(this.getActivity(), 0,1, this ).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        new GetBlogPostsTopicsTask(this.getActivity(), 0,5, this ).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     private  void addAdapter()
@@ -166,13 +204,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiL
                         mAdapter.notifyDataSetChanged();
                         showLoading(false);
                     }
+                showLoading(false);
                 }
+            else
+            {
+                notify("Không thành công", output.getMessage());
+            }
 
             }
         }
 
     @Override
     public void onConnectionError(BaseTask task, Exception exception) {
+        Log.i("NHAT DEP TRAI",exception.getMessage());
 
     }
     public void showLoading(boolean isShow) {
@@ -186,5 +230,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiL
             }
         } catch (IllegalArgumentException ex) {
         }
+    }
+    private void notify(String result,String mess)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setCancelable(true);
+        builder.setTitle(result);
+        builder.setMessage(mess);
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
 }

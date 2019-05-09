@@ -11,13 +11,15 @@ import java.math.BigDecimal;
 
 public class ContentProject implements Serializable {
     @SerializedName("id")
-    private Integer id;
+    private Long id;
     @SerializedName("name")
     private String name;
     @SerializedName("image")
     private String image;
     @SerializedName("shortDescription")
     private String shortDescription;
+    @SerializedName("description")
+    private String description;
     @SerializedName("projectTopic")
     private ProjectTopic projectTopic;
     @SerializedName("createdBy")
@@ -41,11 +43,11 @@ public class ContentProject implements Serializable {
     @SerializedName("currency")
     private Currency currency;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -71,6 +73,14 @@ public class ContentProject implements Serializable {
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public ProjectTopic getProjectTopic() {

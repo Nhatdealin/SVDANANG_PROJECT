@@ -29,13 +29,13 @@ import com.diendan.svdanang.tasks.UpdateProfileTask;
 public class ChangePasswordActivity extends AppCompatActivity implements ApiListener<ChangePasswordOutput>, View.OnClickListener {
     private Button btn_change_submit,btn_change_cancel;
     private ImageView md_nav_back;
-    private TextView tvUsername,tvEmail,tvFbLink;
+    private TextView tvUsername,tvEmail;
     private  boolean gender;
     private EditText edtOldPass,edtNewPass,edtReNewPass;
     protected ProgressDialog mProgressDialog;
     protected RadioButton rbMale,rbFemale;
     protected RadioGroup rbgGender;
-    String username,department,email,firstname,lastname,address,birthdate,city,fblink,phone;
+    String username,email;
     public static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -45,7 +45,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements ApiList
         setContentView(R.layout.activity_change_password);
         Intent intent = this.getIntent();
         email = intent.getStringExtra("email");
-        fblink = intent.getStringExtra("fblink");
         username = intent.getStringExtra("username");
 
 
@@ -53,7 +52,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements ApiList
         btn_change_cancel = findViewById(R.id.btn_change_cancel);
         md_nav_back = findViewById(R.id.imv_change_pass_back);
         tvEmail = findViewById(R.id.tv_change_pass_email);
-        tvFbLink = findViewById(R.id.tv_change_pass_fblink);
         tvUsername = findViewById(R.id.tv_change_pass_username);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
@@ -64,7 +62,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements ApiList
 
         tvUsername.setText(username);
         tvEmail.setText(email);
-        tvFbLink.setText(fblink);
         addListener();
     }
 

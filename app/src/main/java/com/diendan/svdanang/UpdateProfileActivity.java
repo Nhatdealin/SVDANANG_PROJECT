@@ -130,7 +130,6 @@ public class UpdateProfileActivity extends AppCompatActivity implements ApiListe
                 int month =birth.getMonth() ;
                 int dayofmonth = birth.getDate();
                 DatePickerDialog dialog = new DatePickerDialog(UpdateProfileActivity.this,R.style.DialogTheme ,date,year,month,dayofmonth);
-
                 dialog.getDatePicker().setMinDate(15177000);
                 dialog.show();
             }

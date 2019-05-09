@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     SharedPreferenceHelper.getInstance(this).set(Constants.PREF_PERSON_NAME, String.valueOf(output.getData().getUser().getFirstName() + " " + output.getData().getUser().getLastName()));
                     SharedPreferenceHelper.getInstance(this).set(Constants.EXTRAX_EMAIL, output.getData().getUser().getEmail());
                     SharedPreferenceHelper.getInstance(this).set(Constants.EXTRAX_TOKEN_CODE, output.getData().getAccessToken());
+                    SharedPreferenceHelper.getInstance(this).set(Constants.PREF_USERNAME, output.getData().getUser().getUserName());
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                 }

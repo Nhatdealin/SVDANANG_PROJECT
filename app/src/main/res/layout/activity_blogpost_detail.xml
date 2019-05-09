@@ -39,12 +39,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_default_cover"
+                android:id="@+id/imv_detail_blogpost_image"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_detail_blogpost_title"
                 android:textSize="@dimen/md_title_textsize"
-                android:text="AAAAAAA"
+                android:gravity="center"
+                android:text="Tiêu đề"
+                android:textColor="@color/titlecolor"
                 android:textStyle="bold"
                 android:layout_margin="@dimen/margin_home_item"/>
             <LinearLayout
@@ -129,13 +136,16 @@
             <WebView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_home_item"
+                android:layout_marginTop="@dimen/margin_home_item"
+                android:layout_marginBottom="@dimen/margin_home_item"
                 android:id="@+id/webview_content_blogpost"
+                android:background="@color/transperent"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
+
                 >
 
             </WebView>

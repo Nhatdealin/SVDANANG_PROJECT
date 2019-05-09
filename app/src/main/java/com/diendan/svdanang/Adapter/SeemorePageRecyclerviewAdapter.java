@@ -63,10 +63,10 @@ public class SeemorePageRecyclerviewAdapter extends  RecyclerView.Adapter<Seemor
     @Override
     public void onBindViewHolder(SeemorePageRecyclerviewAdapter.MyViewHolder holder, final int position) {
         ContentBlogPost seemoreitem = mDataset.get(position);
-        Picasso.with(mContext).load(seemoreitem.getThumbnailImage()).fit().into(holder.imvImage);
+        Picasso.with(mContext).load(seemoreitem.getThumbnailImage()).placeholder(R.drawable.img_default_cover).fit().centerCrop().into(holder.imvImage);
         holder.tvTopic.setText(seemoreitem.getBlogPostTopic().getName());
         holder.tvTitle.setText(seemoreitem.getTitle());
-        holder.tvCreatedAt.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(seemoreitem.getCreatedDate())));
+        holder.tvCreatedAt.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(seemoreitem.getCreatedAt())));
         holder.tvSummary.setText(seemoreitem.getShortContent());
         holder.blogPost.setOnClickListener(new View.OnClickListener() {
             @Override
