@@ -85,16 +85,41 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final Homeitem menu = mDataset.get(position);
         holder.topic = menu.getTopic();
-        holder.tvTitle.setText(menu.getTitle());
-        holder.tvContent1.setText(menu.getData1().getTitle());
-        holder.tvContent2.setText(menu.getData2().getTitle());
-        holder.tvContent3.setText(menu.getData3().getTitle());
-        holder.tvContent4.setText(menu.getData4().getTitle());
-        Picasso.with(mContext).load(menu.getData1().getImage()).placeholder(R.drawable.img_default_cover).error(R.drawable.img_default_cover).fit().centerCrop().into(holder.imvImage1);
-        Picasso.with(mContext).load(menu.getData2().getImage()).placeholder(R.drawable.img_default_cover).error(R.drawable.img_default_cover).fit().centerCrop().into(holder.imvImage2);
-        Picasso.with(mContext).load(menu.getData3().getImage()).placeholder(R.drawable.img_default_cover).error(R.drawable.img_default_cover).fit().centerCrop().into(holder.imvImage3);
-        Picasso.with(mContext).load(menu.getData4().getImage()).placeholder(R.drawable.img_default_cover).error(R.drawable.img_default_cover).fit().centerCrop().into(holder.imvImage4);
-
+        if(menu.getTitle() != null)
+        {
+            holder.tvTitle.setText(menu.getTitle());
+        }
+        if(menu.getData1().getTitle() != null)
+        {
+            holder.tvContent1.setText(menu.getData1().getTitle());
+        }if(menu.getData2().getTitle() != null)
+        {
+            holder.tvContent2.setText(menu.getData2().getTitle());
+        }
+        if(menu.getData3().getTitle() != null)
+        {
+            holder.tvContent3.setText(menu.getData3().getTitle());
+        }
+        if(menu.getData4().getTitle() != null)
+        {
+            holder.tvContent4.setText(menu.getData4().getTitle());
+        }
+        if(menu.getData1().getImage() != null)
+        {
+            Picasso.with(mContext).load(menu.getData1().getImage()).placeholder(R.drawable.img_default_cover).error(R.drawable.img_default_cover).fit().centerCrop().into(holder.imvImage1);
+        }
+        if(menu.getData2().getImage() != null)
+        {
+            Picasso.with(mContext).load(menu.getData2().getImage()).placeholder(R.drawable.img_default_cover).error(R.drawable.img_default_cover).fit().centerCrop().into(holder.imvImage2);
+        }
+        if(menu.getData3().getImage() != null)
+        {
+            Picasso.with(mContext).load(menu.getData3().getImage()).placeholder(R.drawable.img_default_cover).error(R.drawable.img_default_cover).fit().centerCrop().into(holder.imvImage3);
+        }
+        if(menu.getData4().getImage() != null)
+        {
+            Picasso.with(mContext).load(menu.getData4().getImage()).placeholder(R.drawable.img_default_cover).error(R.drawable.img_default_cover).fit().centerCrop().into(holder.imvImage4);
+        }
         holder.blogPost1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,8 +151,6 @@ public class HomeRecyclerviewAdapter extends RecyclerView.Adapter<HomeRecyclervi
                 }
             }
         });
-
-
     }
 
 

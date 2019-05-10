@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class PaypalDonationInput {
     @SerializedName("amount")
-    private Long amount;
+    private String amount;
     @SerializedName("currencyId")
     private Long currencyId;
     @SerializedName("id")
@@ -14,11 +14,11 @@ public class PaypalDonationInput {
     @SerializedName("projectId")
     private Long projectId;
 
-    public Long getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 
@@ -54,7 +54,7 @@ public class PaypalDonationInput {
         this.projectId = projectId;
     }
 
-    public PaypalDonationInput(Long amount, Long currencyId, Long id, String note, Long projectId) {
+    public PaypalDonationInput(String amount, Long currencyId, Long id, String note, Long projectId) {
         this.amount = amount;
         this.currencyId = currencyId;
         this.id = id;

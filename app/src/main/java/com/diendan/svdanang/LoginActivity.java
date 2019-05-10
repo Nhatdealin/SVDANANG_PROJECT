@@ -22,7 +22,7 @@ import com.diendan.svdanang.utils.SharedPreferenceHelper;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, ApiListener{
     private Button btn_login;
-    private TextView tv_sign_up;
+    private TextView tv_sign_up,tv_forgot_pass;
     private EditText edt_user,edt_password;
     protected ProgressDialog mProgressDialog;
     public static final String TAG = MainActivity.class.getSimpleName();
@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         edt_password = findViewById(R.id.edt_password);
         edt_user = findViewById(R.id.edt_username);
         tv_sign_up = findViewById(R.id.tv_sign_up);
+        tv_forgot_pass = findViewById(R.id.tv_forgot_password);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage(getString(R.string.txt_waiting));
@@ -47,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void addListener() {
         btn_login.setOnClickListener(this);
         tv_sign_up.setOnClickListener(this);
+        tv_forgot_pass.setOnClickListener(this);
     }
     @Override
     public void onClick(View view) {
@@ -70,6 +72,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent intent1 = new Intent(LoginActivity.this,SignUpActivity.class);
                 startActivity(intent1);
                 break;
+            case R.id.tv_forgot_password:
+                Intent intent2 = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
+                startActivity(intent2);
+                break;
         }
 
     }
@@ -87,10 +93,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if(output.success)
             {
                 if(output.getData().getTokenType() != ""){
-                    SharedPreferenceHelper.getInstance(this).set(Constants.PREF_PERSON_NAME, String.valueOf(output.getData().getUser().getFirstName() + " " + output.getData().getUser().getLastName()));
+                    SharedPreferenceHelper.getInstance(this).set(Constants.PREF_PERSON_NAME, String.valueOf(output.getData().getUser().getLastName() + " " + output.getData().getUser().getFirstName()));
                     SharedPreferenceHelper.getInstance(this).set(Constants.EXTRAX_EMAIL, output.getData().getUser().getEmail());
                     SharedPreferenceHelper.getInstance(this).set(Constants.EXTRAX_TOKEN_CODE, output.getData().getAccessToken());
                     SharedPreferenceHelper.getInstance(this).set(Constants.PREF_USERNAME, output.getData().getUser().getUserName());
+                    SharedPreferenceHelper.getInstance(this).set(Constants.PREF_AVATAR, output.getData().getUser().getAvatar());
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                 }

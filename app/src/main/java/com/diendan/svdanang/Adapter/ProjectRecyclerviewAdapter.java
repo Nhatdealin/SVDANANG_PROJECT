@@ -42,7 +42,7 @@ public class ProjectRecyclerviewAdapter extends RecyclerView.Adapter<ProjectRecy
         ImageView imvImage;
         TextView tvTopic, tvTitle, tvSummary, tvRaised, tvGoal, tvCurrency1, tvCurrency2, tvStartTime, tvEndTime,tvDonator;
         LinearLayout mProgressBar;
-        Button btnDetail;
+        Button btnDetail,btnDonate;
 
         View vSpace;
 
@@ -60,6 +60,7 @@ public class ProjectRecyclerviewAdapter extends RecyclerView.Adapter<ProjectRecy
             tvEndTime = (TextView) view.findViewById(R.id.tv_endtime_project);
             tvDonator = (TextView) view.findViewById(R.id.tv_donator_project);
             btnDetail = (Button) view.findViewById(R.id.btn_detail_project);
+            btnDonate = (Button) view.findViewById(R.id.btn_donate_project);
             mProgressBar = (LinearLayout) view.findViewById(R.id.progress_bar_cr);
         }
     }
@@ -108,7 +109,15 @@ public class ProjectRecyclerviewAdapter extends RecyclerView.Adapter<ProjectRecy
             @Override
             public void onClick(View v) {
                 if (mIOnItemClickedListener != null) {
-                    mIOnItemClickedListener.onItemClickComment(item.getId());
+                    mIOnItemClickedListener.onItemClickComment(item.getId(),false);
+                }
+            }
+        });
+        viewHolder.btnDonate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mIOnItemClickedListener != null) {
+                    mIOnItemClickedListener.onItemClickComment(item.getId(),true);
                 }
             }
         });
@@ -122,7 +131,7 @@ public class ProjectRecyclerviewAdapter extends RecyclerView.Adapter<ProjectRecy
     public interface IOnItemClickedListener {
         void onItemClick(int id);
 
-        void onItemClickComment(Long id);
+        void onItemClickComment(Long id,boolean isDonating);
 
         void userSelectedAValue(String value);
     }

@@ -204,6 +204,8 @@ public abstract class AbstractHttpApi implements HttpApi {
         String response = executeHttpRequest(connection);
         return response;
     }
+
+
     /**
      * Prepare the connection with basic requirement from our application
      *
@@ -211,6 +213,32 @@ public abstract class AbstractHttpApi implements HttpApi {
      * @return the new http connection
      * @throws IOException
      */
+    protected String executeHttpPostImages(@NonNull String requestUrl, @Nullable Map<String, String> headers,
+                                                Map<String, String> params, File file)
+            throws JSONException, ApiException, JSONException, IOException {
+
+        HttpURLConnection connection = prepareConnection(requestUrl);
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
+        connection.setDoInput(true);
+        connection.setRequestProperty("Connection", "Keep-Alive");
+        connection.setRequestProperty("Cache-Control", "no-cache");
+        connection.setRequestProperty("Accept", "*/*");
+        connection.setRequestProperty("Content-Type", "multipart/form-data; charset=" + CHARSET + "; boundary=" + BOUNDARY);
+        if (headers != null) addHeaderFields(connection, headers);
+        OutputStream outputStream = connection.getOutputStream();
+        DataOutputStream dataStream = new DataOutputStream(outputStream);
+        if (params != null) addFormFields(dataStream, params);
+        if (file != null )  addFilePart(dataStream, outputStream, "file", file);
+        dataStream.writeBytes(TWO_HYPHENS + BOUNDARY +
+                TWO_HYPHENS + LINE_FEED);
+        dataStream.flush();
+        dataStream.close();
+        String response = executeHttpRequest(connection);
+        return response;
+    }
+
+
     private HttpURLConnection prepareConnection(String requestUrl) throws IOException {
         URL url = new URL(requestUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

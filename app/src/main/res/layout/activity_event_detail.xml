@@ -36,7 +36,8 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#A6FFFFFF">
+        android:background="#A6FFFFFF"
+        android:id="@+id/event_scrollview">
 
         <LinearLayout
             android:layout_width="match_parent"

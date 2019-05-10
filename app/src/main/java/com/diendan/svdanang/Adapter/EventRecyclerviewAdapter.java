@@ -31,7 +31,7 @@ public class EventRecyclerviewAdapter extends  RecyclerView.Adapter<EventRecycle
 
         ImageView imvImage;
         TextView tvTopic,tvTitle,tvSummary,tvLocation,tvFee,tvCurrency,tvStartTime,tvEndTime;
-        Button btnDetail;
+        Button btnDetail,btnRegister;
 
 
         public MyViewHolder(View view) {
@@ -46,6 +46,7 @@ public class EventRecyclerviewAdapter extends  RecyclerView.Adapter<EventRecycle
             tvStartTime = (TextView) view.findViewById(R.id.tv_starttime_event);
             tvEndTime = (TextView) view.findViewById(R.id.tv_endtime_event);
             btnDetail = (Button) view.findViewById(R.id.btn_information_event);
+            btnRegister = (Button) view.findViewById(R.id.btn_register_event);
 
 
         }
@@ -63,23 +64,56 @@ public class EventRecyclerviewAdapter extends  RecyclerView.Adapter<EventRecycle
     @Override
     public void onBindViewHolder(EventRecyclerviewAdapter.MyViewHolder holder, int position) {
         final ContentEvent eventitem = mDataset.get(position);
-        Picasso.with(mContext).load(eventitem.getImage()).noPlaceholder().fit().centerCrop().into(holder.imvImage);
-        holder.tvTopic.setText(eventitem.getEventTopic().getName());
-        holder.tvTitle.setText(eventitem.getName());
-        holder.tvSummary.setText(eventitem.getShortDescription());
-        holder.tvLocation.setText(eventitem.getLocation());
-        holder.tvFee.setText(String.valueOf(eventitem.getFee()));
-        holder.tvCurrency.setText(eventitem.getCurrency().getName());
-        holder.tvStartTime.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(eventitem.getStartTime())));
-        holder.tvEndTime.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(eventitem.getEndTime())));
+        if(eventitem.getImage() != null)
+        {
+            Picasso.with(mContext).load(eventitem.getImage()).noPlaceholder().fit().centerCrop().into(holder.imvImage);
+        }
+        if(eventitem.getName() != null)
+        {
+            holder.tvTitle.setText(eventitem.getName());
+        }
+        if(eventitem.getShortDescription() != null)
+        {
+            holder.tvSummary.setText(eventitem.getShortDescription());
+        }
+        if(eventitem.getEventTopic() != null)
+        {
+            holder.tvTopic.setText(eventitem.getEventTopic().getName());
+        }
+        if(eventitem.getLocation() != null)
+        {
+            holder.tvLocation.setText(eventitem.getLocation());
+        }if(eventitem.getFee() != null)
+        {
+            holder.tvFee.setText(String.valueOf(eventitem.getFee()));
+        }if(eventitem.getCurrency() != null)
+        {
+            holder.tvCurrency.setText(eventitem.getCurrency().getName());
+        }if(eventitem.getStartTime() != null)
+        {
+            holder.tvStartTime.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(eventitem.getStartTime())));
+        }if(eventitem.getEndTime() != null)
+        {
+            holder.tvEndTime.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(eventitem.getEndTime())));
+        }
+
         holder.btnDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mIOnItemClickedListener != null) {
-                    mIOnItemClickedListener.onItemClickComment(eventitem.getId());
+                    mIOnItemClickedListener.onItemClickComment(eventitem.getId(),false);
                 }
             }
         });
+        holder.btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mIOnItemClickedListener != null) {
+                    mIOnItemClickedListener.onItemClickComment(eventitem.getId(),true);
+                }
+            }
+        });
+
     }
 
 
@@ -91,7 +125,7 @@ public class EventRecyclerviewAdapter extends  RecyclerView.Adapter<EventRecycle
 
     public interface IOnItemClickedListener {
         void onItemClick(int id);
-        void onItemClickComment(Long id);
+        void onItemClickComment(Long id,boolean isRegister);
         void userSelectedAValue(String value);
     }
 }

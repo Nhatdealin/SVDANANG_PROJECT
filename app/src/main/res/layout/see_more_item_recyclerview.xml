@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:src="@drawable/cover1" />
+                android:src="@drawable/img_default_cover" />
 
             <TextView
                 android:id="@+id/tv_title_see_more"
@@ -52,7 +52,7 @@
                 android:textColor="#8B7D7B"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:textSize="15dp"
+                android:textSize="@dimen/md_title_textsize"
                 android:textStyle="bold" />
 
             <TextView
@@ -88,13 +88,19 @@
                             android:layout_height="@dimen/icon_event_size"
                             android:src="@drawable/ic_starttime"
                             android:layout_marginRight="5dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ngày tạo: "
+                            android:textStyle="bold"
+                            />
 
                         <TextView
                             android:id="@+id/tv_createdat_blogpost"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="5dp"
-                            android:text="2/10/2019" />
+                             />
 
                     </LinearLayout>
                     <LinearLayout
@@ -106,6 +112,12 @@
                             android:src="@drawable/icon_topic"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="5dp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chủ đề: "
+                            android:textStyle="bold"
                             />
 
                         <TextView

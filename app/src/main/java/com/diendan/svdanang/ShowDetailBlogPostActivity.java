@@ -9,7 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -102,7 +105,28 @@ public class ShowDetailBlogPostActivity extends AppCompatActivity implements Vie
         tvCreatedBy.setText(output.getData().getCreatedBy().getFirstName() +" "+output.getData().getCreatedBy().getLastName());
         tvTopic.setText(output.getData().getBlogPostTopic().getName());
         tvCreatedDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(output.getData().getCreatedAt())));
-        wvContent.loadData(output.getData().getContent(), "text/html", "UTF-8");
+        WebChromeClient mWebChromeClient = new WebChromeClient(){
+            public void onProgressChanged(WebView view, int newProgress) {
+            }
+        };
+
+        wvContent.setWebChromeClient(new WebChromeClient());
+        wvContent.getSettings().setPluginState(WebSettings.PluginState.ON);
+        wvContent.getSettings().setPluginState(WebSettings.PluginState.ON_DEMAND);
+        wvContent.setWebViewClient(new WebViewClient());
+        wvContent.getSettings().setJavaScriptEnabled(true);
+        wvContent.getSettings().setAllowFileAccess(true);
+        wvContent.getSettings().setDomStorageEnabled(true);
+        wvContent.getSettings().setAppCacheMaxSize(1024*1024*8);
+        wvContent.getSettings().setSupportZoom(true);
+        wvContent.getSettings().setBuiltInZoomControls(true);
+        wvContent.getSettings().setAppCachePath("/data/data/"+ getPackageName() +"/cache");
+        wvContent.getSettings().setAllowFileAccess(true);
+        wvContent.getSettings().setAppCacheEnabled(true);
+        wvContent.getSettings().setDefaultFontSize(14);
+        wvContent.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        wvContent.loadDataWithBaseURL("https://www.youtube.com", output.getData().getContent(),
+                "text/html", "UTF-8", null);
     }
 
     @Override

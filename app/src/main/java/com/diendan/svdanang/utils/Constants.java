@@ -36,6 +36,7 @@ public class Constants {
     public static final String PREF_PERSON_NAME = "PREF_PERSON_NAME";
     public static String PREF_GENERAL_DATA = "PREF_GENERAL_DATA";
     public static final String PREF_USERNAME = "username";
+    public static final String PREF_AVATAR = "avatar";
     public static final String PREF_PASSWORD_NAME = "password";
     public static final String EXTRAX_EMAIL = "email";
     public static final String EXTRAX_TOKEN_CODE = null;

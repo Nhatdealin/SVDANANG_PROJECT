@@ -2,12 +2,14 @@ package com.diendan.svdanang.api;
 
 import android.content.Context;
 
+import com.diendan.svdanang.api.models.AvatarOutput;
 import com.diendan.svdanang.api.models.BlogPostOutput;
 import com.diendan.svdanang.api.models.BlogPostTopicsOutput;
 import com.diendan.svdanang.api.models.BlogPostsOutput;
 import com.diendan.svdanang.api.models.ChangePasswordOutput;
 import com.diendan.svdanang.api.models.EventOutput;
 import com.diendan.svdanang.api.models.EventsOutput;
+import com.diendan.svdanang.api.models.ForgotPasswordOutput;
 import com.diendan.svdanang.api.models.LoginOutput;
 import com.diendan.svdanang.api.models.PaypalDonationOutput;
 import com.diendan.svdanang.api.models.ProfileOutput;
@@ -16,6 +18,7 @@ import com.diendan.svdanang.api.models.ProjectsOutput;
 import com.diendan.svdanang.api.models.ResultDonateOutput;
 import com.diendan.svdanang.api.models.SignupOutput;
 import com.diendan.svdanang.api.objects.ChangePasswordInput;
+import com.diendan.svdanang.api.objects.ForgotPasswordInput;
 import com.diendan.svdanang.api.objects.PaypalDonationInput;
 import com.diendan.svdanang.api.objects.SignupInput;
 import com.diendan.svdanang.api.objects.UpdateProfileInput;
@@ -29,7 +32,10 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import com.diendan.svdanang.api.exception.ApiException;
@@ -48,64 +54,21 @@ public class TaskApi {
     public static final String SIGNUP_VOLUNTEER_API = "volunteers?event_id=%s";
     public static final String PROFILE_API = "users/me";
     public static final String PROJECT_API = "projects?sortBy&t&sortOrder=desc&page=%s&pageSize=%s";
-    public static final String EVENT_API = "events?filter&sortBy&sortOrder&page=%s&pageSize=%s";
+    public static final String EVENT_API = "events?filter&sortBy&sortOrder=desc&page=%s&pageSize=%s";
     public static final String EVENT_BY_ID_API = "events/%s";
-    public static final String BLOGPOST_TOPIC_API = "blog-topics?filter&sortBy&sortOrder&page=%s&pageSize=%s";
+    public static final String BLOGPOST_TOPIC_API = "blog-topics?filter&sortBy&sortOrder=desc&page=%s&pageSize=%s";
     public static final String BLOGPOSTS_TOPIC_ID_API = "blog-posts?topicId=%s&sortBy&sortOrder&page=%s&pageSize=%s";
-    public static final String BLOGPOSTS_ALL_API = "blog-posts?sortBy&sortOrder&page=%s&pageSize=%s";
+    public static final String BLOGPOSTS_ALL_API = "blog-posts?sortBy&sortOrder=desc&page=%s&pageSize=%s";
     public static final String BLOGPOSTS_BY_ID_API = "blog-posts/%s";
     public static final String PROJECT_BY_ID_API = "projects/%s";
     public static final String PAYPAL_DONATION_API = "paypal/make/payment";
     public static final String PAYPAL_DONATION_RESULT_API = "paypal/complete/payment/%s?paymentId=%s&token=%s&PayerID=%s";
-    public static final String USERNAME_AVAILABILITY = "users/checkUsernameAvailability";
-    public static final String GET_NOTE = "crm/notes/%s";
-    public static final String GET_LIST_NOTE = "crm/notes/filter/%s/%s?searchTerm=%s";
-    public static final String GET_LIST_WORK = "crm/works/filter/%s/%s?searchTerm=%s";
-    public static final String POST_NOTE = "crm/notes/create";
-    public static final String DELETE_NOTE = "crm/notes/%s/delete";
-    public static final String EDIT_NOTE = "crm/notes/edit";
-    public static final String EDIT_COMPANY = "crm/contacts/company/edit";
-    public static final String ADD_COMPANY = "crm/contacts/company/create";
-    public static final String GET_LIST_EVENT = "crm/events/filter/%s/%s?searchTerm=%s";
-    public static final String EDIT_EVENT = "crm/events/edit";
-    public static final String DELETE_EVENT = "crm/events/%s/delete";
-    public static final String CREATE_EVENT = "crm/events/create";
-    public static final String EDIT_WORK = "crm/works/edit";
-    public static final String DELETE_WORK = "crm/works/%s/delete";
-    public static final String POST_WORK = "crm/works/create";
-    public static final String GET_ACTIVITY_STATUS = "data/activitystatus";
-    public static final String GET_SHARE_HOLDER_TYPE = "data/shareholdertypes";
-    public static final String EDIT_PERSONAL = "crm/contacts/invidual/edit";
-    public static final String ADD_PERSONAL = "crm/contacts/invidual/create";
-    public static final String GET_ACTIVITY_INVOLVE = "data/crm/getrelatedobjects";
-    public static final String GET_ACTIVITY_EVENT_TYPE = "data/activityeventtype";
-    public static final String GET_LIST_CONTACT = "crm/contacts/invidual/filter/%s/%s?searchTerm=%s&potentialSource=%s";
-    public static final String GET_DETAIL_CONTACT = "crm/contacts/invidual/%s";
-    public static final String DELETE_CONTACT = "crm/contacts/invidual/%s/delete";
-    public static final String GET_LIST_CAREER = "data/prospectcustomerbusinesses";
-    public static final String GET_LIST_COMPANY = "crm/contacts/company/filter/%s/%s?searchTerm=%s&classify=%s";
-    public static final String GET_DETAIL_COMPANY = "crm/contacts/company/%s";
-    public static final String GET_CUSTOMER_GROUP_CRM = "data/customergroupcrms";
-    public static final String GET_CUSTOMER_TYPES = "data/customertypes";
-    public static final String UPDATE_AVATAR_API = "/user/me/updateavatar";
-    public static final String GET_HBC_ROLES = "data/hbcroles";
-    public static final String GET_TITLE_NAME = "data/titlenames";
-    public static final String GET_POTENTIAL_LIST = "data/prospectcustomersources";
-    public static final String EDIT_PROFILE_API = "employee/requesteditemployee";
-    public static final String UPLOAD_AVATAR_API = "user/me/updateavatar";
+    public static final String UPLOAD_AVATAR_API = "uploadFile";
     public static final String LOGOUT_API = "logout";
     public static final String CHANGE_PASSWORD_API = "users/me/password";
-    public static final String FORGOT_PASSWORD_API = "password/forgot";
+    public static final String FORGOT_PASSWORD_API = "auth/forgot";
     public static final String FORGOT_ENTER_CODE_API = "password/validateactivecode";
     public static final String RESET_PASSWORD_API = "password/reset";
-    public static final String GET_CUSTOMERS_API = "customers/search/%s/%s";
-    public static final String GET_CUSTOMERS_CONTACT = "customercontact/%s/%s?searchTerm=%s";
-    public static final String GET_EMPLOYYES_API = "employee/getall";
-    public static final String GET_GENERAL_DATA_API = "data/customertype";
-    public static final String ADD_CUSTOMER_API = "customers/create";
-    public static final String EDIT_CUSTOMER_API = "customers/edit";
-    public static final String DELETE_CUSTOMER_API = "customers/delete";
-    public static final String GET_DETAIL_CUSTOMER_API = "customers/%s";
 
 
     private static final Logger LOG = Logger
@@ -154,6 +117,14 @@ public class TaskApi {
 
         return output;
     }
+    public ForgotPasswordOutput forgotPassword(ForgotPasswordInput forgotPasswordInput) throws ApiException, JSONException, IOException {
+        JSONObject data = mHttpApi.doHttpPost(getFullUrl(FORGOT_PASSWORD_API), new Gson().toJson(forgotPasswordInput));
+        ForgotPasswordOutput output = mGson.fromJson(data.toString(), ForgotPasswordOutput.class);
+        return output;
+    }
+
+
+
     public SignupOutput signUpAccount(SignupInput signupInput) throws ApiException, JSONException, IOException {
         JSONObject data = (JSONObject) mHttpApi.doHttpPost(getFullUrl(SIGNUP_API), new Gson().toJson(signupInput));
         SignupOutput output = (SignupOutput) mGson.fromJson(data.toString(), SignupOutput.class);
@@ -176,6 +147,13 @@ public class TaskApi {
         ProfileOutput output = (ProfileOutput) mGson.fromJson(data.toString(), ProfileOutput .class);
         return output;
     }
+    public AvatarOutput updateAvatar(File updateFile) throws ApiException, JSONException, IOException {
+        mHttpApi.setCredentials(SharedPreferenceHelper.getInstance(this.mContext).get(Constants.EXTRAX_TOKEN_CODE));
+        JSONObject data = (JSONObject) mHttpApi.doHttpPostImages(getFullUrl(UPLOAD_AVATAR_API), new HashMap<String, String>(), updateFile);
+        AvatarOutput output = (AvatarOutput) mGson.fromJson(data.toString(), AvatarOutput .class);
+        return output;
+    }
+
     public ProjectsOutput getProjects(int page,int pagesize) throws ApiException, JSONException, IOException {
         mHttpApi.setCredentials(SharedPreferenceHelper.getInstance(this.mContext).get(Constants.EXTRAX_TOKEN_CODE));
         JSONObject data = (JSONObject) mHttpApi.doHttpGetWithHeader(String.format(getFullUrl(PROJECT_API),page +"",5+""));

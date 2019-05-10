@@ -33,7 +33,7 @@ public class DataProfile implements Serializable {
     @SerializedName("facebookLink")
     private String facebookLink;
     @SerializedName("avatar")
-    private Object avatar;
+    private String avatar;
 
 
     public String getFirstName() {
@@ -124,11 +124,11 @@ public class DataProfile implements Serializable {
         this.facebookLink = facebookLink;
     }
 
-    public Object getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(Object avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 

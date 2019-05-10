@@ -293,6 +293,47 @@ public class HttpApiWithSessionAuth extends AbstractHttpApi {
 //        }
     }
 
+    public JSONObject doHttpPostImages(@NonNull String requestUrl, Map<String, String> params, File files)
+            throws ApiException, JSONException, IOException {
+//        try {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("Content-Disposition", "form-data");
+        map.put("Accept", "application/json");
+        if (hasCredentials()) {
+            map.put("Lang", "en");
+            map.put("Authorization", mToken);
+        }
+        JSONObject jsonResult = new JSONObject(executeHttpPostImages(requestUrl, map, params, files));
+        try {
+            if(jsonResult.getInt("ErrorCode") == Constants.FAILURE_SESSION_EXPIRED){
+                if(getNewSession()) {
+                    map = new LinkedHashMap<>();
+                    map.put("Content-Disposition", "form-data");
+//                    map.put("Content-Type", "application/json");
+                    map.put("Accept", "application/json");
+                    if (hasCredentials()) {
+                        map.put("Lang", "en");
+                        map.put("Authorization", mToken);
+                    }
+                    return new JSONObject(executeHttpPostImages(requestUrl, map, params, files));
+                } else {
+                    return jsonResult;
+                }
+            }
+        } catch (JSONException ex){
+
+        }
+        return jsonResult;
+//        } catch (ApiException e) {
+//            if (e.getErrorCode() == Constants.FAILURE_SESSION_EXPIRED) {
+//                getNewSession();
+//                return new JSONObject(executeHttpMultipart(requestUrl, createHeaderWithAuthorization(), params, files));
+//            } else
+//            throw e;
+//        }
+    }
+
+
     @Override
     public JSONObject doHttpMultipartImages(@NonNull String requestUrl, Map<String, String> params, ArrayList<File> files)
             throws ApiException, JSONException, IOException {
@@ -333,6 +374,10 @@ public class HttpApiWithSessionAuth extends AbstractHttpApi {
 //            throw e;
 //        }
     }
+
+
+
+
 
     //    /**
 //     * YeahShip will get new session by api login if current session is expired.

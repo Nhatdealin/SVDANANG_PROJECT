@@ -71,7 +71,7 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
     private void loadData() {
         showLoading(true);
 //        ShowLoadMore();
-        new GetProjectsTask(getActivity(), mStart,5, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        new GetProjectsTask(getActivity(), mStart,10, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
     }
 
@@ -84,9 +84,10 @@ public class ProjectFragment extends Fragment implements View.OnClickListener, A
             }
 
             @Override
-            public void onItemClickComment(Long id) {
+            public void onItemClickComment(Long id,boolean isDonating) {
                 Intent i = new Intent(getActivity(), ShowDetailProjectActivity.class);
                 i.putExtra("id",id);
+                i.putExtra("isDonating",isDonating);
                 startActivity(i);
             }
 

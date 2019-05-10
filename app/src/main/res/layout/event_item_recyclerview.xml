@@ -12,9 +12,9 @@
         android:layout_marginTop="30dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:outlineSpotShadowColor="@color/transperent"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="6dp">
+        app:cardCornerRadius="8dp"
+        app:cardElevation="6dp"
+        android:background="#ffffff">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -215,10 +215,21 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:orientation="vertical">
-
+                    <Button
+                        android:id="@+id/btn_register_event"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/primecolor2"
+                        android:shadowColor="@color/cardview_dark_background"
+                        android:text="Đăng kí"
+                        android:textColor="#ffffff" />
                     <Button
                         android:id="@+id/btn_information_event"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="10dp"

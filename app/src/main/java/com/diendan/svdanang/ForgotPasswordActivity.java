@@ -11,45 +11,77 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.diendan.svdanang.api.ApiListener;
-import com.diendan.svdanang.api.models.LoginOutput;
-import com.diendan.svdanang.api.models.SignupOutput;
-import com.diendan.svdanang.api.objects.SignupInput;
+import com.diendan.svdanang.api.models.ChangePasswordOutput;
+import com.diendan.svdanang.api.models.ForgotPasswordOutput;
+import com.diendan.svdanang.api.objects.ChangePasswordInput;
+import com.diendan.svdanang.api.objects.ForgotPasswordInput;
 import com.diendan.svdanang.tasks.BaseTask;
-import com.diendan.svdanang.tasks.SignupTask;
+import com.diendan.svdanang.tasks.ChangePasswordTask;
+import com.diendan.svdanang.tasks.ForgotPasswordTask;
 
-public class SignUpActivity extends AppCompatActivity implements ApiListener<SignupOutput>,View.OnClickListener {
-    private Button btn_signup;
-    private EditText edt_email,edt_firstname,edt_lastname,edt_username,edt_password;
+public class ForgotPasswordActivity extends AppCompatActivity implements ApiListener<ForgotPasswordOutput>, View.OnClickListener {
+    private Button btn_submit,btn_cancel;
+    private ImageView md_nav_back;
+    private EditText edtEmail;
     protected ProgressDialog mProgressDialog;
     public static final String TAG = MainActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-        btn_signup = findViewById(R.id.btn_signup);
 
+        setContentView(R.layout.activity_forgot_password);
+
+        btn_submit = findViewById(R.id.btn_submit);
+        btn_cancel = findViewById(R.id.btn_cancel);
+        md_nav_back = findViewById(R.id.imv_forgot_pass_back);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage(getString(R.string.txt_waiting));
-        edt_email = findViewById(R.id.edt_signup_email);
-        edt_firstname = findViewById(R.id.edt_signup_firstname);
-        edt_lastname = findViewById(R.id.edt_signup_lastname);
-        edt_username = findViewById(R.id.edt_signup_username);
-        edt_password = findViewById(R.id.edt_signup_password);
+        edtEmail = findViewById(R.id.edt_forgot_email);
         addListener();
     }
+
     protected void addListener() {
-        btn_signup.setOnClickListener(this);
+        btn_submit.setOnClickListener(this);
+        btn_cancel.setOnClickListener(this);
+        md_nav_back.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View view) {
-        showLoading(true);
-        SignupInput signup = new SignupInput(edt_email.getText().toString(),edt_firstname.getText().toString(),edt_lastname.getText().toString(),edt_password.getText().toString(),edt_username.getText().toString());
-//        SignupInput signup = new SignupInput("dominhnhat2311971@gmail.com","DoDÔDODOD","Nhat","123123","nhatnhat231197");
-        new SignupTask(this, signup, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        switch (view.getId()){
+            case R.id.btn_submit :
+                if((edtEmail.getText().toString().trim().equals("")))
+                {
+                    notify("Không thành công","Vui lòng nhập Email");
+                }
+                else{
+                    showLoading(true);
+                    ForgotPasswordInput forgotPasswordInput = new ForgotPasswordInput(edtEmail.getText().toString().trim());
+                    new ForgotPasswordTask(this, forgotPasswordInput, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                }
+                break;
+            case R.id.btn_cancel:
+                exit();
+                break;
+
+            case R.id.imv_forgot_pass_back:
+                exit();
+                break;  }
+
+    }
+
+    private void exit() {
+        Intent i = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+        showLoading(false);
+        startActivity(i);
     }
 
     @Override
@@ -57,35 +89,33 @@ public class SignUpActivity extends AppCompatActivity implements ApiListener<Sig
 
     }
 
+
     @Override
-    public void onConnectionSuccess(BaseTask task, SignupOutput data) {
-        if(task instanceof SignupTask){
-            showLoading(false);
-            SignupOutput output = data;
+    public void onConnectionSuccess(BaseTask task, ForgotPasswordOutput data) {
+        if(task instanceof ForgotPasswordTask){
+            ForgotPasswordOutput output = data;
             if(output.success){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setCancelable(true);
-                builder.setTitle("Đăng kí thành công");
-                builder.setMessage(output.getMessage());
+                builder.setTitle("Thành công");
+                builder.setMessage(data.getMessage());
                 builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        exit();
                         dialog.cancel();
-                        Intent intent = new Intent(SignUpActivity.this,LoginActivity.class);
-                        startActivity(intent);
                     }
                 });
                 builder.show();
-
             }
-            else {
+            else
+            {
                 showLoading(false);
                 notify("Không thành công",data.getMessage());
             }
 
-
         }
-    }
+}
     private void notify(String result,String mess)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -116,6 +146,6 @@ public class SignUpActivity extends AppCompatActivity implements ApiListener<Sig
     @Override
     public void onConnectionError(BaseTask task, Exception exception) {
 
-
+        Log.e(TAG, exception.getMessage());
     }
 }

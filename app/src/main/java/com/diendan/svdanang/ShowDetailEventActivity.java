@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -52,6 +53,7 @@ import java.util.Locale;
 public class ShowDetailEventActivity extends AppCompatActivity implements View.OnClickListener, ApiListener {
     ProgressDialog mProgressDialog;
     Long id;
+    boolean isRegister;
     TextView tvTitleEventt, tvFee,tvCreatedBy, tvTopic, tvCreatedDate, tvContent, tvStartTime, tvEndTime, tvQuantity, tvCurrency1;
     private EditText edtVolunteerFullName, edtVolunteerAddress, edtVolunteerCity, edtVolunteerPhone, edtVolunteerBirthDate, edtVolunteerFbLink, edtVolunteerEmail, edtVolunteerDepartment, edtVolunteerSkills, edtVolunteerNote;
     Button btnApply, btnSubmit,btnCancel;
@@ -59,6 +61,7 @@ public class ShowDetailEventActivity extends AppCompatActivity implements View.O
     protected RadioGroup rbgGender;
     View formVolunteer;
     LinearLayout mProgressBar;
+    NestedScrollView eventScrollView;
     ImageView imvImage;
     WebView wvContent;
     private ImageView md_nav_back;
@@ -73,6 +76,7 @@ public class ShowDetailEventActivity extends AppCompatActivity implements View.O
         mProgressDialog.setMessage(getString(R.string.txt_waiting));
         Intent intent = this.getIntent();
         id = intent.getLongExtra("id", 0);
+        isRegister = intent.getBooleanExtra("isRegister", false);
         tvTitleEventt = findViewById(R.id.tv_detail_event_title);
         tvCreatedBy = findViewById(R.id.tv_detail_event_created_by);
         tvTopic = findViewById(R.id.tv_detail_event_topic);
@@ -102,6 +106,16 @@ public class ShowDetailEventActivity extends AppCompatActivity implements View.O
         btnCancel = findViewById(R.id.btn_volunteer_cancel);
         wvContent = findViewById(R.id.webview_content_event);
         setpview5 =  (VerticalStepView) findViewById(R.id.step_view);
+        eventScrollView =  (NestedScrollView) findViewById(R.id.event_scrollview);
+        if(isRegister)
+        {
+            formVolunteer.setVisibility(View.VISIBLE);
+            eventScrollView.post(new Runnable() {
+                public void run() {
+                    eventScrollView.fullScroll(View.FOCUS_DOWN);
+                }
+            });
+        }
         md_nav_back = findViewById(R.id.imv_back);
 //        stepView.setSteps(steps);
         loadData();
@@ -131,6 +145,11 @@ public class ShowDetailEventActivity extends AppCompatActivity implements View.O
         switch (view.getId()) {
             case R.id.btn_apply_detail_event:
                 formVolunteer.setVisibility(View.VISIBLE);
+                eventScrollView.post(new Runnable() {
+                    public void run() {
+                        eventScrollView.fullScroll(View.FOCUS_DOWN);
+                    }
+                });
                 LoadDataToForm();
                 break;
             case R.id.btn_volunteer_submit:
@@ -302,17 +321,13 @@ public class ShowDetailEventActivity extends AppCompatActivity implements View.O
         wvContent.getSettings().setJavaScriptEnabled(true);
         wvContent.getSettings().setAllowFileAccess(true);
         wvContent.getSettings().setDomStorageEnabled(true);
-
-        // Set cache size to 8 mb by default. should be more than enough
         wvContent.getSettings().setAppCacheMaxSize(1024*1024*8);
         wvContent.getSettings().setSupportZoom(true);
         wvContent.getSettings().setBuiltInZoomControls(true);
-        // This next one is crazy. It's the DEFAULT location for your app's cache
-        // But it didn't work for me without this line
         wvContent.getSettings().setAppCachePath("/data/data/"+ getPackageName() +"/cache");
         wvContent.getSettings().setAllowFileAccess(true);
         wvContent.getSettings().setAppCacheEnabled(true);
-        wvContent.getSettings().setDefaultFontSize(12);
+        wvContent.getSettings().setDefaultFontSize(14);
         wvContent.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
 
 

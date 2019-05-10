@@ -45,13 +45,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imv_avatar"
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ava"
-                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imv_avatar"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/img_default_cover"
+                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/md_listitem_vertical_margin_choice"
+                        android:layout_gravity="center_horizontal">
+
+                        <Button
+                            android:id="@+id/btn_chose_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+
+                            android:background="@color/primecolor2"
+                            android:text="Tải ảnh"
+                            android:textColor="@color/cardview_light_background"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -63,7 +88,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_home_item"
-                        android:layout_marginBottom="@dimen/md_listitem_vertical_margin_choice"
+                        android:layout_marginBottom="@dimen/margin_profile"
                         android:text="Nhat Dealin Do"
                         android:textSize="@dimen/md_title_textsize"
                         android:textStyle="bold"
@@ -76,6 +101,7 @@
                         android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
                         android:layout_marginBottom="@dimen/md_listitem_vertical_margin_choice"
+                        android:layout_marginTop="@dimen/md_listitem_vertical_margin_choice"
                         >
                         <ImageView
                             android:layout_width="@dimen/icon_profile"
@@ -85,7 +111,6 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="dominhnhat2311@gmail.com"
                             android:textSize="@dimen/md_content_textsize"
                             android:id="@+id/tv_update_email"
                             android:layout_gravity="left|center_vertical"
@@ -101,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginBottom="@dimen/md_listitem_vertical_margin_choice"
+                        android:layout_marginBottom="@dimen/margin_home_item"
                         >
                         <ImageView
                             android:layout_width="@dimen/icon_profile"
@@ -112,7 +137,6 @@
                             android:id="@+id/edt_update_fblink"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="facebook.com/nhat.dealin"
                             android:textSize="@dimen/md_content_textsize"
                             android:layout_gravity="left|center_vertical"
                             app:met_floatingLabel="normal"

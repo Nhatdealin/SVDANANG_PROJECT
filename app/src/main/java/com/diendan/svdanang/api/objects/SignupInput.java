@@ -8,20 +8,20 @@ import com.google.gson.annotations.SerializedName;
 public class SignupInput {
     @SerializedName("email")
     public String email;
-    @SerializedName("firstname")
-    public String firstname;
-    @SerializedName("lastname")
-    public String lastname;
+    @SerializedName("firstName")
+    public String firstName;
+    @SerializedName("lastName")
+    public String lastName;
     @SerializedName("password")
     public String password;
-    @SerializedName("username")
-    public String username;
+    @SerializedName("userName")
+    public String userName;
 
     public SignupInput(String email, String firstname, String lastname, String password, String username) {
         this.email = email;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstname;
+        this.lastName = lastname;
         this.password = password;
-        this.username = username;
+        this.userName = username;
     }
 }

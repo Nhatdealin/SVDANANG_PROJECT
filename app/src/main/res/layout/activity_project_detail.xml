@@ -353,7 +353,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:id="@+id/form_donation"
-                android:visibility="gone">
+                android:visibility="visible">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -374,12 +374,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/md_title_textsize"
-                    android:text="Ủng hộ dự án"
+                    android:text="Ủng hộ trực tuyến"
                     android:textStyle="bold"
-                    android:layout_margin="@dimen/margin_home_item"
+                    android:layout_margin="@dimen/margin_profile"
                     android:gravity="center"
                     android:textColor="@color/titlecolor"
                     />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_paypal"
+                    android:layout_gravity="center_horizontal"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -389,18 +394,31 @@
                     android:textStyle="bold"
                     android:textSize="@dimen/md_content_textsize"
                     />
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edt_donation_amount"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_profile"
-                    android:textSize="@dimen/md_content_textsize"
-                    app:met_floatingLabelTextColor="#F8F8FF"
-                    app:met_primaryColor="#FF8C00"
-                    app:met_textColorHint="#EEEEEE"
-                    app:met_underlineColor="#E1E1E1"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_dollar"
+                        android:layout_gravity="center_vertical"/>
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/edt_donation_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:layout_margin="@dimen/margin_profile"
+                        android:textSize="@dimen/md_content_textsize"
+                        app:met_floatingLabelTextColor="#F8F8FF"
+                        app:met_primaryColor="#FF8C00"
+                        app:met_textColorHint="#EEEEEE"
+                        app:met_underlineColor="#E1E1E1"
 
-                    />
+                        />
+
+                </LinearLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

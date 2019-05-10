@@ -12,7 +12,10 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -49,6 +52,7 @@ import java.util.ArrayList;
 public class ShowDetailProjectActivity extends AppCompatActivity implements View.OnClickListener, ApiListener {
     ProgressDialog mProgressDialog;
     Long id;
+    boolean isDonating;
     private ImageView md_nav_back;
     TextView tvTitleProject,tvCreatedBy,tvTopic,tvCreatedDate,tvStartTime,tvEndTime,tvGoal,tvRaised,tvCurrency1,tvCurrency2;
     Button btnDonate,btnSubmit,btnCancel;
@@ -67,6 +71,7 @@ public class ShowDetailProjectActivity extends AppCompatActivity implements View
         mProgressDialog.setMessage(getString(R.string.txt_waiting));
         Intent intent = this.getIntent();
         id = intent.getLongExtra("id",0);
+        isDonating = intent.getBooleanExtra("isDonating",false);
         tvTitleProject = findViewById(R.id.tv_detail_project_title);
         tvCreatedBy = findViewById(R.id.tv_detail_project_created_by);
         tvTopic = findViewById(R.id.tv_detail_project_topic);
@@ -88,6 +93,16 @@ public class ShowDetailProjectActivity extends AppCompatActivity implements View
         formDonation = findViewById(R.id.form_donation);
         projectScrollView = findViewById(R.id.project_scrollview);
         md_nav_back = findViewById(R.id.imv_back);
+        if(isDonating)
+        {
+            formDonation.setVisibility(View.VISIBLE);
+            projectScrollView.post(new Runnable() {
+                public void run() {
+                    projectScrollView.fullScroll(View.FOCUS_DOWN);
+                }
+            });
+        }
+        else formDonation.setVisibility(View.GONE);
         loadData();
         addListener();
 
@@ -135,15 +150,15 @@ public class ShowDetailProjectActivity extends AppCompatActivity implements View
     }
 
     private void SubmitDataDonation() {
-        if(!edtAmount.getText().toString().equals(""))
+        if(!edtAmount.getText().toString().equals("") && Double.parseDouble(edtAmount.getText().toString()) > 0)
         {
-            PaypalDonationInput donation = new PaypalDonationInput(Long.parseLong(edtAmount.getText().toString()),new Long(1),new Long(0),edtNote.getText().toString(),id);
+            PaypalDonationInput donation = new PaypalDonationInput(edtAmount.getText().toString(),new Long(1),new Long(0),edtNote.getText().toString(),id);
             showLoading(true);
             new DonatePaypalTask(this,donation, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
         else
         {
-            notify("Không thành công", "Nhập số tiền ủng hộ");
+            notify("Không thành công", "Nhập lại số tiền ủng hộ");
         }
 
     }
@@ -170,10 +185,6 @@ public class ShowDetailProjectActivity extends AppCompatActivity implements View
             PaypalDonationOutput output =  (PaypalDonationOutput)data;
             if(output.getStatus().equals("success"))
             {
-//                String url = output.getRedirectUrl().toString();
-//                if (!url.startsWith("http://") && !url.startsWith("https://"))
-//                    url = "http://" + url;
-//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 Intent browserIntent = new Intent(ShowDetailProjectActivity.this, RedirectDonationActivity.class);
                 browserIntent.putExtra("url",output.getRedirectUrl().toString());
                 browserIntent.putExtra("id",id);
@@ -186,7 +197,7 @@ public class ShowDetailProjectActivity extends AppCompatActivity implements View
 
     private void setValue(ProjectOutput output) {
         tvTitleProject.setText(output.getData().getName());
-        Picasso.with(this).load(output.getData().getImage()).noPlaceholder().fit().into(imvImage);
+        Picasso.with(this).load(output.getData().getImage()).noPlaceholder().fit().centerCrop().into(imvImage);
         tvCreatedBy.setText(output.getData().getCreatedBy().getLastName() +" "+output.getData().getCreatedBy().getFirstName());
         tvTopic.setText(output.getData().getProjectTopic().getName());
         tvCreatedDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(output.getData().getCreatedAt())));
@@ -199,8 +210,29 @@ public class ShowDetailProjectActivity extends AppCompatActivity implements View
         else raised = new BigDecimal(0);
         tvGoal.setText(String.valueOf(output.getData().getGoal()));
         tvRaised.setText(String.valueOf(raised));
+
+        WebChromeClient mWebChromeClient = new WebChromeClient(){
+            public void onProgressChanged(WebView view, int newProgress) {
+            }
+        };
+
+        wvContent.setWebChromeClient(new WebChromeClient());
+        wvContent.getSettings().setPluginState(WebSettings.PluginState.ON);
+        wvContent.getSettings().setPluginState(WebSettings.PluginState.ON_DEMAND);
+        wvContent.setWebViewClient(new WebViewClient());
+        wvContent.getSettings().setJavaScriptEnabled(true);
+        wvContent.getSettings().setAllowFileAccess(true);
         wvContent.getSettings().setDomStorageEnabled(true);
-        wvContent.loadData(output.getData().getDescription(), "text/html", "UTF-8");
+        wvContent.getSettings().setAppCacheMaxSize(1024*1024*8);
+        wvContent.getSettings().setSupportZoom(true);
+        wvContent.getSettings().setBuiltInZoomControls(true);
+        wvContent.getSettings().setAppCachePath("/data/data/"+ getPackageName() +"/cache");
+        wvContent.getSettings().setAllowFileAccess(true);
+        wvContent.getSettings().setAppCacheEnabled(true);
+        wvContent.getSettings().setDefaultFontSize(14);
+        wvContent.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        wvContent.loadDataWithBaseURL("https://www.youtube.com", output.getData().getDescription(),
+                "text/html", "UTF-8", null);
         float factor = this.getResources().getDisplayMetrics().density;
         ViewGroup.LayoutParams progresBarLayoutParams = mProgressBar.getLayoutParams();
         float divide = 1;

@@ -110,7 +110,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, ApiL
         });}
     private void loadData() {
         showLoading(true);
-        new GetBlogPostsTask(getActivity(),0,5, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        new GetBlogPostsTask(getActivity(),mStart,10, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
     }
 

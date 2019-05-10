@@ -75,6 +75,7 @@ public class RedirectDonationActivity extends AppCompatActivity implements ApiLi
             public boolean shouldOverrideUrlLoading(WebView view, String url){
                 // do your handling codes here, which url is the requested url
                 // probably you need to open that url rather than redirect:
+                showLoading(true);
                 subUrl = url.split("[/]");
 
                 if(subUrl[2].equals("svdanang.com"))
@@ -89,11 +90,12 @@ public class RedirectDonationActivity extends AppCompatActivity implements ApiLi
                     new DonatePaypalResultTask(RedirectDonationActivity.this,id,subPaymentId[1],subToken[1],subPayerID[1],RedirectDonationActivity.this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 }
                 else {
-                    showLoading(true);
+
                     view.loadUrl(url);
-                    showLoading(false);
+
 
                 }
+                showLoading(false);
                 return false;// then it is not handled by default action
             }
         });
@@ -140,6 +142,12 @@ public class RedirectDonationActivity extends AppCompatActivity implements ApiLi
                     builder.show();
 
             }
+            else
+            {
+                showLoading(false);
+                notify("Không thành công",data.getMessage());
+            }
+
         }
     }
 
@@ -156,7 +164,20 @@ public class RedirectDonationActivity extends AppCompatActivity implements ApiLi
         } catch (IllegalArgumentException ex) {
         }
     }
-
+    private void notify(String result,String mess)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(result);
+        builder.setMessage(mess);
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+    }
     @Override
     public void onConnectionError(BaseTask task, Exception exception) {
 

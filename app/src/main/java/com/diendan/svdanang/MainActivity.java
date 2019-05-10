@@ -1,9 +1,11 @@
 package com.diendan.svdanang;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -30,6 +32,7 @@ import com.diendan.svdanang.tasks.BaseTask;
 import com.diendan.svdanang.tasks.GetProfileTask;
 import com.diendan.svdanang.utils.Constants;
 import com.diendan.svdanang.utils.SharedPreferenceHelper;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.prefs.PreferenceChangeEvent;
@@ -52,12 +55,9 @@ public class MainActivity extends AppCompatActivity implements ApiListener<Profi
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_menu);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         ArrayList<Menuitem> menuitemList = new ArrayList<>();
-        menuitemList.add(new Menuitem(Constants.MENU_ITEM_MANAGE_MEETING, 1, R.drawable.icon_meeting_management, "Quản lý lịch họp"));
-        menuitemList.add(new Menuitem(Constants.MENU_ITEM_MANAGE_MEMBER, 2, R.drawable.icon_member_management, "Quản lý thành viên"));
         menuitemList.add(new Menuitem(Constants.MENU_ITEM_PROFILE, 3, R.drawable.icon_personal_infomation, "Thông tin cá nhân"));
         menuitemList.add(new Menuitem(Constants.MENU_ITEM_PASSWORD, 4, R.drawable.ic_password_profile, "Thay đổi mật khẩu"));
-        menuitemList.add(new Menuitem(Constants.MENU_ITEM_MANAGE_USER, 4, R.drawable.icon_user_management, "Quản lý tài khoản"));
-        menuitemList.add(new Menuitem(Constants.MENU_ITEM_LOGOUT, 4, R.drawable.ic_logout, "Đăng xuất"));
+        menuitemList.add(new Menuitem(Constants.MENU_ITEM_LOGOUT, 5, R.drawable.ic_logout, "Đăng xuất"));
         mAdapter = new MenuRecyclerviewAdapter(this, menuitemList);
         mRecyclerView.setAdapter(mAdapter);
         mProgressDialog = new ProgressDialog(this);
@@ -100,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements ApiListener<Profi
 
         if (SharedPreferenceHelper.getInstance(this).get(Constants.PREF_PERSON_NAME) != null) {
             tvUssername.setText(SharedPreferenceHelper.getInstance(this).get(Constants.PREF_PERSON_NAME));
+        }
+        if (SharedPreferenceHelper.getInstance(this).get(Constants.PREF_AVATAR) != null) {
+            Picasso.with(this).load(SharedPreferenceHelper.getInstance(this).get(Constants.PREF_AVATAR)).noPlaceholder().fit().centerCrop().into(imgAvatar);
         }
     }
 
@@ -222,6 +225,8 @@ public class MainActivity extends AppCompatActivity implements ApiListener<Profi
     }
 
     public void onBackPressed() {
+
+
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
@@ -281,6 +286,7 @@ public class MainActivity extends AppCompatActivity implements ApiListener<Profi
                 i.putExtra("address",getData.getAddress());
                 i.putExtra("birthdate",getData.getBirthDate());
                 i.putExtra("city",getData.getCity());
+                i.putExtra("avatar",getData.getAvatar());
                 i.putExtra("department",getData.getDepartment());
                 i.putExtra("email",getData.getEmail());
                 i.putExtra("fblink",getData.getFacebookLink());
@@ -290,10 +296,29 @@ public class MainActivity extends AppCompatActivity implements ApiListener<Profi
                 showLoading(false);
                 startActivity(i);
             }
+            else
+            {
+                showLoading(false);
+                notify("Không thành công",data.getMessage());
+            }
+
 
         }
     }
-
+    private void notify(String result,String mess)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(result);
+        builder.setMessage(mess);
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+    }
     @Override
     public void onConnectionError(BaseTask task, Exception exception) {
 

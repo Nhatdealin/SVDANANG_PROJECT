@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiL
     LinearLayoutManager mLayoutManager;
     LinearLayoutManager mLayoutManagerPageView;
     ProgressDialog mProgressDialog;
-    final int duration = 2000;
+    final int duration = 4000;
     final int pixelsToMove = 30;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final Runnable SCROLLING_RUNNABLE = new Runnable() {
@@ -112,13 +112,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiL
                         public void run() {
                             mViewpageRecyclerView.setAdapter(null);
                             mViewpageRecyclerView.setAdapter(mViewPageAdapter);
-                            mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
+                            mHandler.postDelayed(SCROLLING_RUNNABLE, 4000);
                         }
-                    }, 2000);
+                    }, 4000);
                 }
             }
         });
-        mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
+        mHandler.postDelayed(SCROLLING_RUNNABLE, 4000);
         loadDataTopic();
         addListener();
         return rootView;

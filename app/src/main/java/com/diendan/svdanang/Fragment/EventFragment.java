@@ -75,9 +75,10 @@ public class EventFragment extends Fragment implements View.OnClickListener, Api
             }
 
             @Override
-            public void onItemClickComment(Long id) {
+            public void onItemClickComment(Long id,boolean isRegister) {
                 Intent i = new Intent(getActivity(), ShowDetailEventActivity.class);
                 i.putExtra("id",id);
+                i.putExtra("isRegister",isRegister);
                 startActivity(i);
             }
 
@@ -112,7 +113,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Api
         });}
     private void loadData() {
         showLoading(true);
-        new GetEventsTask(getActivity(), mStart,5, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        new GetEventsTask(getActivity(), mStart,10, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
     }
 

@@ -44,7 +44,7 @@
                 android:drawableLeft="@drawable/ic_acc_white"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
-                android:hint="User name"
+                android:hint="Tài khoản hoặc email"
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:maxLines="1"
@@ -64,7 +64,7 @@
                 android:drawableLeft="@drawable/ic_account_white"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
-                android:hint="Password"
+                android:hint="Mật khẩu"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:maxLines="1"
@@ -84,7 +84,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bg_button"
                 android:gravity="center"
-                android:text="Login"
+                android:text="Đăng nhập"
                 android:textColor="#fff"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -102,7 +102,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_marginLeft="15dp"
-                    android:text="Forgot passsword"
+                    android:text="Quên mật khẩu"
                     android:textSize="15sp" />
                 <View
                     android:layout_width="0dp"
@@ -115,7 +115,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_marginRight="15dp"
-                    android:text="Sign up"
+                    android:text="Đăng kí"
                     android:textSize="15sp"/>
             </LinearLayout>
 

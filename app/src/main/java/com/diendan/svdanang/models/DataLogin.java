@@ -17,6 +17,7 @@ public class DataLogin implements Serializable {
     @SerializedName("user")
     private User user;
 
+
     public String getAccessToken() {
         return accessToken;
     }
@@ -40,4 +41,5 @@ public class DataLogin implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+
 }
