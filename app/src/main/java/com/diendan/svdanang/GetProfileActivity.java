@@ -16,6 +16,7 @@ import com.diendan.svdanang.api.objects.UpdateProfileInput;
 import com.diendan.svdanang.models.DataProfile;
 import com.diendan.svdanang.tasks.BaseTask;
 import com.diendan.svdanang.tasks.GetProfileTask;
+import com.squareup.picasso.Picasso;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -27,7 +28,8 @@ public class GetProfileActivity extends AppCompatActivity implements ApiListener
     private String firstname,lastname;
     private  boolean gender;
     private ImageView md_nav_back;
-    String imvAvatar;
+    String avatar;
+    ImageView imvAvatar;
     public static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -40,7 +42,7 @@ public class GetProfileActivity extends AppCompatActivity implements ApiListener
         Long birthdate =  intent.getLongExtra("birthdate",0);
         String city = intent.getStringExtra("city");
         String department = intent.getStringExtra("department");
-        imvAvatar = intent.getStringExtra("avatar");
+        avatar = intent.getStringExtra("avatar");
         String email = intent.getStringExtra("email");
         String fblink = intent.getStringExtra("fblink");
         gender = intent.getBooleanExtra("gender", true);
@@ -64,6 +66,7 @@ public class GetProfileActivity extends AppCompatActivity implements ApiListener
         tvInforGender = findViewById(R.id.tv_infor_gender);
         tvInforPhone = findViewById(R.id.tv_infor_phonenumber);
         tvInforUsername = findViewById(R.id.tv_infor_username);
+        imvAvatar = findViewById(R.id.imv_profile_avatar);
 
         tvIfnorFullname.setText(firstname+" "+lastname);
         tvInforAddress.setText(address);
@@ -75,6 +78,7 @@ public class GetProfileActivity extends AppCompatActivity implements ApiListener
         tvInforGender.setText(gender ? "Nam" : "Nữ");
         tvInforPhone.setText(phone);
         tvInforUsername.setText(username);
+        Picasso.with(this).load(avatar).noPlaceholder().fit().centerCrop().into(imvAvatar);
         addListener();
     }
 
@@ -92,7 +96,7 @@ public class GetProfileActivity extends AppCompatActivity implements ApiListener
                 i.putExtra("lastname",lastname);
                 i.putExtra("address",tvInforAddress.getText());
                 i.putExtra("birthdate",tvInforBirthDate.getText());
-                i.putExtra("avatar",imvAvatar);
+                i.putExtra("avatar",avatar);
                 i.putExtra("city",tvInforCity.getText());
                 i.putExtra("email",tvInforEmail.getText());
                 i.putExtra("fblink",tvInforFbLink.getText());

@@ -66,7 +66,6 @@ public class UpdateProfileActivity extends AppCompatActivity implements ApiListe
     private TextView tvUsername, tvUpdateEmail;
     private boolean gender, isChangeAvatar = false;
     File finalAvatar;
-    ImageView imvAvatar;
     private Uri mImageCaptureUri;
     private EditText edtUpdateFirstname, edtUpdateLastname, edtUpdateGender, edtUpdateAddress, edtUpdateCity, edtUpdatePhone, edtUpdateBirthDate, edtUpdateFbLink;
     protected ProgressDialog mProgressDialog;
@@ -110,14 +109,14 @@ public class UpdateProfileActivity extends AppCompatActivity implements ApiListe
         edtUpdateBirthDate = findViewById(R.id.edt_update_birthdate);
         edtUpdateCity = findViewById(R.id.edt_update_city);
         tvUpdateEmail = findViewById(R.id.tv_update_email);
-        imvAvatar = findViewById(R.id.imv_avatar);
+        imv_avatar = findViewById(R.id.imv_avatar);
         edtUpdateFbLink = findViewById(R.id.edt_update_fblink);
         rbMale = findViewById(R.id.rb_update_male_gender);
         rbFemale = findViewById(R.id.rb_update_female_gender);
         rbgGender = findViewById(R.id.rbg_gender);
         edtUpdatePhone = findViewById(R.id.edt_update_phonenumber);
         tvUsername = findViewById(R.id.tv_infor_username);
-        Picasso.with(this).load(avatar).noPlaceholder().fit().centerCrop().into(imvAvatar);
+        Picasso.with(this).load(avatar).noPlaceholder().fit().centerCrop().into(imv_avatar);
         edtUpdateFirstname.setText(firstname);
         edtUpdateLastname.setText(lastname);
         edtUpdateAddress.setText(address);
@@ -324,6 +323,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements ApiListe
 
                     }
                     doCrop();
+
+
+                    isChangeAvatar = true;
                     break;
                 case SELECT_PICTURE:
                     mImageCaptureUri = data.getData();
@@ -380,13 +382,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements ApiListe
         String imageFileName = "picture_crop" + timeStamp + ".jpg";
         Uri destination = Uri.fromFile(new File(this.getCacheDir(), imageFileName));
         Crop.of(mImageCaptureUri, destination).asSquare().start(this);
-        Bitmap bitmap = null;
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), destination);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        imv_avatar.setImageBitmap(bitmap);
+        imv_avatar.setImageURI(mImageCaptureUri);
         isChangeAvatar = true;
     }
 
@@ -444,6 +440,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements ApiListe
                 i.putExtra("firstname", getData.getFirstName());
                 i.putExtra("lastname", getData.getLastName());
                 i.putExtra("address", getData.getAddress());
+                i.putExtra("avatar",getData.getAvatar());
                 i.putExtra("birthdate", getData.getBirthDate());
                 i.putExtra("city", getData.getCity());
                 i.putExtra("email", email);
@@ -452,6 +449,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements ApiListe
                 i.putExtra("phone", getData.getPhoneNumber());
                 i.putExtra("username", username);
                 i.putExtra("department", department);
+                SharedPreferenceHelper.getInstance(this).set(Constants.PREF_AVATAR, output.getData().getAvatar());
                 SharedPreferenceHelper.getInstance(this).set(Constants.PREF_USERNAME, output.getData().getUserName());
                 SharedPreferenceHelper.getInstance(this).set(Constants.PREF_PERSON_NAME, String.valueOf(output.getData().getFirstName() + " " + output.getData().getLastName()));
                 showLoading(false);

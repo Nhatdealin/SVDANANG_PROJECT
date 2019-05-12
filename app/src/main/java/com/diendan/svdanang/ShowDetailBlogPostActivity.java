@@ -36,6 +36,7 @@ public class ShowDetailBlogPostActivity extends AppCompatActivity implements Vie
     TextView tvTitleBlogPost,tvCreatedBy,tvTopic,tvCreatedDate;
     WebView wvContent;
     ImageView imvImage;
+    private ImageView md_nav_back;
 
 
 
@@ -53,7 +54,8 @@ public class ShowDetailBlogPostActivity extends AppCompatActivity implements Vie
         tvTopic = findViewById(R.id.tv_detail_blogpost_topic);
         imvImage = findViewById(R.id.imv_detail_blogpost_image);
         tvCreatedDate = findViewById(R.id.tv_createdat_detail_blogposst);
-        wvContent = (WebView) findViewById(R.id.webview_content_blogpost);
+        wvContent = findViewById(R.id.webview_content_blogpost);
+        md_nav_back =  findViewById(R.id.btn_back);
         loadData();
         addListener();
 
@@ -65,7 +67,7 @@ public class ShowDetailBlogPostActivity extends AppCompatActivity implements Vie
     }
 
     private void addListener() {
-            //chỗ ni là m muốn onlick cái nào thì setOnClickListener(this) vào đây
+        md_nav_back.setOnClickListener(this);
 
 
         }
@@ -76,7 +78,9 @@ public class ShowDetailBlogPostActivity extends AppCompatActivity implements Vie
     public void onClick(View view) {
         // khai báo nút detail findviewby id ở trên, rồi vô đây làm sự kiện chuyển sang trang detail
         switch (view.getId()) {
-
+            case R.id.btn_back:
+                finish();
+                break;
         }
 
     }

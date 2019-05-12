@@ -54,7 +54,7 @@ public class ShowDetailEventActivity extends AppCompatActivity implements View.O
     ProgressDialog mProgressDialog;
     Long id;
     boolean isRegister;
-    TextView tvTitleEventt, tvFee,tvCreatedBy, tvTopic, tvCreatedDate, tvContent, tvStartTime, tvEndTime, tvQuantity, tvCurrency1;
+    TextView tvTitleEventt, tvFee,tvCreatedBy, tvTopic, tvCreatedDate, tvStartTime, tvEndTime, tvQuantity, tvCurrency1;
     private EditText edtVolunteerFullName, edtVolunteerAddress, edtVolunteerCity, edtVolunteerPhone, edtVolunteerBirthDate, edtVolunteerFbLink, edtVolunteerEmail, edtVolunteerDepartment, edtVolunteerSkills, edtVolunteerNote;
     Button btnApply, btnSubmit,btnCancel;
     protected RadioButton rbMale, rbFemale;
